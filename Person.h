@@ -1,5 +1,7 @@
-#include <string>
+#ifndef PERSON_H
+#define PERSON_H
 
+#include <string>
 using namespace std;
 
 class Person{
@@ -29,3 +31,5 @@ class Person{
         // mutator for specialization
         virtual void SetRank(string specialization) = 0;
 };
+
+#endif //PERSON_H

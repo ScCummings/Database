@@ -1,3 +1,6 @@
+#ifndef GEN_TREE_H
+#define GEN_TREE_H
+
 #include <iostream>
 using namespace std;
 
@@ -294,3 +297,4 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){ //d is the node to be deleted
 
 }
 
+#endif //GEN_TREE_H
