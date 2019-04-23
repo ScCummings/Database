@@ -1,32 +1,36 @@
 #include <iostream>
 using namespace std;
 
+template<class T>
 class TreeNode{
     public:
         TreeNode();
-        TreeNode(int k);
+        TreeNode(T k);
         virtual ~TreeNode();//why a virtual destructor?
 
-        int key;
-        TreeNode *left;
-        TreeNode *right;
+        T key;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
 };
 
 
 //////Implementation///////
 
-TreeNode::TreeNode(){
+template<class T>
+TreeNode<T>::TreeNode(){
     left = nullptr;
     right = nullptr;
 }
 
-TreeNode::TreeNode(int k){
+template<class T>
+TreeNode<T>::TreeNode(T k){
     key = k;
     left = nullptr;
     right = nullptr;
 }
 
-TreeNode::~TreeNode(){
+template<class T>
+TreeNode<T>::~TreeNode(){
     //let's do a little research (that means us)  :(
 }
 
@@ -34,54 +38,61 @@ TreeNode::~TreeNode(){
 
 /////let's define our tree class/////
 
+template<class T>
 class BST{
     public:
         BST();
         virtual ~BST();
-        void insert(int value);
-        bool contains(int value); //AKA search
-        bool deleteR(int key);
-        TreeNode* getSuccessor(TreeNode* d);
+        void insert(T value);
+        bool contains(T value); //AKA search
+        bool deleteR(T key);
+        TreeNode<T>* getSuccessor(TreeNode<T> *d);
 
-        TreeNode* getMin();
-        TreeNode* getMax();
+        TreeNode<T>* getMin();
+        TreeNode<T>* getMax();
         bool isEmpty();
         void printTree();
-        void recPrint(TreeNode *node);
+        void recPrint(TreeNode<T> *node);
         void printPre();
-        void printPre(TreeNode *node);
-        void printPre(TreeNode *node, int level);
+        void printPre(TreeNode<T> *node);
+        void printPre(TreeNode<T> *node, int level);
 
     private:
-        TreeNode* root;
+        TreeNode<T>* root;
 };
 
 
 /////implement this bad boy/////
 
 //Default
-BST::BST(){
+template<class T>
+BST<T>::BST(){
     root = nullptr;
 }
 
-BST::~BST(){
+template<class T>
+BST<T>::~BST(){
     //iterate and delete
     //lets put on our research hats
 }
 
-void BST::printTree(){
+template<class T>
+void BST<T>::printTree(){
     recPrint(root);
 }
 
-void BST::printPre(){
+template<class T>
+void BST<T>::printPre(){
     printPre(root, 0);
 }
 
-void BST::printPre(TreeNode *node){
+template<class T>
+void BST<T>::printPre(TreeNode<T> *node){
     printPre(node, 0);
 }
 
-void BST::printPre(TreeNode *node, int level){
+template<class T>
+void BST<T>::printPre(TreeNode<T> *node, int level){
     if(node == nullptr){
         return;
     }    
@@ -96,7 +107,8 @@ void BST::printPre(TreeNode *node, int level){
     }
 }
 
-void BST::recPrint(TreeNode *node){
+template<class T>
+void BST<T>::recPrint(TreeNode<T> *node){
     if(node == nullptr){
         return;
     }
@@ -107,21 +119,23 @@ void BST::recPrint(TreeNode *node){
     }
 }
 
-bool BST::isEmpty(){
+template<class T>
+bool BST<T>::isEmpty(){
     return (root == nullptr);
 }
 
-void BST::insert(int value){
+template<class T>
+void BST<T>::insert(T value){
     //check if value exists, if not continue
 
-    TreeNode *node = new TreeNode(value); //key is now set to value
+    TreeNode<T> *node = new TreeNode<T>(value); //key is now set to value
 
     if(isEmpty()){ //empty tree
         root = node;
     }
     else{  //not empty need to find insertion point
-        TreeNode *current = root; //keep track of where we are
-        TreeNode *parent = nullptr; //keep track of where we've been
+        TreeNode<T> *current = root; //keep track of where we are
+        TreeNode<T> *parent = nullptr; //keep track of where we've been
 
         while(true){
             parent = current;
@@ -147,12 +161,13 @@ void BST::insert(int value){
     }
 }
 
-bool BST::contains(int value){
+template<class T>
+bool BST<T>::contains(T value){
     if(isEmpty()){
         return false;
     }
     else{ //not an empty tree
-        TreeNode *current = root;
+        TreeNode<T> *current = root;
 
         while(current->key != value){
             if(value < current->key)
@@ -167,15 +182,16 @@ bool BST::contains(int value){
     return true;
 }
 
-bool BST::deleteR(int key){
+template<class T>
+bool BST<T>::deleteR(T key){
     if(isEmpty())
         return false;
     
     if(!contains(key))
         return false;
 
-    TreeNode *current = root;
-    TreeNode *parent = root;
+    TreeNode<T> *current = root;
+    TreeNode<T> *parent = root;
     bool isLeft = true;
 
     while(current->key != key){
@@ -238,7 +254,7 @@ bool BST::deleteR(int key){
     //node has two children!
     else{ 
         //find the successor of the node to be deleted (current)
-        TreeNode *successor = getSuccessor(current);
+        TreeNode<T> *successor = getSuccessor(current);
 
         if(current == root){
             root = successor;
@@ -256,11 +272,12 @@ bool BST::deleteR(int key){
     return true;
 }
 
-TreeNode* BST::getSuccessor(TreeNode *d){ //d is the node to be deleted
+template<class T>
+TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){ //d is the node to be deleted
     //we want the smallest larger than d
-    TreeNode *sp = d; //successor's parent
-    TreeNode *successor = d; //
-    TreeNode *current = d->right;
+    TreeNode<T> *sp = d; //successor's parent
+    TreeNode<T> *successor = d; //
+    TreeNode<T> *current = d->right;
 
     while(current != nullptr){
         sp = successor;
