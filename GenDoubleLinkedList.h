@@ -18,7 +18,7 @@ class GenDoubleListNode{
         ~GenDoubleListNode();
 
         T data;
-        
+
         GenDoubleListNode *next;
         GenDoubleListNode *prev;
 };
@@ -144,7 +144,7 @@ void GenDoubleLinkedList<T>::insertFront(T d){
         back = node;
     }
     else{
-        node->next = front;       
+        node->next = front;
         front->prev = node;
         front = node;
     }
@@ -178,7 +178,7 @@ T GenDoubleLinkedList<T>::removeFront(){
 
     T temp = front->data;
     GenDoubleListNode<T> *ft = front;
-    
+
     if(size == 1){
         front = nullptr;
         back = nullptr;
@@ -200,7 +200,7 @@ T GenDoubleLinkedList<T>::removeFront(){
 template<class T>
 void GenDoubleLinkedList<T>::insertBack(T d){
     GenDoubleListNode<T> *node = new GenDoubleListNode<T>(d);
-    
+
     //if this is the first element, set it to the front and the back
     if(size == 0){
         back = node;
@@ -212,7 +212,7 @@ void GenDoubleLinkedList<T>::insertBack(T d){
         back = node;
     }
 
-    resetIterator();    
+    resetIterator();
     size++;
 }
 template<class T>
@@ -230,7 +230,7 @@ T GenDoubleLinkedList<T>::getBack(){
         cerr << "Tried to access an element in an empty list\n";
         exit(EXIT_FAILURE);
     }
-    
+
     return back->data;
 }
 template<class T>
@@ -325,7 +325,7 @@ T GenDoubleLinkedList<T>::getPos(int pos){
         cerr << "Tried to access an element in an empty list\n";
         exit(EXIT_FAILURE);
     }
-    
+
     if(pos >=size || pos < 0){
         cerr << "\nLinked List index out of bounds" << endl;
         exit(EXIT_FAILURE);
@@ -367,7 +367,7 @@ T GenDoubleLinkedList<T>::deletePos(int pos){
     GenDoubleListNode<T> *atPos = front;
     GenDoubleListNode<T> *beforePos;
     GenDoubleListNode<T> *afterPos;
-    
+
     for(int i = 0; i < pos; i++){
         atPos = atPos->next;
         beforePos = atPos->prev;
@@ -395,7 +395,7 @@ int GenDoubleLinkedList<T>::find(T d){
         cerr << "Tried to access an element in an empty list\n";
         exit(EXIT_FAILURE);
     }
-    
+
     GenDoubleListNode<T> *curr = front;
     int index = -1;
 
@@ -421,7 +421,7 @@ int GenDoubleLinkedList<T>::findLast(T d){
         cerr << "Tried to access an element in an empty list\n";
         exit(EXIT_FAILURE);
     }
-    
+
     GenDoubleListNode<T> *curr = back;
     int index = size;
 

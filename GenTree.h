@@ -98,14 +98,14 @@ template<class T>
 void BST<T>::printPre(TreeNode<T> *node, int level){
     if(node == nullptr){
         return;
-    }    
-    else{       
+    }
+    else{
         printPre(node->right, level+1);
         for(int i = 0; i < level; i++){
             cout << "   |";
         }
         cout << node->key << endl;
-        
+
         printPre(node->left, level+1);
     }
 }
@@ -189,7 +189,7 @@ template<class T>
 bool BST<T>::deleteR(T key){
     if(isEmpty())
         return false;
-    
+
     if(!contains(key))
         return false;
 
@@ -209,7 +209,7 @@ bool BST<T>::deleteR(T key){
             isLeft = false;
             current = current->right;
         }
-        
+
         if(current == nullptr)
             return false;
     }
@@ -220,7 +220,7 @@ bool BST<T>::deleteR(T key){
     if(current->left == nullptr && current->right == nullptr){
         if(current == root)
             root = nullptr;
-        else if(isLeft){   
+        else if(isLeft){
             parent->left = nullptr;
             //delete current; check this!
         }
@@ -255,7 +255,7 @@ bool BST<T>::deleteR(T key){
     }
 
     //node has two children!
-    else{ 
+    else{
         //find the successor of the node to be deleted (current)
         TreeNode<T> *successor = getSuccessor(current);
 

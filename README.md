@@ -13,17 +13,16 @@
 2. Source Files
     * main.cpp
     * Makefile
-    
+
 
 3. Description of any known compile/runtime errors, or bugs.
     * N/A
 
 4. References used to complete the assignment
-    * 
+    *
 
 5. Instructions for running the assignment
     * git clone from repository
     * cd to Database folder
     * input "make"
     * input "./assignment5.exe"
-
