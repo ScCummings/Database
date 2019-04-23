@@ -30,6 +30,34 @@ class Person{
 
         // mutator for specialization
         virtual void SetRank(string specialization) = 0;
-};
 
+        //overloaded comparison operator for Person objects
+        bool operator ==(const Person& p);
+
+        //overloaded less than comparison operator for Person objects
+        bool operator >(const Person& p);
+
+        //overloaded greater than comparison operator for Person objects
+        bool operator <(const Person& p);
+};
+bool operator ==(const Person& p){
+    if(p.GetID == this.GetID){
+        return true;
+    }
+    return false;
+}
+
+bool operator >(const Person& p){
+    if(p.GetID > this.GetID){
+        return true;
+    }
+    return false;
+}
+
+bool operator <(const Person& p){
+    if(p.GetID < this.GetID){
+        return true;
+    }
+    return false;
+}
 #endif //PERSON_H
