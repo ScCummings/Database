@@ -32,6 +32,12 @@ class Person{
         // accessor for specialization
         virtual string GetSpecialization() const = 0;
 
+        //Returns a string representation of the person in question
+        virtual string ToString() const = 0;
+
+        //overlaoded stream insertion operator
+        friend ostream& operator<<(ostream& os, const Person& p);
+
         //overloaded comparison operator for Person objects
         bool operator ==(const Person& p) const{
             if(p.id == this->id){
@@ -42,7 +48,7 @@ class Person{
 
         //overloaded less than comparison operator for Person objects
         bool operator >(const Person& p) const{
-            if(p.id > this->id){
+            if(this->id > p.id){
                 return true;
             }
             return false;
@@ -50,7 +56,7 @@ class Person{
 
         //overloaded greater than comparison operator for Person objects
         bool operator <(const Person& p) const{
-            if(p.id < this->id){
+            if(this->id < p.id){
                 return true;
             }
             return false;
