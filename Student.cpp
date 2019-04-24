@@ -30,21 +30,17 @@ string GetSpecialization(){
 
 //mutator for the student's Specialization (major)
 string SetSpecialization(string specialization){
-    this.specialization = specialization;
+    this->specialization = specialization;
 }
 
 // mutator for the student's advisor's ID
 void SetAdvisorID(int advisorID){
-    this.advisorID = advisorID;
+    this->advisorID = advisorID;
 }
 
 // mutator for the student's GPA
-<<<<<<< HEAD
 void SetSPA(float GPA){
-=======
-void SetGPA(float GPA){
->>>>>>> 516cb1a7fb01f320f5a25d0f20e56c442d3fd3db
-    this.GPA = GPA;
+    this->GPA = GPA;
 }
 
 

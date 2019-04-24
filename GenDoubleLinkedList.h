@@ -44,7 +44,7 @@ GenDoubleListNode<T>::~GenDoubleListNode(){
 }
 
 template<class T>
-class GenDoubleLinkedList : public List<T>{
+class GenDoubleLinkedList {
     private:
         GenDoubleListNode<T> *front;
         GenDoubleListNode<T> *back;

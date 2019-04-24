@@ -1,5 +1,6 @@
 #include "Faculty.h"
 #include <iostream>
+
 using namespace std;
 
 //Default Constructor
@@ -9,21 +10,23 @@ Faculty::Faculty(){
 
 //Overloaded Constructor: Accepts params for all members except advisees
 Faculty::Faculty(int id, string name, short rank, string specialization){
-    this.id = id;
-    this.name = name;
-    this.rank = rank;
-    this.specialization = specialization;
-    this.advisees = new GenDoubleLinkedList<int>();
+    this->id = id;
+    this->name = name;
+    this->rank = rank;
+    this->specialization = specialization;
+    this->advisees = new GenDoubleLinkedList<int>();
 }
 
+/*
 //Overloaded Constructor: Accepts params for all members
 Faculty::Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> advisees){
-    this.id = id;
-    this.name = name;
-    this.rank = rank;
-    this.specialization = specialization;
-    this.advisees = advisees;
+    this->id = id;
+    this->name = name;
+    this->rank = rank;
+    this->specialization = specialization;
+    this->advisees = advisees;
 }
+*/
 
 //Destructor
 Faculty::~Faculty(){
@@ -32,11 +35,11 @@ Faculty::~Faculty(){
 
 //Returns a complete list of Advisee ID numbers
 int* Faculty::GetAdvisees(){
-    int* advisees = new int[this.advisees->getSize()];
+    int* advisees = new int[this->advisees->getSize()];
 
     int count = 0;
-    while(this.advisees->hasNext()){
-        advisees[count++] = this.advisees->getNext();
+    while(this->advisees->hasNext()){
+        advisees[count++] = this->advisees->getNext();
     }
 
     return advisees;
@@ -48,7 +51,7 @@ void Faculty::AddAdvisee(int studentID){
 }
 
 // accessor for rank
-string Faculty::GetRank(){
+string Faculty::GetRank() const{
     return "";
 }
 
@@ -58,16 +61,16 @@ void Faculty::SetRank(){
 }
 
 // accessor for name
-string Faculty::GetName(){
+string Faculty::GetName() const{
     return name;
 }
 
 // accessor for ID
-int Faculty::GetID(){
+int Faculty::GetID() const{
     return id;
 }
 
 // accessor for specialization
-string Faculty::GetSpecialization(){
+string Faculty::GetSpecialization() const{
     return specialization;
 }
