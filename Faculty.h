@@ -26,8 +26,14 @@ class Faculty : public Person{
         //Returns a complete list of Advisee ID numbers
         int* GetAdvisees();
 
+        //Returns the number of advisees that the faculty member oversees
+        int GetAdviseeCount();
+
         //Adds a single advisee to the list of advisees
         void AddAdvisee(int studentID);
+
+        //Removes a student from the advisee list
+        void RemoveAdvisee(int studentID);
 
         // accessor for rank
         string GetRank();

@@ -108,7 +108,6 @@ string Student::ToString(){
     stu += name + "\n";
     stu += GetRank() + " in " + GetSpecialization() + "\n";
     stu += "Advisor ID: " + GetAdvisorID();
-    }
 
-    return fac;
+    return stu;
 }

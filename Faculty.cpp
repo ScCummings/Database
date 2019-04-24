@@ -36,19 +36,30 @@ Faculty::~Faculty(){
 
 //Returns a complete list of Advisee ID numbers
 int* Faculty::GetAdvisees(){
-    int* advisees = new int[this->advisees.getSize()];
+    int* adv = new int[advisees.getSize()];
 
+    advisees.resetIterator();
     int count = 0;
-    while(this->advisees.hasNext()){
-        advisees[count++] = this->advisees.getNext();
+    while(advisees.hasNext()){
+        adv[count++] = advisees.getNext();
     }
 
-    return advisees;
+    return adv;
+}
+
+//Returns the number of advisees that the faculty member oversees
+int Faculty::GetAdviseeCount(){
+    return advisees.getSize();
 }
 
 //Adds a single advisee to the list of advisees
 void Faculty::AddAdvisee(int studentID){
     advisees.insertBack(studentID);
+}
+
+//Removes a student from the advisee list
+void Faculty::RemoveAdvisee(int studentID){
+    advisees.remove(studentID);
 }
 
 // accessor for rank
@@ -99,9 +110,11 @@ string Faculty::ToString(){
     fac += GetRank() + " in " + GetSpecialization() + "\n";
     fac += "Advisees: ";
     
-    while(this->advisees.hasNext()){
-        fac += to_string(advisees.getNext()) + "\n";
-        fac += "          ";
+    advisees.resetIterator();
+    while(advisees.hasNext()){
+        fac += to_string(advisees.getNext());
+        if(advisees.hasNext())
+            fac += "\n          ";
     }
     
     return fac;
