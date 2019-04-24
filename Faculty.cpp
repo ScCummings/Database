@@ -17,7 +17,7 @@ Faculty::Faculty(int id, string name, short rank, string specialization){
     this->advisees = new GenDoubleLinkedList<int>();
 }
 
-/*
+
 //Overloaded Constructor: Accepts params for all members
 Faculty::Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> advisees){
     this->id = id;
@@ -26,7 +26,7 @@ Faculty::Faculty(int id, string name, short rank, string specialization, GenDoub
     this->specialization = specialization;
     this->advisees = advisees;
 }
-*/
+
 
 //Destructor
 Faculty::~Faculty(){

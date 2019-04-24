@@ -33,34 +33,28 @@ class Person{
         virtual string GetSpecialization() const = 0;
 
         //overloaded comparison operator for Person objects
-        bool operator ==(const Person& p) const;
+        bool operator ==(const Person& p) const{
+            if(p.id == this->id){
+                return true;
+            }
+            return false;
+        }
 
         //overloaded less than comparison operator for Person objects
-        bool operator >(const Person& p) const;
+        bool operator >(const Person& p) const{
+            if(p.id > this->id){
+                return true;
+            }
+            return false;
+        }
 
         //overloaded greater than comparison operator for Person objects
-        bool operator <(const Person& p) const;
+        bool operator <(const Person& p) const{
+            if(p.id < this->id){
+                return true;
+            }
+            return false;
+        }
 };
-
-bool Person::operator ==(const Person& p) const{
-    if(p.id == this->id){
-        return true;
-    }
-    return false;
-}
-
-bool Person::operator >(const Person& p) const{
-    if(p.id > this->id){
-        return true;
-    }
-    return false;
-}
-
-bool Person::operator <(const Person& p) const{
-    if(p.id < this->id){
-        return true;
-    }
-    return false;
-}
 
 #endif //PERSON_H
