@@ -21,7 +21,7 @@ class Person{
         virtual string GetRank() const = 0;
 
         // mutator for rank
-        virtual void SetRank() = 0;
+        void SetRank(short rank);
 
         // accessor for name
         virtual string GetName() const = 0;
@@ -34,7 +34,15 @@ class Person{
 
         //overloaded comparison operator for Person objects
         bool operator ==(const Person& p) const{
-            if(p.id == this->id){
+            if(this->id == p.id){
+                return true;
+            }
+            return false;
+        }
+
+        //overloaded not equal to operator for Person objects
+        bool operator !=(const Person& p) const{
+            if(this->id != p.id){
                 return true;
             }
             return false;
