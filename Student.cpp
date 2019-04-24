@@ -1,4 +1,6 @@
 #include "Student.h"
+
+using namespace std;
 //Student default constructor
 Student::Student(){
     this->advisorID = 0;
@@ -17,6 +19,10 @@ Student::Student(int advisorID, float GPA, int ID, string name, short rank, stri
     this->name = name;
     this->rank = rank;
     this->specialization = specialization;
+}
+
+Student::~Student(){
+    //nothing needs to happen here
 }
 
 
@@ -46,17 +52,17 @@ void Student::SetGPA(float GPA){
 
 
 // accessor for the student's ID
-int Student::GetID() const{
+int Student::GetID(){
     return id;
 }
 
 //accessor for the student's name
-string Student::GetName() const{
+string Student::GetName(){
     return name;
 }
 
 //accessor for the student's rank
-string Student::GetRank() const{
+string Student::GetRank(){
     switch (rank){
         case 0:
             return "First Year";
@@ -77,7 +83,7 @@ string Student::GetRank() const{
 }
 
 //accessor for the student's specialization
-string Student::GetSpecialization() const{
+string Student::GetSpecialization(){
     return specialization;
 }
 
@@ -93,4 +99,16 @@ string Student::SetSpecialization(string specialization){
 //overloaded stream insertion operator
 ostream& operator<<(ostream& os, Student& s){
     os << s.ToString();
+}
+
+//Student ToString function
+string Student::ToString(){
+    string stu = "";
+    stu += "Student: " + to_string(id) + "\n";
+    stu += name + "\n";
+    stu += GetRank() + " in " + GetSpecialization() + "\n";
+    stu += "Advisor ID: " + GetAdvisorID();
+    }
+
+    return fac;
 }

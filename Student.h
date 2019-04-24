@@ -1,6 +1,8 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "Person.h"
+
+using namespace std;
 class Student : public Person
 {
     private:
@@ -17,6 +19,9 @@ class Student : public Person
 
         //student overloaded constructor
         Student(int advisorID, float GPA, int ID, string name, short rank, string specialization);
+
+        //student destructor
+        ~Student();
 
 
 
@@ -37,16 +42,16 @@ class Student : public Person
 
 
         //accessor for the Student's ID
-        int GetID() const;
+        int GetID();
 
         //accessor for the Student's Name
-        string GetName() const;
+        string GetName();
 
         //accessor for the Student's rank
-        string GetRank() const;
+        string GetRank();
 
         //accessor for the student's major
-        string GetSpecialization() const;
+        string GetSpecialization();
 
         //mutator for the Student's rank
         void SetRank(short rank);
@@ -56,6 +61,8 @@ class Student : public Person
 
         //overloaded stream insertion operator
         friend ostream& operator<<(ostream& os, Student& s);
+
+        string ToString();
 
 };
 
