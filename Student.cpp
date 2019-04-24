@@ -1,3 +1,4 @@
+#include "Student.h"
 // accessor for the student's advisor's ID
 int Student::GetAdvisorID(){
     return advisorID;

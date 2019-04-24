@@ -1,6 +1,6 @@
 #ifndef STUDENT_H
 #define STUDENT_H
-
+#include "Person.h"
 class Student : public Person
 {
     private:
@@ -23,6 +23,21 @@ class Student : public Person
 
         // mutator for the student's GPA
         void SetGPA(float GPA);
+
+        //accessor for the Student's ID
+        int GetID();
+
+        //accessor for the Student's Name
+        string GetName();
+
+        //accessor for the Student's rank
+        short GetRank();
+
+        //accessor for the student's major
+        string GetSpecialization();
+
+        //mutator for the student's specialization
+        string SetSpecialization(string specialization);
 };
 
 #endif //STUDENT_H
