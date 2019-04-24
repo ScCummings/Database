@@ -12,6 +12,15 @@ class Student : public Person
 
         //accessors and mutators
     public:
+        //student constuctor
+        Student();
+
+        //student overloaded constructor
+        Student(int advisorID, float GPA, int ID, string name, short rank, string specialization);
+
+
+
+
         // accessor for the student's advisor's ID
         int GetAdvisorID();
 
@@ -24,17 +33,23 @@ class Student : public Person
         // mutator for the student's GPA
         void SetGPA(float GPA);
 
+
+
+
         //accessor for the Student's ID
-        int GetID();
+        int GetID() const;
 
         //accessor for the Student's Name
-        string GetName();
+        string GetName() const;
 
         //accessor for the Student's rank
-        short GetRank();
+        string GetRank() const;
 
         //accessor for the student's major
-        string GetSpecialization();
+        string GetSpecialization() const;
+
+        //mutator for the Student's rank
+        void SetRank(short rank);
 
         //mutator for the student's specialization
         string SetSpecialization(string specialization);
