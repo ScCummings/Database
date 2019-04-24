@@ -7,6 +7,7 @@
 using namespace std;
 
 int main(){
+<<<<<<< HEAD
 
     /*BST<Person> *StudentTree = new BST<Person>();
 
@@ -61,6 +62,9 @@ int main(){
     cout << StudentTree->getMin() << endl;
 
     Faculty f0(4432, "Name", 0, "N/A");
+=======
+    Faculty f0(4432, "Name Bitchface", 0, "Bitching");
+>>>>>>> 394fecaffce5bc1a960194d394edbcb7949de1a9
     Faculty f1(6653, "Name", 0, "N/A");
     Faculty f2(5433, "Name", 0, "N/A");
     Faculty f3(1425, "Name", 0, "N/A");

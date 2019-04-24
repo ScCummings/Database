@@ -33,7 +33,7 @@ class Faculty : public Person{
         string GetRank();
 
         // mutator for rank
-        void SetRank();
+        void SetRank(short rank);
 
         // accessor for name
         string GetName();

@@ -53,12 +53,27 @@ void Faculty::AddAdvisee(int studentID){
 
 // accessor for rank
 string Faculty::GetRank(){
-    return "";
+    switch(rank){
+        case 0:
+            return "Lecturer";
+        case 1:
+            return "Assistant Professor";
+        case 2:
+            return "Adjunct Professor";
+        case 3:
+            return "Associate Professor";
+        case 4:
+            return "Tenure Professor";
+        case 5:
+            return "Professor Emeritus";
+        default:
+            return "N/A";
+    }
 }
 
 // mutator for rank
-void Faculty::SetRank(){
-
+void Faculty::SetRank(short rank){
+    this->rank = rank;
 }
 
 // accessor for name
@@ -79,18 +94,21 @@ string Faculty::GetSpecialization(){
 //Returns a string representation of the Faculty member in question
 string Faculty::ToString(){
     string fac = "";
-    fac += "Faculty Member: " + to_string(id); "\n";
+    fac += "Faculty Member: " + to_string(id) + "\n";
     fac += name + "\n";
     fac += GetRank() + " in " + GetSpecialization() + "\n";
     fac += "Advisees: ";
+    
     while(this->advisees.hasNext()){
         fac += to_string(advisees.getNext()) + "\n";
         fac += "          ";
     }
-
+    
+    return fac;
 }
 
 //overlaoded stream insertion operator
 ostream& operator<<(ostream& os, Faculty& f){
     os << f.ToString();
+    return os;
 }
