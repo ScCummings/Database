@@ -89,3 +89,8 @@ void Student::SetRank(short rank){
 string Student::SetSpecialization(string specialization){
     this->specialization = specialization;
 }
+
+//overloaded stream insertion operator
+ostream& operator<<(ostream& os, Student& s){
+    os << s.ToString();
+}

@@ -7,10 +7,8 @@
 using namespace std;
 
 int main(){
-<<<<<<< HEAD
 
-
-    BST<Student> *StudentTree = new BST<Student>();
+    /*BST<Person> *StudentTree = new BST<Person>();
 
     //Make a bunch of Students
     Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
@@ -61,7 +59,7 @@ int main(){
 
     cout << StudentTree->getMax() << endl;
     cout << StudentTree->getMin() << endl;
-=======
+
     Faculty f0(4432, "Name", 0, "N/A");
     Faculty f1(6653, "Name", 0, "N/A");
     Faculty f2(5433, "Name", 0, "N/A");
@@ -87,14 +85,23 @@ int main(){
     f0.AddAdvisee(243465);
     f0.AddAdvisee(987967);
 
-    cout << f0 << endl;
+    cout << f0 << endl;*/
+    Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
+    Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
+    Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
+    Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
+    Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");
 
+    cout << Queenie.GetName() << endl;
+    cout << Wardu.GetAdvisorID() << endl;
+    cout << Earnie.GetGPA() << endl;
+    cout << Ricardo.GetID() << endl;
+    cout << Tracy.GetSpecialization() << endl;
 
     return 0;
 }
 
 // BST<char> *b = new BST<char>();
->>>>>>> c4e5ce9474c3ad1cb8fd5105a6134577befc1c2f
 
 // b->insert('G');
 // b->insert('5');

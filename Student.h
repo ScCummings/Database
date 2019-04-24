@@ -53,6 +53,10 @@ class Student : public Person
 
         //mutator for the student's specialization
         string SetSpecialization(string specialization);
+
+        //overloaded stream insertion operator
+        friend ostream& operator<<(ostream& os, Student& s);
+
 };
 
 #endif //STUDENT_H

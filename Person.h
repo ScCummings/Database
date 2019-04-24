@@ -39,7 +39,6 @@ class Person{
         friend ostream& operator<<(ostream& os, Person& p);
 
         //overloaded comparison operator for Person objects
-<<<<<<< HEAD
         bool operator ==(const Person& p) const{
             if(this->id == p.id){
                 return true;
@@ -50,10 +49,6 @@ class Person{
         //overloaded not equal to operator for Person objects
         bool operator !=(const Person& p) const{
             if(this->id != p.id){
-=======
-        bool operator ==(Person& p) {
-            if(p.id == this->id){
->>>>>>> c4e5ce9474c3ad1cb8fd5105a6134577befc1c2f
                 return true;
             }
             return false;
