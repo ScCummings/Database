@@ -9,7 +9,7 @@ using namespace std;
 
 class Faculty : public Person{
     private:
-        GenDoubleLinkedList<int> *advisees;
+        GenDoubleLinkedList<int> advisees;
     public:
         //Default Constructor
         Faculty();
@@ -18,7 +18,7 @@ class Faculty : public Person{
         Faculty(int id, string name, short rank, string specialization);
 
         //Overloaded Constructor: Accepts params for all members
-        Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> *advisees);
+        Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> advisees);
 
         //Destructor
         ~Faculty();
@@ -30,19 +30,25 @@ class Faculty : public Person{
         void AddAdvisee(int studentID);
 
         // accessor for rank
-        virtual string GetRank() const;
+        string GetRank();
 
         // mutator for rank
-        virtual void SetRank();
+        void SetRank();
 
         // accessor for name
-        virtual string GetName() const;
+        string GetName();
 
         // accessor for ID
-        virtual int GetID() const;
+        int GetID();
 
         // accessor for specialization
-        virtual string GetSpecialization() const;
+        string GetSpecialization();
+
+        //Returns a string representation of the Faculty member in question
+        string ToString();
+
+        //overlaoded stream insertion operator
+        friend ostream& operator<<(ostream& os, Faculty& f);
 };
 
 #endif //FACULTY_H
