@@ -97,7 +97,7 @@ void TestScott(){
 }
 
 void TestDan(){
-    Faculty f0(4432, "Name Bitchface", 0, "Bitching");
+    Faculty f0(4432, "Albert Einstein", 5, "Physics");
     Faculty f1(6653, "Name", 0, "N/A");
     Faculty f2(5433, "Name", 0, "N/A");
     Faculty f3(1425, "Name", 0, "N/A");
