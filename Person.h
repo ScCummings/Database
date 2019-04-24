@@ -21,7 +21,7 @@ class Person{
         virtual string GetRank() = 0;
 
         // mutator for rank
-        virtual void SetRank() = 0;
+        virtual void SetRank(short rank) = 0;
 
         // accessor for name
         virtual string GetName() = 0;
@@ -34,9 +34,6 @@ class Person{
 
         //Returns a string representation of the person in question
         virtual string ToString() = 0;
-
-        //overlaoded stream insertion operator
-        friend ostream& operator<<(ostream& os, Person& p);
 
         //overloaded comparison operator for Person objects
         bool operator ==(Person& p) {
