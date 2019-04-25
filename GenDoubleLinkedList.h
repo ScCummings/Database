@@ -122,6 +122,10 @@ GenDoubleLinkedList<T>::GenDoubleLinkedList(){
 }
 template<class T>
 GenDoubleLinkedList<T>::~GenDoubleLinkedList(){
+    /*if(front == nullptr)
+		//don't destruct (return)
+		We need to account for empty lists in the destructor (advisees list from the faculty objects)
+	*/
     GenDoubleListNode<T> *curr = front;
     front = nullptr;
     back = nullptr;
