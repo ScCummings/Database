@@ -127,12 +127,14 @@ GenDoubleLinkedList<T>::~GenDoubleLinkedList(){
     back = nullptr;
     currentNode = nullptr;
 
-    //iterate through list and delete each node
-    while(curr->next != nullptr){
-        curr = curr->next;
-        delete curr->prev;
+    if(curr != nullptr){
+        //iterate through list and delete each node
+        while(curr->next != nullptr){
+            curr = curr->next;
+            delete curr->prev;
+        }
+        delete curr;
     }
-    delete curr;
 }
 
 
