@@ -12,8 +12,6 @@ public class Database{
     private:
         GenTree<Student> studentTable;
         GenTree<Faculty> facultyTable;
-
-        void 
-}
+};
 
 #endif //DATABASE_H

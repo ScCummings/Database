@@ -4,27 +4,40 @@
 #include "Database.h"
 #include <iostream>
 
-public class Rollback{
+class Rollback{
     private:
-        bool isDelete;
-        bool isFaculty;
+        //1-Deleted Faculty
+        //2-Deleted Student
+        //3-Inserted Faculty
+        //4-Inserted Student
+        //5-Changed Advisee
+        //6-Changed Advisor
+        short rollbackAction;
         
-        Faculty *rollbackFaculty;
-        Student *rollbackStudent;
+        Faculty *deletedFaculty;
+        Student *deletedkStudent;
+        int studentID;
+        int facultyID;
+
 
         void UndoFacultyDelete(Database *database);
-        void UndoFacultyInsert(Database *database);
-
         void UndoStudentDelete(Database *database);
+
+        void UndoFacultyInsert(Database *database);
         void UndoStudentInsert(Database *database);
+        
+        void UndoChangeOfAdvisee(Database *database);
+        void UndoChangeOfAdvisor(Database *database);
 
     public:
-        Rollback(bool isDelete, Faculty *rollbackFaculty);
-        Rollback(bool isDelete, Student *rollbackStudent);
+        Rollback(Faculty *deletedFaculty);
+        Rollback(Student *deletedStudent);
+        Rollback(int insertedPersonID, bool isFaculty);
+        Rollback(int facultyID, int studentID, bool isChangeAdvisee);
 
-        ~Rollback();
+        ~Rollback();   
 
-        
-}
+        void PerformRollback();   
+};
 
 #endif //ROLLBACK_H
