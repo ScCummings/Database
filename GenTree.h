@@ -34,7 +34,8 @@ TreeNode<T>::TreeNode(T k){
 
 template<class T>
 TreeNode<T>::~TreeNode(){
-    //let's do a little research (that means us)  :(
+    left = nullptr;
+    right = nullptr;
 }
 
 
@@ -61,6 +62,7 @@ class BST{
         void printPre(TreeNode<T> *node, int level);
 
     private:
+        void destructRecursive(TreeNode<T> *node);
         TreeNode<T>* root;
 };
 
@@ -75,8 +77,16 @@ BST<T>::BST(){
 
 template<class T>
 BST<T>::~BST(){
-    //iterate and delete
-    //lets put on our research hats
+    destructRecursive(root);
+}
+
+template<class T>
+BST<T>::destructRecursive(TreeNode<T> node){
+    if(node != nullptr){
+        destructRecursive(node->left);
+        destructRecursive(node->right);
+        delete node;        
+    }
 }
 
 template<class T>
