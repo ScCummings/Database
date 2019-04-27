@@ -1,6 +1,28 @@
 #include "Database.h"
 
 using namespace std;
+
+Database::Database(){
+    if(!LoadFiles){
+        studentTable = new BST<Student>();
+        facultyTable = new BST<Faculty>();
+    }
+
+    rollbackStack = new LimitedAcceptingStack<Rollback>();
+}
+
+Database::~Database(){
+    //save to file
+
+    delete studentTable;
+    delete facultyTable;
+    delete rollbackStack;
+}
+
+bool Database::LoadFiles(){
+    return false;
+}
+
 void Database::PrintFaculty(){
     facultyTable->recPrint();
 }
