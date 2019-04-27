@@ -22,6 +22,7 @@ int main(){
 
 void TestScott(){
     BST<Student> *StudentTree = new BST<Student>();
+    BST<Faculty> *FacultyTree = new BST<Faculty>()
     cout << "makes it into test" << endl;
     //Make a bunch of Students
     Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
@@ -38,25 +39,6 @@ void TestScott(){
     StudentTree->insert(Ricardo);
     StudentTree->insert(Tracy);
 
-    cout << "inserts all the students" << endl;
-    StudentTree->recPrint();
-    cout << "makes it past the first recPrint" << endl;
-    StudentTree->deleteR(Queenie);
-    cout << endl;
-
-    StudentTree->recPrint();
-    StudentTree->deleteR(Wardu);
-    cout << endl;
-
-    StudentTree->recPrint();
-    StudentTree->deleteR(Earnie);
-    cout << endl;
-
-    StudentTree->recPrint();
-
-    cout << StudentTree->contains(Ricardo) << endl;
-    cout << StudentTree->contains(Tracy) << endl;
-
     //cout << StudentTree->getMax() << endl;
     //cout << StudentTree->getMin() << endl;
 
@@ -70,15 +52,17 @@ void TestScott(){
     Faculty f7(5532, "Name", 0, "N/A");
     Faculty f8(4432, "Name", 0, "N/A");
     Faculty f9(1123, "Name", 0, "N/A");
-
-    cout << "Equals (1):  " << (f0 == f8) << endl;
-    cout << "Equals (0):  " << (f9 == f8) << endl;
-
-    cout << "Greater (1)  " << (f1 > f2) << endl;
-    cout << "Greater (0)  " << (f3 > f2) << endl;
-
-    cout << "Lesser (1)   " << (f5 < f4) << endl;
-    cout << "Lesser (0)   " << (f6 < f9) << endl;
+    //insert each of the faculty objects into the FacultyTree
+    FacultyTree->insert(f0);
+    FacultyTree->insert(f1);
+    FacultyTree->insert(f2);
+    FacultyTree->insert(f3);
+    FacultyTree->insert(f4);
+    FacultyTree->insert(f5);
+    FacultyTree->insert(f6);
+    FacultyTree->insert(f7);
+    FacultyTree->insert(f8);
+    FacultyTree->insert(f9);
 
     f0.AddAdvisee(234423);
     f0.AddAdvisee(543523);
@@ -91,12 +75,8 @@ void TestScott(){
     Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
     Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
     Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");*/
+    Database d = new Database()
 
-    cout << Queenie.GetName() << endl;
-    cout << Wardu.GetAdvisorID() << endl;
-    cout << Earnie.GetGPA() << endl;
-    cout << Ricardo.GetID() << endl;
-    cout << Tracy.GetSpecialization() << endl;
 }
 
 /*void TestDan(){
