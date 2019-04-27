@@ -14,6 +14,11 @@ class Faculty : public Person{
         //Default Constructor
         Faculty();
 
+        //Faculty(Faculty that);
+
+        //Overloaded constuctor for the PrintFaculty function
+        Faculty(int ID);
+
         //Overloaded Constructor: Accepts params for all members except advisees
         Faculty(int id, string name, short rank, string specialization);
 

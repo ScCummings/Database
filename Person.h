@@ -58,6 +58,14 @@ class Person{
             }
             return false;
         }
+
+        //overloaded not equal to comparison equal for Person objects
+        bool operator !=(Person& p) {
+            if(this->id != p.id){
+                return true;
+            }
+            return false;
+        }
 };
 
 #endif //PERSON_H

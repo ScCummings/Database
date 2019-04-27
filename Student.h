@@ -17,14 +17,14 @@ class Student : public Person
         //student constuctor
         Student();
 
+        //overloaded student constructor for the PrintStudent function
+        Student(int ID);
+
         //student overloaded constructor
         Student(int advisorID, float GPA, int ID, string name, short rank, string specialization);
 
         //student destructor
         ~Student();
-
-
-
 
         // accessor for the student's advisor's ID
         int GetAdvisorID();

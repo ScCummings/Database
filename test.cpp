@@ -1,11 +1,12 @@
-#include "GenTree.h"
-#include "Faculty.h"
-#include "Person.h"
-#include "Student.h"
+// #include "GenTree.h"
+// #include "Faculty.h"
+// #include "Person.h"
+// #include "Student.h"
+#include "Database.h"
 #include <iostream>
 
 void TestScott();
-void TestDan();
+//void TestDan();
 
 int main(){
     TestScott();
@@ -14,21 +15,22 @@ int main(){
     cout << "========================";
     cout << endl << endl;
 
-    TestDan();
+    //TestDan();
 
     return 0;
 }
 
 void TestScott(){
-    /*BST<Person> *StudentTree = new BST<Person>();
-
+    BST<Student> *StudentTree = new BST<Student>();
+    cout << "makes it into test" << endl;
     //Make a bunch of Students
     Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
+    cout << Queenie << endl;
     Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
     Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
     Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
     Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");
-
+    cout << "Makes all the students" << endl;
     //Insert the students into the StudentTree
     StudentTree->insert(Queenie);
     StudentTree->insert(Wardu);
@@ -36,28 +38,29 @@ void TestScott(){
     StudentTree->insert(Ricardo);
     StudentTree->insert(Tracy);
 
-    StudentTree->printPre();
+    cout << "inserts all the students" << endl;
+    StudentTree->recPrint();
+    cout << "makes it past the first recPrint" << endl;
     StudentTree->deleteR(Queenie);
     cout << endl;
 
-    StudentTree->printPre();
+    StudentTree->recPrint();
     StudentTree->deleteR(Wardu);
     cout << endl;
 
-    StudentTree->printPre();
+    StudentTree->recPrint();
     StudentTree->deleteR(Earnie);
     cout << endl;
 
-    StudentTree->printPre();
+    StudentTree->recPrint();
 
     cout << StudentTree->contains(Ricardo) << endl;
     cout << StudentTree->contains(Tracy) << endl;
 
-    cout << StudentTree->getMax() << endl;
-    cout << StudentTree->getMin() << endl;
+    //cout << StudentTree->getMax() << endl;
+    //cout << StudentTree->getMin() << endl;
 
     Faculty f0(4432, "Name", 0, "N/A");
-    Faculty f0(4432, "Name Bitchface", 0, "Bitching");
     Faculty f1(6653, "Name", 0, "N/A");
     Faculty f2(5433, "Name", 0, "N/A");
     Faculty f3(1425, "Name", 0, "N/A");
@@ -82,12 +85,12 @@ void TestScott(){
     f0.AddAdvisee(243465);
     f0.AddAdvisee(987967);
 
-    cout << f0 << endl;*/
-    Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
+    cout << f0 << endl;
+    /*Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
     Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
     Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
     Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
-    Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");
+    Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");*/
 
     cout << Queenie.GetName() << endl;
     cout << Wardu.GetAdvisorID() << endl;
@@ -96,7 +99,7 @@ void TestScott(){
     cout << Tracy.GetSpecialization() << endl;
 }
 
-void TestDan(){
+/*void TestDan(){
     Faculty f0(4432, "Albert Einstein", 5, "Physics");
     Faculty f1(6653, "Name", 0, "N/A");
     Faculty f2(5433, "Name", 0, "N/A");
@@ -134,9 +137,9 @@ void TestDan(){
 
     for(int i = 0; i < count; i++){
         cout << haha[i] << endl;
-    }
+    }*/
 
-    // BST<char> *b = new BST<char>();
+    //BST<char> *b = new BST<char>();
 
     // b->insert('G');
     // b->insert('5');
@@ -175,4 +178,4 @@ void TestDan(){
 
     // cout << b->getMax() << endl;
     // cout << b->getMin() << endl;
-}
+//}
