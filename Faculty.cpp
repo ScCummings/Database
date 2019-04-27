@@ -12,6 +12,25 @@ Faculty::Faculty(){
     //advisees = new GenDoubleLinkedList<int>();
 }
 
+/*
+Faculty::Faculty(Faculty that){
+    this->id = that.id;
+    this->name = that.name;
+    this->rank = that.name;
+    this->specialization = that.specialization;
+    this->advisees = that.advisees;
+}
+*/
+
+//Overloaded Constructor for the PrintFaculty Function
+Faculty::Faculty(int ID){
+    id = ID;
+    name = "N/A";
+    rank = -1;
+    specialization = "N/A";
+
+}
+
 //Overloaded Constructor: Accepts params for all members except advisees
 Faculty::Faculty(int id, string name, short rank, string specialization){
     this->id = id;
@@ -109,14 +128,14 @@ string Faculty::ToString(){
     fac += name + "\n";
     fac += GetRank() + " in " + GetSpecialization() + "\n";
     fac += "Advisees: ";
-    
+
     advisees.resetIterator();
     while(advisees.hasNext()){
         fac += to_string(advisees.getNext());
         if(advisees.hasNext())
             fac += "\n          ";
     }
-    
+
     return fac;
 }
 

@@ -4,11 +4,21 @@ using namespace std;
 //Student default constructor
 Student::Student(){
     this->advisorID = 0;
-    this->GPA = 0;
+    this->GPA = -1;
     this->id = 0;
-    this->name = "0";
-    this->rank = 0;
-    this->specialization = "0";
+    this->name = "N/A";
+    this->rank = -1;
+    this->specialization = "N/A";
+}
+
+//student overloaded constructor for the PrintStudent function
+Student::Student(int id){
+    this->id = id;
+    this->GPA = -1;
+    this->advisorID = 0;
+    this->name = "N/A";
+    this->rank = -1;
+    this->specialization = "N/A";
 }
 
 //Student overloaded constructor
@@ -99,6 +109,7 @@ string Student::SetSpecialization(string specialization){
 //overloaded stream insertion operator
 ostream& operator<<(ostream& os, Student& s){
     os << s.ToString();
+    return os;
 }
 
 //Student ToString function

@@ -39,7 +39,6 @@ TreeNode<T>::~TreeNode(){
 }
 
 
-
 /////let's define our tree class/////
 
 template<class T>
@@ -49,6 +48,7 @@ class BST{
         virtual ~BST();
         void insert(T value);
         bool contains(T value); //AKA search
+        T* Find(T *value);
         bool deleteR(T key);
         TreeNode<T>* getSuccessor(TreeNode<T> *d);
 
@@ -57,9 +57,12 @@ class BST{
         bool isEmpty();
         void printTree();
         void recPrint(TreeNode<T> *node);
+        void recPrint();
+        TreeNode<T>* GetRoot();
+        /*
         void printPre();
         void printPre(TreeNode<T> *node);
-        void printPre(TreeNode<T> *node, int level);
+        void printPre(TreeNode<T> *node, int level);*/
 
     private:
         void destructRecursive(TreeNode<T> *node);
@@ -77,15 +80,17 @@ BST<T>::BST(){
 
 template<class T>
 BST<T>::~BST(){
+    cout << "Makes it into the destructor" << endl;
     destructRecursive(root);
+    cout << "Makes it past destructRecursive" << endl;
 }
 
 template<class T>
-BST<T>::destructRecursive(TreeNode<T> node){
+void BST<T>::destructRecursive(TreeNode<T> *node){
     if(node != nullptr){
         destructRecursive(node->left);
         destructRecursive(node->right);
-        delete node;        
+        delete node;
     }
 }
 
@@ -95,43 +100,25 @@ void BST<T>::printTree(){
 }
 
 template<class T>
-void BST<T>::printPre(){
-    printPre(root, 0);
-}
-
-template<class T>
-void BST<T>::printPre(TreeNode<T> *node){
-    printPre(node, 0);
-}
-
-template<class T>
-void BST<T>::printPre(TreeNode<T> *node, int level){
-    if(node == nullptr){
-        return;
-    }
-    else{
-        printPre(node->right, level+1);
-        for(int i = 0; i < level; i++){
-            cout << "   |";
-        }
-        cout << node->key << endl;
-
-        printPre(node->left, level+1);
-    }
-}
-
-template<class T>
 void BST<T>::recPrint(TreeNode<T> *node){
+    cout << "makes it into recPrint" << endl;
     if(node == nullptr){
+        cout << "node is null" << endl;
         return;
     }
     else{
+        cout << "node is not null" << endl;
         recPrint(node->left);
         cout << node->key << endl;
         recPrint(node->right);
     }
 }
 
+//overloaded recPrint function that calls from the root
+template<class T>
+void BST<T>::recPrint(){
+    recPrint(root);
+}
 template<class T>
 bool BST<T>::isEmpty(){
     return (root == nullptr);
@@ -306,5 +293,38 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d){ //d is the node to be deleted
     return successor;
 
 }
+
+template<class T>
+T* BST<T>::Find(T *value){
+    if(isEmpty()){
+        cout << "Sorry, the tree is empty." << endl;
+        return nullptr;
+    }
+    else{ //not an empty tree
+        TreeNode<T> *current = root;
+
+        while(current->key != (*value)){
+            if((*value) < current->key)
+                current = current->left;
+            else
+                current = current->right;
+
+            if(current == nullptr) //we didn't find it :(
+                cout << "Value was not found." << endl;
+                return nullptr;
+        }
+
+        T *returnT = &current->key;
+
+        return returnT;
+    }
+}
+
+//GetRoot function for the addStudent function in Database
+template<class T>
+TreeNode<T>* BST<T>::GetRoot(){
+    return root;
+}
+//getMax and getMin to be added
 
 #endif //GEN_TREE_H
