@@ -9,7 +9,7 @@ void TestScott();
 //void TestDan();
 
 int main(){
-    TestScott();
+    //TestScott();
 
     cout << endl << endl;
     cout << "========================";
@@ -19,6 +19,7 @@ int main(){
 
     return 0;
 }
+
 
 void TestScott(){
     BST<Student> *StudentTree = new BST<Student>();
@@ -91,29 +92,29 @@ void TestScott(){
     Faculty f8(4432, "Name", 0, "N/A");
     Faculty f9(1123, "Name", 0, "N/A");
 
-    cout << "Equals (1):  " << (f0 == f8) << endl;
-    cout << "Equals (0):  " << (f9 == f8) << endl;
+    // cout << "Equals (1):  " << (f0 == f8) << endl;
+    // cout << "Equals (0):  " << (f9 == f8) << endl;
 
-    cout << "Greater (1)  " << (f1 > f2) << endl;
-    cout << "Greater (0)  " << (f3 > f2) << endl;
+    // cout << "Greater (1)  " << (f1 > f2) << endl;
+    // cout << "Greater (0)  " << (f3 > f2) << endl;
 
-    cout << "Lesser (1)   " << (f5 < f4) << endl;
-    cout << "Lesser (0)   " << (f6 < f9) << endl;
+    // cout << "Lesser (1)   " << (f5 < f4) << endl;
+    // cout << "Lesser (0)   " << (f6 < f9) << endl;
 
-    f0.AddAdvisee(234423);
-    f0.AddAdvisee(543523);
-    f0.AddAdvisee(243465);
-    f0.AddAdvisee(987967);
+    // f0.AddAdvisee(234423);
+    // f0.AddAdvisee(543523);
+    // f0.AddAdvisee(243465);
+    // f0.AddAdvisee(987967);
 
-    cout << f0 << endl;
+    // cout << f0 << endl;
 
-    f0.RemoveAdvisee(543523);
+    // f0.RemoveAdvisee(543523);
 
-    cout << f0 << endl;
+    // cout << f0 << endl;
 
-    int* haha = f0.GetAdvisees();
+    // int* haha = f0.GetAdvisees();
 
-    int count = f0.GetAdviseeCount();
+    // int count = f0.GetAdviseeCount();
 
     for(int i = 0; i < count; i++){
         cout << haha[i] << endl;
