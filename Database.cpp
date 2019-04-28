@@ -3,12 +3,17 @@
 using namespace std;
 
 Database::Database(){
-    if(!LoadFiles){
+    //if(!LoadFiles){
         studentTable = new BST<Student>();
         facultyTable = new BST<Faculty>();
-    }
+    //}
 
-    rollbackStack = new LimitedAcceptingStack<Rollback>();
+    //rollbackStack = new LimitedAcceptingStack<Rollback>();
+}
+
+Database::Database(BST<Student> *studentTable,BST<Faculty> *facultyTable){
+    this->studentTable = studentTable;
+    this->facultyTable = facultyTable;
 }
 
 Database::~Database(){
@@ -16,7 +21,7 @@ Database::~Database(){
 
     delete studentTable;
     delete facultyTable;
-    delete rollbackStack;
+    //delete rollbackStack;
 }
 
 bool Database::LoadFiles(){
@@ -36,7 +41,7 @@ void Database::PrintFaculty(int facultyID){
         cout << "Sorry, faculty member not found" << endl;
     }
     else{
-        cout << &temp;
+        cout << (*temp);
     }
 }
 void Database::PrintStudent(int studentID){
@@ -46,7 +51,7 @@ void Database::PrintStudent(int studentID){
         cout << "Sorry, student was not found" << endl;
     }
     else{
-        cout << &temp;
+        cout << (*temp);
     }
 }
 void Database::PrintAdvisor(int studentID){
@@ -78,7 +83,7 @@ void Database::PrintAdvisees(int facultyID){
             cout << "Sorry, one of the student's that you tried to access doesn't exist." << endl;
         }
         else{
-            cout << (*stuTemp);
+            cout << (*stuTemp) << endl;
         }
     }
 }
@@ -97,6 +102,7 @@ void Database::DeleteStudent(int studentID){
     Faculty* facTemp = new Faculty(stuTemp->GetAdvisorID());
     facTemp = facultyTable->Find(facTemp);
     facTemp->RemoveAdvisee(studentID);
+    this->ChangeAdvisor(studentID,facultyTable->GetRoot()->key.GetID());
     if(stuTemp != nullptr){
         studentTable->deleteR((*stuTemp));
     }

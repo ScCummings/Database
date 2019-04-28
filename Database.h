@@ -4,7 +4,7 @@
 //#include "GenDoubleLinkedList.h"
 #include "Faculty.h"
 #include "Student.h"
-#include "Rollback.h"
+//#include "Rollback.h"
 #include "GenTree.h"
 #include "LimitedAcceptingStack.h"
 
@@ -15,7 +15,7 @@ class Database{
         BST<Student> *studentTable;
         BST<Faculty> *facultyTable;
 
-        LimitedAcceptingStack<Rollback> *rollbackStack;
+        //LimitedAcceptingStack<Rollback> *rollbackStack;
 
         //Tries to load files with trees
         //If it succedes it returns true
@@ -23,6 +23,7 @@ class Database{
 
     public:
         Database();
+        Database(BST<Student> *studentTable,BST<Faculty> *facultyTable);
         ~Database();
 
         void PrintFaculty();

@@ -9,7 +9,7 @@ using namespace std;
 
 class Faculty : public Person{
     private:
-        GenDoubleLinkedList<int> advisees;
+        GenDoubleLinkedList<int> *advisees;
     public:
         //Default Constructor
         Faculty();
@@ -23,7 +23,7 @@ class Faculty : public Person{
         Faculty(int id, string name, short rank, string specialization);
 
         //Overloaded Constructor: Accepts params for all members
-        Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> advisees);
+        Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> *advisees);
 
         //Destructor
         ~Faculty();

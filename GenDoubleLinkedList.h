@@ -367,8 +367,8 @@ T GenDoubleLinkedList<T>::deletePos(int pos){
     }
 
     GenDoubleListNode<T> *atPos = front;
-    GenDoubleListNode<T> *beforePos;
-    GenDoubleListNode<T> *afterPos;
+    GenDoubleListNode<T> *beforePos = nullptr;
+    GenDoubleListNode<T> *afterPos = nullptr;
 
     for(int i = 0; i < pos; i++){
         atPos = atPos->next;
@@ -475,6 +475,7 @@ T GenDoubleLinkedList<T>::getNext(){
     }
     T temp = currentNode->data;
     currentNode = currentNode->next;
+    //cout << "Temp: " << temp << endl;
     return temp;
 }
 template<class T>

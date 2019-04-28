@@ -1,4 +1,4 @@
-#include "Database.h"
+/*#include "Database.h"
 #include <iostream>
 
 using namespace std;
@@ -12,4 +12,4 @@ class DatabaseManager{
 
     private:
         Database *schoolDatabase;
-}
+};*/

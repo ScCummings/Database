@@ -101,13 +101,10 @@ void BST<T>::printTree(){
 
 template<class T>
 void BST<T>::recPrint(TreeNode<T> *node){
-    cout << "makes it into recPrint" << endl;
     if(node == nullptr){
-        cout << "node is null" << endl;
         return;
     }
     else{
-        cout << "node is not null" << endl;
         recPrint(node->left);
         cout << node->key << endl;
         recPrint(node->right);
