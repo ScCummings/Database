@@ -4,12 +4,12 @@
 using namespace std;
 
 class DatabaseManager{
-    public:
-        DatabaseManager();
-        ~DatabaseManager();
+	public:
+		DatabaseManager();
+		~DatabaseManager();
 
-        bool PickOption();
+		bool PickOption();
 
-    private:
-        Database *schoolDatabase;
+	private:
+		Database *schoolDatabase;
 };*/

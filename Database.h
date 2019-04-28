@@ -10,35 +10,35 @@
 
 #include <iostream>
 
-class Database{
-    private:
-        BST<Student> *studentTable;
-        BST<Faculty> *facultyTable;
+class Database {
+private:
+	BST<Student> *studentTable;
+	BST<Faculty> *facultyTable;
 
-        //LimitedAcceptingStack<Rollback> *rollbackStack;
+	//LimitedAcceptingStack<Rollback> *rollbackStack;
 
-        //Tries to load files with trees
-        //If it succedes it returns true
-        bool LoadFiles();
+	//Tries to load files with trees
+	//If it succedes it returns true
+	bool LoadFiles();
 
-    public:
-        Database();
-        Database(BST<Student> *studentTable,BST<Faculty> *facultyTable);
-        ~Database();
+public:
+	Database();
+	Database(BST<Student> *studentTable, BST<Faculty> *facultyTable);
+	~Database();
 
-        void PrintFaculty();
-        void PrintStudents();
-        void PrintFaculty(int facultyID);
-        void PrintStudent(int studentID);
-        void PrintAdvisor(int studentID);
-        void PrintAdvisees(int facultyID);
-        void AddStudent(Student newStudent);
-        void DeleteStudent(int studentID);
-        void AddFaculty(Faculty newFaculty);
-        void DeleteFaculty(int facultyID);
-        void ChangeAdvisor(int studentID,int facultyID);
-        void RemoveAdvisee(int facultyID,int studentID);
-        void Rollback();
+	void PrintFaculty();
+	void PrintStudents();
+	void PrintFaculty(int facultyID);
+	void PrintStudent(int studentID);
+	void PrintAdvisor(int studentID);
+	void PrintAdvisees(int facultyID);
+	void AddStudent(Student newStudent);
+	void DeleteStudent(int studentID);
+	void AddFaculty(Faculty newFaculty);
+	void DeleteFaculty(int facultyID);
+	void ChangeAdvisor(int studentID, int facultyID);
+	void RemoveAdvisee(int facultyID, int studentID);
+	void Rollback();
 };
 
 #endif //DATABASE_H

@@ -7,59 +7,62 @@
 
 using namespace std;
 
-class Faculty : public Person{
-    private:
-        GenDoubleLinkedList<int> *advisees;
-    public:
-        //Default Constructor
-        Faculty();
+class Faculty : public Person {
+private:
+	GenDoubleLinkedList<int> *advisees;
+public:
+	//Default Constructor
+	Faculty();
 
-        //Faculty(Faculty that);
+	//Faculty(Faculty that);
 
-        //Overloaded constuctor for the PrintFaculty function
-        Faculty(int ID);
+	//Overloaded constuctor for the PrintFaculty function
+	Faculty(int ID);
 
-        //Overloaded Constructor: Accepts params for all members except advisees
-        Faculty(int id, string name, short rank, string specialization);
+	//Overloaded Constructor: Accepts params for all members except advisees
+	Faculty(int id, string name, short rank, string specialization);
 
-        //Overloaded Constructor: Accepts params for all members
-        Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> *advisees);
+	//Overloaded Constructor: Accepts params for all members
+	Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> *advisees);
 
-        //Destructor
-        ~Faculty();
+	//Destructor
+	~Faculty();
 
-        //Returns a complete list of Advisee ID numbers
-        int* GetAdvisees();
+	//Returns a complete list of Advisee ID numbers
+	int* GetAdvisees();
 
-        //Returns the number of advisees that the faculty member oversees
-        int GetAdviseeCount();
+	//Returns the number of advisees that the faculty member oversees
+	int GetAdviseeCount();
 
-        //Adds a single advisee to the list of advisees
-        void AddAdvisee(int studentID);
+	//Adds a single advisee to the list of advisees
+	void AddAdvisee(int studentID);
 
-        //Removes a student from the advisee list
-        void RemoveAdvisee(int studentID);
+	//Adds multiple advisees to the list of advisees
+	void AddAdvisees(int* studentArray, int sizeOfStudentArray);
 
-        // accessor for rank
-        string GetRank();
+	//Removes a student from the advisee list
+	void RemoveAdvisee(int studentID);
 
-        // mutator for rank
-        void SetRank(short rank);
+	// accessor for rank
+	string GetRank();
 
-        // accessor for name
-        string GetName();
+	// mutator for rank
+	void SetRank(short rank);
 
-        // accessor for ID
-        int GetID();
+	// accessor for name
+	string GetName();
 
-        // accessor for specialization
-        string GetSpecialization();
+	// accessor for ID
+	int GetID();
 
-        //Returns a string representation of the Faculty member in question
-        string ToString();
+	// accessor for specialization
+	string GetSpecialization();
 
-        //overlaoded stream insertion operator
-        friend ostream& operator<<(ostream& os, Faculty& f);
+	//Returns a string representation of the Faculty member in question
+	string ToString();
+
+	//overlaoded stream insertion operator
+	friend ostream& operator<<(ostream& os, Faculty& f);
 };
 
 #endif //FACULTY_H
