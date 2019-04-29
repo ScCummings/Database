@@ -3,10 +3,11 @@
 // #include "Person.h"
 // #include "Student.h"
 #include "Database.h"
+#include "Manager.h"
 #include <iostream>
 
 void TestScott();
-//void TestDan();
+void TestDan();
 
 int main(){
     //TestScott();
@@ -15,102 +16,107 @@ int main(){
     cout << "========================";
     cout << endl << endl;
 
-    //TestDan();
+    TestDan();
 
     return 0;
 }
 
 
 void TestScott(){
-    BST<Student> *StudentTree = new BST<Student>();
-    cout << "makes it into test" << endl;
-    //Make a bunch of Students
-    Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
-    cout << Queenie << endl;
-    Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
-    Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
-    Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
-    Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");
-    cout << "Makes all the students" << endl;
-    //Insert the students into the StudentTree
-    StudentTree->insert(Queenie);
-    StudentTree->insert(Wardu);
-    StudentTree->insert(Earnie);
-    StudentTree->insert(Ricardo);
-    StudentTree->insert(Tracy);
+    // BST<Student> *StudentTree = new BST<Student>();
+    // cout << "makes it into test" << endl;
+    // //Make a bunch of Students
+    // Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
+    // cout << Queenie << endl;
+    // Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
+    // Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
+    // Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
+    // Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");
+    // cout << "Makes all the students" << endl;
+    // //Insert the students into the StudentTree
+    // StudentTree->insert(Queenie);
+    // StudentTree->insert(Wardu);
+    // StudentTree->insert(Earnie);
+    // StudentTree->insert(Ricardo);
+    // StudentTree->insert(Tracy);
 
-    cout << "inserts all the students" << endl;
-    StudentTree->recPrint();
-    cout << "makes it past the first recPrint" << endl;
-    StudentTree->deleteR(Queenie);
-    cout << endl;
+    // cout << "inserts all the students" << endl;
+    // StudentTree->recPrint();
+    // cout << "makes it past the first recPrint" << endl;
+    // StudentTree->deleteR(Queenie);
+    // cout << endl;
 
-    StudentTree->recPrint();
-    StudentTree->deleteR(Wardu);
-    cout << endl;
+    // StudentTree->recPrint();
+    // StudentTree->deleteR(Wardu);
+    // cout << endl;
 
-    StudentTree->recPrint();
-    StudentTree->deleteR(Earnie);
-    cout << endl;
+    // StudentTree->recPrint();
+    // StudentTree->deleteR(Earnie);
+    // cout << endl;
 
-    StudentTree->recPrint();
+    // StudentTree->recPrint();
 
-    cout << StudentTree->contains(Ricardo) << endl;
-    cout << StudentTree->contains(Tracy) << endl;
+    // cout << StudentTree->contains(Ricardo) << endl;
+    // cout << StudentTree->contains(Tracy) << endl;
 
-    //cout << StudentTree->getMax() << endl;
-    //cout << StudentTree->getMin() << endl;
+    // //cout << StudentTree->getMax() << endl;
+    // //cout << StudentTree->getMin() << endl;
 
-    Faculty f0(4432, "Name", 0, "N/A");
-    Faculty f1(6653, "Name", 0, "N/A");
-    Faculty f2(5433, "Name", 0, "N/A");
-    Faculty f3(1425, "Name", 0, "N/A");
-    Faculty f4(6546, "Name", 0, "N/A");
-    Faculty f5(2434, "Name", 0, "N/A");
-    Faculty f6(1432, "Name", 0, "N/A");
-    Faculty f7(5532, "Name", 0, "N/A");
-    Faculty f8(4432, "Name", 0, "N/A");
-    Faculty f9(1123, "Name", 0, "N/A");
+    // Faculty f0(4432, "Name", 0, "N/A");
+    // Faculty f1(6653, "Name", 0, "N/A");
+    // Faculty f2(5433, "Name", 0, "N/A");
+    // Faculty f3(1425, "Name", 0, "N/A");
+    // Faculty f4(6546, "Name", 0, "N/A");
+    // Faculty f5(2434, "Name", 0, "N/A");
+    // Faculty f6(1432, "Name", 0, "N/A");
+    // Faculty f7(5532, "Name", 0, "N/A");
+    // Faculty f8(4432, "Name", 0, "N/A");
+    // Faculty f9(1123, "Name", 0, "N/A");
 
-    cout << "Equals (1):  " << (f0 == f8) << endl;
-    cout << "Equals (0):  " << (f9 == f8) << endl;
+    // cout << "Equals (1):  " << (f0 == f8) << endl;
+    // cout << "Equals (0):  " << (f9 == f8) << endl;
 
-    cout << "Greater (1)  " << (f1 > f2) << endl;
-    cout << "Greater (0)  " << (f3 > f2) << endl;
+    // cout << "Greater (1)  " << (f1 > f2) << endl;
+    // cout << "Greater (0)  " << (f3 > f2) << endl;
 
-    cout << "Lesser (1)   " << (f5 < f4) << endl;
-    cout << "Lesser (0)   " << (f6 < f9) << endl;
+    // cout << "Lesser (1)   " << (f5 < f4) << endl;
+    // cout << "Lesser (0)   " << (f6 < f9) << endl;
 
-    f0.AddAdvisee(234423);
-    f0.AddAdvisee(543523);
-    f0.AddAdvisee(243465);
-    f0.AddAdvisee(987967);
+    // f0.AddAdvisee(234423);
+    // f0.AddAdvisee(543523);
+    // f0.AddAdvisee(243465);
+    // f0.AddAdvisee(987967);
 
-    cout << f0 << endl;
-    /*Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
-    Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
-    Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
-    Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
-    Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");*/
+    // cout << f0 << endl;
+    // /*Student Queenie(1234,4.0,1,"Queenie",2,"Enviornmental Science");
+    // Student Wardu(1234,3.9,2,"Wardu",0,"Integrated Educational Studies");
+    // Student Earnie(1234,3.8,1,"Earnie",1,"Psychology");
+    // Student Ricardo(1234,3.7,3,"Ricardo",2,"Applied Physics");
+    // Student Tracy(1234,3.6,2,"Tracy",1,"German Language and Culture");*/
 
-    cout << Queenie.GetName() << endl;
-    cout << Wardu.GetAdvisorID() << endl;
-    cout << Earnie.GetGPA() << endl;
-    cout << Ricardo.GetID() << endl;
-    cout << Tracy.GetSpecialization() << endl;
+    // cout << Queenie.GetName() << endl;
+    // cout << Wardu.GetAdvisorID() << endl;
+    // cout << Earnie.GetGPA() << endl;
+    // cout << Ricardo.GetID() << endl;
+    // cout << Tracy.GetSpecialization() << endl;
 }
 
-/*void TestDan(){
-    Faculty f0(4432, "Albert Einstein", 5, "Physics");
-    Faculty f1(6653, "Name", 0, "N/A");
-    Faculty f2(5433, "Name", 0, "N/A");
-    Faculty f3(1425, "Name", 0, "N/A");
-    Faculty f4(6546, "Name", 0, "N/A");
-    Faculty f5(2434, "Name", 0, "N/A");
-    Faculty f6(1432, "Name", 0, "N/A");
-    Faculty f7(5532, "Name", 0, "N/A");
-    Faculty f8(4432, "Name", 0, "N/A");
-    Faculty f9(1123, "Name", 0, "N/A");
+void TestDan(){
+
+    DatabaseManager manager;
+
+    
+
+    // Faculty f0(4432, "Albert Einstein", 5, "Physics");
+    // Faculty f1(6653, "Name", 0, "N/A");
+    // Faculty f2(5433, "Name", 0, "N/A");
+    // Faculty f3(1425, "Name", 0, "N/A");
+    // Faculty f4(6546, "Name", 0, "N/A");
+    // Faculty f5(2434, "Name", 0, "N/A");
+    // Faculty f6(1432, "Name", 0, "N/A");
+    // Faculty f7(5532, "Name", 0, "N/A");
+    // Faculty f8(4432, "Name", 0, "N/A");
+    // Faculty f9(1123, "Name", 0, "N/A");
 
     // cout << "Equals (1):  " << (f0 == f8) << endl;
     // cout << "Equals (0):  " << (f9 == f8) << endl;
@@ -136,9 +142,9 @@ void TestScott(){
 
     // int count = f0.GetAdviseeCount();
 
-    for(int i = 0; i < count; i++){
-        cout << haha[i] << endl;
-    }*/
+    // for(int i = 0; i < count; i++){
+    //     cout << haha[i] << endl;
+    // }
 
     //BST<char> *b = new BST<char>();
 
@@ -179,4 +185,4 @@ void TestScott(){
 
     // cout << b->getMax() << endl;
     // cout << b->getMin() << endl;
-//}
+}
