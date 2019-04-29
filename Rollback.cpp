@@ -1,4 +1,4 @@
-#include "Rollback.h"
+/*#include "Rollback.h"
 #include <iostream>
 
 Rollback::Rollback(Faculty *deletedFaculty){
@@ -78,4 +78,4 @@ void Rollback::UndoChangeOfAdvisee(Database *database){
 }
 void Rollback::UndoChangeOfAdvisor(Database *database){
 
-}
+}*/
