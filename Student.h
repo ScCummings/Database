@@ -21,7 +21,7 @@ class Student : public Person
         Student(int ID);
 
         //student overloaded constructor
-        Student(int advisorID, float GPA, int ID, string name, short rank, string specialization);
+        Student(int ID, float GPA, int advisorID, string name, short rank, string specialization);
 
         //student destructor
         ~Student();

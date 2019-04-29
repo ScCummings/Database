@@ -22,7 +22,7 @@ Student::Student(int id){
 }
 
 //Student overloaded constructor
-Student::Student(int advisorID, float GPA, int ID, string name, short rank, string specialization){
+Student::Student(int ID, float GPA, int advisorID, string name, short rank, string specialization){
     this->advisorID = advisorID;
     this->GPA = GPA;
     this->id = ID;

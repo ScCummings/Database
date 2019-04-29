@@ -160,9 +160,11 @@ c) @return: NA
 d) no exceptions thrown
 */
 void Database::AddStudent(Student newStudent) {
-	newStudent.SetAdvisorID(facultyTable->GetRoot()->key.GetID());
 	if (&newStudent != nullptr) {
 		studentTable->insert(newStudent);
+        Faculty *tempFac = new Faculty(newStudent.GetAdvisorID());
+        tempFac = facultyTable->Find(tempFac);
+        tempFac->AddAdvisee(newStudent.GetID());
 	}
 	else {
 		cout << "Sorry, the student you passed in doesn't exist." << endl;
