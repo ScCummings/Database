@@ -57,7 +57,7 @@ class Student : public Person
         void SetRank(short rank);
 
         //mutator for the student's specialization
-        string SetSpecialization(string specialization);
+        void SetSpecialization(string specialization);
 
         //overloaded stream insertion operator
         friend ostream& operator<<(ostream& os, Student& s);
