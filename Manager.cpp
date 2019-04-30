@@ -176,5 +176,6 @@ Faculty DatabaseManager::GetNewFaculty(){
     int facultyID;
     string name;
     short rank;
-    //*******************************WORK HERE*************************
+    string specialization;
+    
 }
