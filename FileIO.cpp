@@ -126,7 +126,7 @@ bool FileIO::CheckLoadStatus(){
             cout << "Student Data not empty" << endl;
             studentTableHasData = true;
         }
-
+        inputStream.close();
         inputStream.open(facultyData);
         tempLine = "";
         if(getline(inputStream, tempLine)){
@@ -181,7 +181,42 @@ bool FileIO::CheckLoadStatus(){
             }
 
             else if(facultyTableHasData){
-                    
+                bool userResponse = false;
+                string userResponseString = "";
+                while(true){
+                    cout << "Sorry, data was only found in the faculty file. Would you like to dump this file?(y/n)" << endl;
+                    cin >> userResponseString;
+                    if(userResponseString == "y"){
+                        userResponse = true;
+                        break;
+                    }
+                    else if(userResponseString == "n"){
+                        userResponse = false;
+                        break;
+                    }
+                    else{
+                        cout << "Sorry, user response not recognized." << endl;
+                    }
+                }
+                if(userResponse){
+                    inputStream.open(facultyData);
+                    inputStream.clear();
+                    inputStream.seekg(0, inputStream.beg);
+                    outputStream.open(facultyDataDump);
+
+                    string temp = "";
+                    while(getline(inputStream,temp)){
+                        cout << "***" << temp << "***" << endl;
+                        outputStream << temp << endl;
+                    }
+                    return false;
+                }
+                else if(!userResponse){
+                    return false;
+                }
+                else{
+                    return false;
+                }
             }
         else {
             cout << "Neither file has data :(" << endl;
