@@ -149,6 +149,8 @@ Student UnserializeS(string str){
         }
     }
 
+    delete delim;
+
     Student someStudent(id,GPA,advisorID,name,rank,specialization);
     return someStudent;
 }
@@ -297,6 +299,8 @@ Faculty UnserializeF(string str){
             }
         }
     }
+
+    delete delim;
 
     Faculty someFaculty(id,name,rank,specialization,advisees);
     return someFaculty;

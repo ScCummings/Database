@@ -1,6 +1,9 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "Person.h"
+#include "GenStack.h"
+#include <iostream>
+#include <string>
 
 using namespace std;
 class Student : public Person
@@ -25,6 +28,12 @@ class Student : public Person
 
         //student destructor
         ~Student();
+
+        //returns a serialized string representation of the Student object
+        string Serialize();
+
+        // returns a Student object parced from a string
+        static Student Unserialize(string str);
 
         // accessor for the student's advisor's ID
         int GetAdvisorID();

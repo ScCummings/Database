@@ -35,7 +35,9 @@ Student::~Student(){
     //nothing needs to happen here
 }
 
-
+Student Student::Unserialize(string str){
+    
+}
 
 
 // accessor for the student's advisor's ID

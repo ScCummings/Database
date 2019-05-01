@@ -14,8 +14,6 @@ public:
 	//Default Constructor
 	Faculty();
 
-	//Faculty(Faculty that);
-
 	//Overloaded constuctor for the PrintFaculty function
 	Faculty(int ID);
 
@@ -27,6 +25,12 @@ public:
 
 	//Destructor
 	~Faculty();
+
+    // Returns a serialized version of the faculty object
+    string Serialize();
+
+    // Returns a Faculty object parced from a string
+    static Faculty Unserialize(string str);
 
 	//Returns a complete list of Advisee ID numbers
 	int* GetAdvisees();
