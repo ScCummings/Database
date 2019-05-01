@@ -80,9 +80,7 @@ BST<T>::BST() {
 
 template<class T>
 BST<T>::~BST() {
-	cout << "Makes it into the destructor" << endl;
 	destructRecursive(root);
-	cout << "Makes it past destructRecursive" << endl;
 }
 
 template<class T>
@@ -310,7 +308,7 @@ T* BST<T>::Find(T *value) {
 				cout << "Value was not found." << endl;
 				return nullptr;
 			}
-				
+
 		}
 
 		T *returnT = &current->key;

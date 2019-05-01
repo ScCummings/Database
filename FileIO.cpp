@@ -54,6 +54,9 @@ d) throws UnserializationException
 */
 BST<Student>* FileIO::LoadStudents(){
     BST<Student> *newStudentTree = new BST<Student>();
+    if(inputStream.is_open()){
+        inputStream.close();
+    }
     inputStream.open(studentData);
     string line = "";
     try{
@@ -75,6 +78,9 @@ d) throws UnserializationException
 */
 BST<Faculty>* FileIO::LoadFaculty(){
     BST<Faculty> *newFacultyTree = new BST<Faculty>();
+    if(inputStream.is_open()){
+        inputStream.close();
+    }
     inputStream.open(facultyData);
     string line = "";
     try{
@@ -122,16 +128,12 @@ bool FileIO::CheckLoadStatus(){
         inputStream.open(studentData);
         string tempLine = "";
         if(getline(inputStream, tempLine)){
-            cout << "**" << tempLine << "**" << endl;
-            cout << "Student Data not empty" << endl;
             studentTableHasData = true;
         }
         inputStream.close();
         inputStream.open(facultyData);
         tempLine = "";
         if(getline(inputStream, tempLine)){
-            cout << "**" << tempLine << "**" << endl;
-            cout << "Faculty Data not empty" << endl;
             facultyTableHasData = true;
         }
 
@@ -167,7 +169,6 @@ bool FileIO::CheckLoadStatus(){
 
                     string temp = "";
                     while(getline(inputStream,temp)){
-                        cout << "***" << temp << "***" << endl;
                         outputStream << temp << endl;
                     }
                     return false;
@@ -206,7 +207,6 @@ bool FileIO::CheckLoadStatus(){
 
                     string temp = "";
                     while(getline(inputStream,temp)){
-                        cout << "***" << temp << "***" << endl;
                         outputStream << temp << endl;
                     }
                     return false;
