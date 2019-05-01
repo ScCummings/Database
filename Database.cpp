@@ -242,7 +242,7 @@ void Database::ChangeAdvisor(int studentID, int facultyID) {
 	Student* stuTemp = new Student(studentID);
 	stuTemp = studentTable->Find(stuTemp);
 	Faculty* facTemp1 = new Faculty(facultyID);
-	Faculty* facTemp2 = new Faculty(facultyID);
+	Faculty* facTemp2 = new Faculty(stuTemp->GetAdvisorID());
 	facTemp1 = facultyTable->Find(facTemp1);
 	facTemp2 = facultyTable->Find(facTemp2);
 	facTemp1->AddAdvisee(studentID);
