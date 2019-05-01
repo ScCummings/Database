@@ -121,7 +121,7 @@ bool DatabaseManager::PickOption(int optionNumber){
         case 7: {
             cout << "Adding new student:" << endl;
             Student newStudent = GetNewStudent();
-            schoolDatabase->AddStudent(newStudent);
+            schoolDatabase->AddStudent(newStudent, false);
             
             return true;
         }
@@ -132,7 +132,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Deleting student:" << endl;
             cout << "What is the ID of the student you want to delete?" << endl;
             int studentID = GetStudentID();
-            schoolDatabase->DeleteStudent(studentID);
+            schoolDatabase->DeleteStudent(studentID, false);
 
             return true;
         }
@@ -142,7 +142,7 @@ bool DatabaseManager::PickOption(int optionNumber){
         case 9: {
             cout << "Adding new faculty member:" << endl;
             Faculty newFaculty = GetNewFaculty();
-            schoolDatabase->AddFaculty(newFaculty);
+            schoolDatabase->AddFaculty(newFaculty, false);
 
             return true;
         }
@@ -153,7 +153,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Deleting faculty member:" << endl;
             cout << "What is the ID of the faculty memeber you want to delete?" << endl;
             int facultyID = GetFacultyID();
-            schoolDatabase->DeleteFaculty(facultyID);
+            schoolDatabase->DeleteFaculty(facultyID, false);
 
             return true;
         }
@@ -166,7 +166,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             int studentID = GetStudentID();
             cout << "What is the ID of the faculty who will be the new advisor for student " << studentID << " ?" << endl;
             int facultyID = GetFacultyID();
-            schoolDatabase->ChangeAdvisor(studentID, facultyID);
+            schoolDatabase->ChangeAdvisor(studentID, facultyID, false);
 
             return true;
         }
@@ -174,7 +174,13 @@ bool DatabaseManager::PickOption(int optionNumber){
 
         //Remove Advisee
         case 12: {
-
+            cout << "Removing a faculty member's advisee:" << endl;
+            cout << "WARNING: THIS WILL LEAVE THE STUDENT WITHOUT AN ADVISOR" << endl;
+            cout << "What is the ID of the faculty member you wish to remove from?" << endl;
+            int facultyID = GetFacultyID();
+            cout << "What is the ID of the advisee you wish to remove?" << endl;
+            int studentID = GetStudentID();
+            schoolDatabase->RemoveAdvisee(facultyID, studentID, false);
             return true;
         }
         break;

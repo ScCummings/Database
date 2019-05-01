@@ -1,6 +1,8 @@
 #ifndef ROLLBACK_H
 #define ROLLBACK_H
 
+class Rollback;
+
 #include "Database.h"
 #include <iostream>
 
