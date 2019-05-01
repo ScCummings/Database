@@ -16,7 +16,7 @@ bool DatabaseManager::PickOption(int option){
         case 2: //Print faculty
             schoolDatabase->PrintFaculty();
             break;
-        
+
         case 3: //Print specific student
             int studentID = GetStudentID();
             schoolDatabase->PrintStudent(studentID);
@@ -136,7 +136,7 @@ Student DatabaseManager::GetNewStudent(){
     }
 
     keepGoing = true;
-    
+
     //Getting student's GPA
     while(keepGoing){
         cout << "What is the new student's GPA?\n";
@@ -177,5 +177,5 @@ Faculty DatabaseManager::GetNewFaculty(){
     string name;
     short rank;
     string specialization;
-    
+
 }
