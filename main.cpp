@@ -1,14 +1,11 @@
-#include "GenTree.h"
-#include "Faculty.h"
-#include "Person.h"
-#include "Student.h"
+#include "Manager.h"
 #include <iostream>
 
 using namespace std;
 
-/*
-int main(){
 
-    return;
+int main(){
+    DatabaseManager m;
+    m.RunManager();
+    return 0;
 }
-*/

@@ -9,9 +9,18 @@ c) @return: NA
 d) no exceptions thrown
 */
 Database::Database() {
-	//if(!LoadFiles){
-	studentTable = new BST<Student>();
-	facultyTable = new BST<Faculty>();
+	if(fileIO.CheckLoadStatus()){
+        studentTable = fileIO.LoadStudents();
+        facultyTable = fileIO.LoadFaculty();
+        cout << "loaded from files" << endl;
+
+        studentTable->printTree();
+
+    }
+	else{
+        studentTable = new BST<Student>();
+	    facultyTable = new BST<Faculty>();
+    }
 	//}
 
 	//rollbackStack = new LimitedAcceptingStack<Rollback>();
@@ -165,6 +174,8 @@ void Database::AddStudent(Student newStudent) {
         Faculty *tempFac = new Faculty(newStudent.GetAdvisorID());
         tempFac = facultyTable->Find(tempFac);
         tempFac->AddAdvisee(newStudent.GetID());
+        Rollback r(newStudent.GetID(), false);
+        rollbackStack->Push(r);
 	}
 	else {
 		cout << "Sorry, the student you passed in doesn't exist." << endl;
@@ -186,6 +197,8 @@ void Database::DeleteStudent(int studentID) {
 	//facTemp->RemoveAdvisee(studentID);
 	//this->ChangeAdvisor(studentID, facultyTable->GetRoot()->key.GetID());
 	if (stuTemp != nullptr) {
+        Rollback r(stuTemp);
+        rollbackStack->Push(r);
 		studentTable->deleteR((*stuTemp));
 	}
 	else {
@@ -202,9 +215,11 @@ d) no exceptions thrown
 void Database::AddFaculty(Faculty newFaculty) {
 	if (&newFaculty != nullptr) {
 		facultyTable->insert(newFaculty);
+        Rollback r(newFaculty.GetID, true);
+        rollbackStack->Push(r);
 	}
 	else {
-		cout << "Sorry, the student you passed in doesn't exist." << endl;
+		cout << "Sorry, the faculty member you passed in doesn't exist." << endl;
 	}
 }
 
@@ -223,9 +238,12 @@ void Database::DeleteFaculty(int facultyID) {
 		stuTemp = studentTable->Find(stuTemp);
 		stuTemp->SetAdvisorID(facultyTable->GetRoot()->key.GetID());
 	}*/
-	facultyTable->GetRoot()->key.AddAdvisees(facTemp->GetAdvisees(), facTemp->GetAdviseeCount());
+	
 	if (facTemp != nullptr) {
+        Rollback r(facTemp);
+        rollbackStack->Push(r);
 		facultyTable->deleteR((*facTemp));
+        facultyTable->GetRoot()->key.AddAdvisees(facTemp->GetAdvisees(), facTemp->GetAdviseeCount());
 	}
 	else {
 		cout << "Sorry, the faculty member you tried to delete doesn't exist." << endl;
@@ -248,6 +266,9 @@ void Database::ChangeAdvisor(int studentID, int facultyID) {
 	facTemp1->AddAdvisee(studentID);
 	stuTemp->SetAdvisorID(facultyID);
 	facTemp2->RemoveAdvisee(studentID);
+
+    Rollback r(facultyID, studentID, true);
+    rollbackStack->Push(r);
 }
 
 /*
@@ -262,6 +283,9 @@ void Database::RemoveAdvisee(int facultyID, int studentID) {
 	facTemp->RemoveAdvisee(studentID);
 	Student* stuTemp = new Student(studentID);
 	stuTemp = studentTable->Find(stuTemp);
-	stuTemp->SetAdvisorID(facultyTable->GetRoot()->key.GetID());
+	stuTemp->SetAdvisorID(0);
+
+    Rollback r(facultyID, studentID, false);
+    rollbackStack->Push(r);
 }
 //void Database::Rollback();
