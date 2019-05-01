@@ -8,10 +8,12 @@ class DatabaseManager{
 		DatabaseManager();
 		~DatabaseManager();
 
-		bool PickOption(int option);
+        void RunManager();
 
 	private:
 		Database *schoolDatabase;
+
+		bool PickOption(int option);
 
         int GetStudentID();
         int GetFacultyID();
