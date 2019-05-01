@@ -9,7 +9,46 @@ DatabaseManager::~DatabaseManager(){
 }
 
 void DatabaseManager::RunManager(){
+    cout << "----------------DATABASE----------------" << endl;
+    int optionNumber;
+    do{
+        while(true){
+            cout << "Please choose an action (type the number and press enter)" << endl;
+            cout << "1 ) Print all students" << endl;
+            cout << "2 ) Print all faculty members" << endl;
+            cout << "3 ) Print a specific student" << endl;
+            cout << "4 ) Print a specific faculty member" << endl;
+            cout << "5 ) Print a student's advisor" << endl;
+            cout << "6 ) Print a faculty member's advisees" << endl;
+            cout << "7 ) Add a new student" << endl;
+            cout << "8 ) Delete a student" << endl;
+            cout << "9 ) Add a new faculty member" << endl;
+            cout << "10) Delete a faculty member" << endl;
+            cout << "11) Change a student's advisor" << endl;
+            cout << "12) Remove an advisee from an advisor" << endl;
+            cout << "13) Rollback a change" << endl;
+            cout << "14) Exit" << endl << endl;
 
+            string temp;
+            getline(cin, temp);
+
+            try{
+                optionNumber = stoi(temp);
+
+                if((optionNumber >= 1) && (optionNumber <= 14)){
+                    break;
+                }
+            }
+            catch(invalid_argument e){
+                cout << "**Command not recognized**" << endl;
+            }
+            catch(out_of_range e){
+                cout << "**Command not recognized**" << endl;
+            }
+
+            cout << "**Command not recognized**" << endl;
+        }
+    }while(PickOption(optionNumber));
 }
 
 bool DatabaseManager::PickOption(int optionNumber){
