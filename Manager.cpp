@@ -8,12 +8,18 @@ DatabaseManager::~DatabaseManager(){
     delete schoolDatabase;
 }
 
+void DatabaseManager::RunManager(){
+
+}
+
 bool DatabaseManager::PickOption(int optionNumber){
     switch(optionNumber){
         //Print students
         case 1: {
             cout << "Printing students:" << endl;
             schoolDatabase->PrintStudents();
+
+            return true;
         }
         break;
 
@@ -22,11 +28,8 @@ bool DatabaseManager::PickOption(int optionNumber){
         case 2: {
             cout << "Printing faculty:" << endl;
             schoolDatabase->PrintFaculty();
-<<<<<<< HEAD
-            break;
 
-        case 3: //Print specific student
-=======
+            return true;
         }
         break;
 
@@ -34,9 +37,10 @@ bool DatabaseManager::PickOption(int optionNumber){
         case 3: {
             cout << "Printing single student:" << endl;
             cout << "What is the ID of the student you want to print" << endl;
->>>>>>> 05a625cce5fd55eee82297f643606628d66c462b
             int studentID = GetStudentID();
             schoolDatabase->PrintStudent(studentID);
+
+            return true;
         }
         break;
 
@@ -46,6 +50,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty member you want to print?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->PrintFaculty(facultyID);
+
+            return true;
         }
         break;
 
@@ -55,6 +61,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the student whose advisor you want to print?" << endl;
             int studentID = GetStudentID();
             schoolDatabase->PrintAdvisor(studentID);
+
+            return true;
         }
         break;
 
@@ -64,6 +72,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty member whose advisees you want to print?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->PrintAdvisees(facultyID);
+
+            return true;
         }
         break;
 
@@ -72,6 +82,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new student:" << endl;
             Student newStudent = GetNewStudent();
             schoolDatabase->AddStudent(newStudent);
+
+            return true;
         }
         break;
 
@@ -81,6 +93,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the student you want to delete?" << endl;
             int studentID = GetStudentID();
             schoolDatabase->DeleteStudent(studentID);
+
+            return true;
         }
         break;
 
@@ -89,6 +103,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new faculty member:" << endl;
             Faculty newFaculty = GetNewFaculty();
             schoolDatabase->AddFaculty(newFaculty);
+
+            return true;
         }
         break;
 
@@ -98,6 +114,8 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty memeber you want to delete?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->DeleteFaculty(facultyID);
+
+            return true;
         }
         break;
 
@@ -109,16 +127,28 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty who will be the new advisor for student " << studentID << " ?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->ChangeAdvisor(studentID, facultyID);
+
+            return true;
         }
         break;
 
         //Remove Advisee
         case 12: {
-            
 
+            return true;
         }
         break;
 
+        //rollback
+        case 13: {
+            return true;
+        }
+        break;
+
+        //exit
+        default: {
+            return false;
+        }
     }
 }
 
@@ -147,7 +177,7 @@ int DatabaseManager::GetStudentID(){
                 cout << "Invalid ID number\n";
             }
         }
-        
+
         //Test to see if student ID is valid and contained in the tree
         bool isContained = true;
 
@@ -223,7 +253,7 @@ Student DatabaseManager::GetNewStudent(){
         catch(out_of_range e){
             cout << "Invalid ID number\n";
         }
-        
+
     }
 
     keepGoing = true;
@@ -316,9 +346,6 @@ Faculty DatabaseManager::GetNewFaculty(){
     short rank;
     string specialization;
 
-<<<<<<< HEAD
-}
-=======
     bool keepGoing = true;
 
     //Getting faculty ID
@@ -342,7 +369,7 @@ Faculty DatabaseManager::GetNewFaculty(){
         catch(out_of_range e){
             cout << "Invalid ID number\n";
         }
-        
+
     }
 
     keepGoing = true;
@@ -372,4 +399,3 @@ Faculty DatabaseManager::GetNewFaculty(){
     Faculty returnFaculty(facultyID, name, rank, specialization);
     return returnFaculty;
 }
->>>>>>> 05a625cce5fd55eee82297f643606628d66c462b

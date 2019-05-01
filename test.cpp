@@ -4,6 +4,7 @@
 // #include "Student.h"
 // #include "Database.h"
 // #include "Manager.h"
+/*
 #include <iostream>
 using namespace std;
 void TestScott();
@@ -19,7 +20,7 @@ int main(){
     TestDan();
 
     return 0;
-}
+}*/
 
 
 // void TestScott(){
@@ -110,7 +111,7 @@ int main(){
 //     //void Rollback();
 
 // }
-
+/*
 void TestDan(){
 
     int i;
@@ -118,8 +119,8 @@ void TestDan(){
 
     cout << i << endl;
 
-    
 
+*/
     // Faculty f0(4432, "Albert Einstein", 5, "Physics");
     // Faculty f1(6653, "Name", 0, "N/A");
     // Faculty f2(5433, "Name", 0, "N/A");
@@ -198,4 +199,4 @@ void TestDan(){
 
     // cout << b->getMax() << endl;
     // cout << b->getMin() << endl;
-}
+//}
