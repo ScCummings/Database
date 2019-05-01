@@ -1,9 +1,7 @@
 #ifndef STUDENT_H
 #define STUDENT_H
+
 #include "Person.h"
-#include "GenStack.h"
-#include <iostream>
-#include <string>
 
 using namespace std;
 class Student : public Person
@@ -47,9 +45,6 @@ class Student : public Person
         // mutator for the student's GPA
         void SetGPA(float GPA);
 
-
-
-
         //accessor for the Student's ID
         int GetID();
 
@@ -66,7 +61,7 @@ class Student : public Person
         void SetRank(short rank);
 
         //mutator for the student's specialization
-        string SetSpecialization(string specialization);
+        void SetSpecialization(string specialization);
 
         //overloaded stream insertion operator
         friend ostream& operator<<(ostream& os, Student& s);

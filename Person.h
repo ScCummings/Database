@@ -21,9 +21,6 @@ protected:
 public:
     // returns a serialized version of the person
     virtual string Serialize() = 0;
-
-    // returns a Person parsed from a serialized Person string
-    virtual static Unserialize(string str) = 0;
     
 	// accessor for rank
 	virtual string GetRank() = 0;
