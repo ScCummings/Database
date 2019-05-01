@@ -1,5 +1,6 @@
 #include "FileIO.h"
 
+/*
 int main(){
     FileIO newFileIO;
     bool b = newFileIO.CheckLoadStatus();
@@ -14,3 +15,4 @@ int main(){
     cout << s << endl;
     return 0;
 }
+*/

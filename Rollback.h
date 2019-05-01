@@ -1,4 +1,4 @@
-/*#ifndef ROLLBACK_H
+#ifndef ROLLBACK_H
 #define ROLLBACK_H
 
 #include "Database.h"
@@ -15,7 +15,7 @@ class Rollback{
         short rollbackAction;
 
         Faculty *deletedFaculty;
-        Student *deletedkStudent;
+        Student *deletedStudent;
         int studentID;
         int facultyID;
 
@@ -37,7 +37,7 @@ class Rollback{
 
         ~Rollback();
 
-        void PerformRollback();
+        void PerformRollback(Database *database);
 };
 
-#endif //ROLLBACK_H*/
+#endif //ROLLBACK_H

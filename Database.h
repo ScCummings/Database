@@ -1,10 +1,12 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-//#include "GenDoubleLinkedList.h"
+class Database;
+
 #include "Faculty.h"
 #include "Student.h"
-//#include "Rollback.h"
+#include "Rollback.h"
+#include "FileIO.h"
 #include "GenTree.h"
 #include "LimitedAcceptingStack.h"
 
@@ -15,7 +17,9 @@ private:
 	BST<Student> *studentTable;
 	BST<Faculty> *facultyTable;
 
-	//LimitedAcceptingStack<Rollback> *rollbackStack;
+    FileIO fileIO;
+
+	LimitedAcceptingStack<Rollback> *rollbackStack;
 
 	//Tries to load files with trees
 	//If it succedes it returns true
@@ -38,7 +42,7 @@ public:
 	void DeleteFaculty(int facultyID);
 	void ChangeAdvisor(int studentID, int facultyID);
 	void RemoveAdvisee(int facultyID, int studentID);
-	void Rollback();
+	void PerformRollback();
 };
 
 #endif //DATABASE_H

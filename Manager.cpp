@@ -9,6 +9,7 @@ DatabaseManager::~DatabaseManager(){
 }
 
 void DatabaseManager::RunManager(){
+    cin.clear();
     cout << "----------------DATABASE----------------" << endl;
     int optionNumber;
     do{
@@ -121,7 +122,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new student:" << endl;
             Student newStudent = GetNewStudent();
             schoolDatabase->AddStudent(newStudent);
-
+            
             return true;
         }
         break;
@@ -433,6 +434,31 @@ Faculty DatabaseManager::GetNewFaculty(){
         //add input protection if you get around to it!
 
         keepGoing = false;
+    }
+
+    //Get student's year
+    while(keepGoing){
+        cout << "What is the student's year?\n";
+
+        string fRankString;
+        getline(cin, fRankString);
+
+        try{
+            rank = stoi(fRankString);
+
+            if(0 <= rank && rank <= 5){
+                keepGoing = false;
+            }
+            else{
+                cout << "Invalid rank, only ranks 0-5 are supported\n";
+            }
+        }
+        catch(invalid_argument e){
+            cout << "Invalid rank, only ranks 0-5 are supported\n";
+        }
+        catch(out_of_range e){
+            cout << "Invalid rank, only ranks 0-5 are supported\n";
+        }
     }
 
     Faculty returnFaculty(facultyID, name, rank, specialization);
