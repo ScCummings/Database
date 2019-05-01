@@ -1,3 +1,6 @@
+#ifndef MANAGER_H
+#define MANAGER_H
+
 #include "Database.h"
 #include <iostream>
 
@@ -21,3 +24,5 @@ class DatabaseManager{
         Student GetNewStudent();
         Faculty GetNewFaculty();
 };
+
+#endif //MANAGER_H

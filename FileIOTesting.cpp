@@ -10,7 +10,7 @@ Student GetNewStudent();
 Faculty GetNewFaculty();
 int GetStudentID();
 int GetFaculutID();
-
+/*
 int main(){
     string someString = "{\"id\":1,\"name\":\"Queenie\",\"rank\":2,\"specialization\":\"Sci\",\"GPA\":4.0,\"advisorID\":4432}";
     string someStringF = "{\"id\":4432,\"name\":\"Urdu\",\"rank\":0,\"specialization\":\"Queso Studies\",\"advisees\":[]}";
@@ -35,7 +35,7 @@ int main(){
     cout << f.Serialize() << endl;
     return 0;
 }
-
+*/
 int GetStudentID(){
     int studentID;
     while(true){

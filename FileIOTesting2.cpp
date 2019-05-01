@@ -1,6 +1,16 @@
 #include "FileIO.h"
+
 int main(){
     FileIO newFileIO;
-    cout << newFileIO.CheckLoadStatus();
+    bool b = newFileIO.CheckLoadStatus();
+    string s = "";
+
+    if(b){
+        s = "true";
+    }
+    else{
+        s = "false";
+    }
+    cout << s << endl;
     return 0;
 }

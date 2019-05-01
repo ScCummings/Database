@@ -13,9 +13,9 @@ using namespace std;
 class FileIO{
     private:
         //file input stream
-        static ifstream inputStream;
+        ifstream inputStream;
         //file output stream
-        static ofstream outputStream;
+        ofstream outputStream;
 
         //Stores string for name of student data file
         const string studentData = "StudentTable.dat";

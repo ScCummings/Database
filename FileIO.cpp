@@ -118,52 +118,74 @@ bool FileIO::CheckLoadStatus(){
     else{
         bool studentTableHasData = false;
         bool facultyTableHasData = false;
+
         inputStream.open(studentData);
-        if(!inputStream.eof()){
+        string tempLine = "";
+        if(getline(inputStream, tempLine)){
+            cout << "**" << tempLine << "**" << endl;
+            cout << "Student Data not empty" << endl;
             studentTableHasData = true;
         }
+
         inputStream.open(facultyData);
-        if(!inputStream.eof()){
+        tempLine = "";
+        if(getline(inputStream, tempLine)){
+            cout << "**" << tempLine << "**" << endl;
+            cout << "Faculty Data not empty" << endl;
             facultyTableHasData = true;
         }
+
+
         if(studentTableHasData && facultyTableHasData){
             return true;
         }
+
         else if(studentTableHasData || facultyTableHasData){
             if(studentTableHasData){
                 bool userResponse = false;
                 string userResponseString = "";
                 while(true){
-                cout << "Sorry, data was only found in the student file. Would you like to dump this file?(y/n)" << endl;
-                cin >> userResponseString;
-                if(userResponseString == ""){
-                    userResponse = true;
-                    break;
+                    cout << "Sorry, data was only found in the student file. Would you like to dump this file?(y/n)" << endl;
+                    cin >> userResponseString;
+                    if(userResponseString == "y"){
+                        userResponse = true;
+                        break;
+                    }
+                    else if(userResponseString == "n"){
+                        userResponse = false;
+                        break;
+                    }
+                    else{
+                        cout << "Sorry, user response not recognized." << endl;
+                    }
                 }
-                else if(userResponseString == ""){
-                    userResponse = false;
-                    break;
+                if(userResponse){
+                    inputStream.open(studentData);
+                    inputStream.clear();
+                    inputStream.seekg(0, inputStream.beg);
+                    outputStream.open(studentDataDump);
+
+                    string temp = "";
+                    while(getline(inputStream,temp)){
+                        cout << "***" << temp << "***" << endl;
+                        outputStream << temp << endl;
+                    }
+                    return false;
+                }
+                else if(!userResponse){
+                    return false;
                 }
                 else{
-                    cout << "Sorry, user response not recognized." << endl;
+                    return false;
                 }
             }
-            if(userResponse){
-                inputStream.open(studentData);
-                outputStream.open(studentDataDump);
-                string temp = "";
-                while(getline(inputStream,temp)){
-                    outputStream << temp << endl;
-                }
-                return false;
+
+            else if(facultyTableHasData){
+                    
             }
-            else if(!userResponse){
-                return false;
-            }
-            else
-            {
-                return false;
-            }
+        else {
+            cout << "Neither file has data :(" << endl;
+            return false;
         }
     }
 }
