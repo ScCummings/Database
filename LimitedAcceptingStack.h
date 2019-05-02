@@ -102,15 +102,12 @@ d) no exceptions thrown
 */
 template<class T>
 void LimitedAcceptingStack<T>::Push(T newElement) {
-    cout << newElement << endl;
 	head = (head + 1) % maxSize;
 	stackArray[head] = newElement;
 	numElements++;
 	if (numElements > 5){
         numElements = 5;
     }
-    cout << "Made it past inremenetation of numElements (is now: " << numElements << ") and to the end of the function" << endl;
-    cout << newElement << endl;
 }
 
 /*

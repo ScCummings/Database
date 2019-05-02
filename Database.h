@@ -33,8 +33,7 @@ private:
 	//Tries to load files with trees
 	//If it succedes it returns true
 	bool LoadFiles();
-	BST<Student>* GetStudentTable();
-	BST<Faculty>* GetFacultyTable();
+	
 
 public:
 	Database();
@@ -55,6 +54,9 @@ public:
 	void RemoveAdvisee(int facultyID, int studentID, bool isRollback);
 	void PerformRollback();
     void Quit();
+
+    BST<Student>* GetStudentTable();
+	BST<Faculty>* GetFacultyTable();
 };
 
 #endif //DATABASE_H

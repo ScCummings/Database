@@ -23,14 +23,11 @@ Database::Database() {
         facultyTable = fileIO.LoadFaculty();
         cout << "loaded from files" << endl;
 
-        studentTable->printTree();
-
     }
 	else{
         studentTable = new BST<Student>();
 	    facultyTable = new BST<Faculty>();
     }
-	//}
 
 	rollbackStack = new LimitedAcceptingStack<Rollback*>(5);
 }
@@ -166,7 +163,7 @@ void Database::PrintAdvisees(int facultyID) {
 			cout << "Sorry, one of the student's that you tried to access doesn't exist." << endl;
 		}
 		else {
-			cout << (*stuTemp) << endl;
+			cout << (*stuTemp) << endl << endl;
 		}
 	}
 }
@@ -185,11 +182,8 @@ void Database::AddStudent(Student newStudent, bool isRollback) {
         tempFac->AddAdvisee(newStudent.GetID());
 
         if(!isRollback){
-            cout << "Before rollback creation" << endl;
             Rollback *r = new Rollback(newStudent.GetID(), false);
-            cout << "After rollback creation" << endl;
             cout << r->ToString() << endl;
-            cout << "**************" << endl;
             rollbackStack->Push(r);
         }
 
@@ -210,13 +204,10 @@ void Database::DeleteStudent(int studentID, bool isRollback) {
 	stuTemp = studentTable->Find(stuTemp);
 	Faculty* facTemp = new Faculty(stuTemp->GetAdvisorID());
 	facTemp = facultyTable->Find(facTemp);
-	//facTemp->AddAdvisee(stuTemp->GetID());
 	facTemp->RemoveAdvisee(studentID);
-	//this->ChangeAdvisor(studentID, facultyTable->GetRoot()->key.GetID());
 	if (stuTemp != nullptr) {
         if(!isRollback){
             Rollback *r = new Rollback(stuTemp);
-            cout << (*r) << endl;
             cout << &r << endl;
             rollbackStack->Push(r);
         }
@@ -238,7 +229,6 @@ void Database::AddFaculty(Faculty newFaculty, bool isRollback) {
 		facultyTable->insert(newFaculty);
         if(!isRollback){
             Rollback *r = new Rollback(newFaculty.GetID(), true);
-            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
 	}
@@ -256,17 +246,10 @@ d) no exceptions thrown
 void Database::DeleteFaculty(int facultyID, bool isRollback) {
 	Faculty* facTemp = new Faculty(facultyID);
 	facTemp = facultyTable->Find(facTemp);
-	/*for (int i = 0; i < facTemp->GetAdviseeCount(); ++i) {
-		//set each of the advisees to the root
-		Student* stuTemp = new Student();
-		stuTemp = studentTable->Find(stuTemp);
-		stuTemp->SetAdvisorID(facultyTable->GetRoot()->key.GetID());
-	}*/
 
 	if (facTemp != nullptr) {
         if(!isRollback){
             Rollback *r = new Rollback(facTemp);
-            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
 		facultyTable->deleteR((*facTemp));
@@ -303,7 +286,6 @@ void Database::ChangeAdvisor(int studentID, int facultyID, bool isRollback) {
 
         if(!isRollback){
             Rollback *r = new Rollback(0, studentID, false);
-            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
     }
@@ -319,7 +301,6 @@ void Database::ChangeAdvisor(int studentID, int facultyID, bool isRollback) {
 
         if(!isRollback){
             Rollback *r = new Rollback(facTemp2->GetID(), studentID, false);
-            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
     }
@@ -341,7 +322,6 @@ void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
 
     if(!isRollback){
         Rollback *r = new Rollback(facultyID, studentID, true);
-        cout << (*r) << endl;
         rollbackStack->Push(r);
     }
 
@@ -383,5 +363,5 @@ c) @return: BST<Faculty>* - a pointer to a BST that represents the faculty table
 d) no exceptions thrown
 */
 BST<Faculty>* Database::GetFacultyTable(){
-	return facultyTree;
+	return facultyTable;
 }
