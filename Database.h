@@ -19,7 +19,7 @@ private:
 
     FileIO fileIO;
 
-	LimitedAcceptingStack<Rollback> *rollbackStack;
+	LimitedAcceptingStack<Rollback*> *rollbackStack;
 
 	//Tries to load files with trees
 	//If it succedes it returns true
@@ -43,6 +43,7 @@ public:
 	void ChangeAdvisor(int studentID, int facultyID, bool isRollback);
 	void RemoveAdvisee(int facultyID, int studentID, bool isRollback);
 	void PerformRollback();
+    void Quit();
 };
 
 #endif //DATABASE_H

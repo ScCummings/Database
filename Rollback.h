@@ -18,8 +18,8 @@ class Rollback{
 
         Faculty *deletedFaculty;
         Student *deletedStudent;
-        int studentID;
-        int facultyID;
+        int studentID = 0;
+        int facultyID = 0;
 
 
         void UndoFacultyDelete(Database *database);
@@ -32,6 +32,7 @@ class Rollback{
         void UndoChangeOfAdvisor(Database *database);
 
     public:
+        Rollback();
         Rollback(Faculty *deletedFaculty);
         Rollback(Student *deletedStudent);
         Rollback(int insertedPersonID, bool isFaculty);
@@ -40,6 +41,11 @@ class Rollback{
         ~Rollback();
 
         void PerformRollback(Database *database);
+
+        string ToString();
+
+        //overloaded stream insertion operator
+        friend ostream& operator<<(ostream& os, Rollback& r);
 };
 
 #endif //ROLLBACK_H

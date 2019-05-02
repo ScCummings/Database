@@ -1,12 +1,22 @@
 #include "Rollback.h"
 
+Rollback::Rollback(){
+    rollbackAction = 0;
+
+    this->deletedStudent = nullptr;
+    this->deletedStudent = nullptr;
+
+}
+
 Rollback::Rollback(Faculty *deletedFaculty){
     rollbackAction = 1;
     this->deletedFaculty = deletedFaculty;
+    this->deletedStudent = nullptr;
 }
 Rollback::Rollback(Student *deletedStudent){
     rollbackAction = 2;
     this->deletedStudent = deletedStudent;
+    this->deletedFaculty = nullptr;
 }
 Rollback::Rollback(int insertedPersonID, bool isFaculty){
     if(isFaculty){
@@ -17,6 +27,9 @@ Rollback::Rollback(int insertedPersonID, bool isFaculty){
         rollbackAction = 4;
         studentID = insertedPersonID;
     }
+    this->deletedStudent = nullptr;
+    this->deletedFaculty = nullptr;
+
 }
 Rollback::Rollback(int facultyID, int studentID, bool isChangeAdvisee){
     if(isChangeAdvisee){
@@ -27,6 +40,10 @@ Rollback::Rollback(int facultyID, int studentID, bool isChangeAdvisee){
     }
     this->facultyID = facultyID;
     this->studentID = studentID;
+
+    this->deletedStudent = nullptr;
+    this->deletedFaculty = nullptr;
+
 }
 
 Rollback::~Rollback(){
@@ -59,6 +76,7 @@ void Rollback::PerformRollback(Database *database){
 }
 
 void Rollback::UndoFacultyDelete(Database *database){
+    cout << "Rolling back student deletion" << endl;
     int* tempAdvisees = deletedFaculty->GetAdvisees();
     int tempAdviseesCount = deletedFaculty->GetAdviseeCount();
 
@@ -74,19 +92,54 @@ void Rollback::UndoFacultyDelete(Database *database){
     }
 }
 void Rollback::UndoStudentDelete(Database *database){
+    cout << "Rolling back student deletion" << endl;
     database->AddStudent((*deletedStudent), true);
 }
 
 void Rollback::UndoFacultyInsert(Database *database){
+    cout << "Rolling back faculty insertion" << endl;
     database->DeleteFaculty(facultyID, true);
 }
 void Rollback::UndoStudentInsert(Database *database){
+    cout << "Rolling back student insertion" << endl;
     database->DeleteStudent(studentID, true);
 }
 
 void Rollback::UndoChangeOfAdvisee(Database *database){
+    cout << "Rolling back change of advisee" << endl;
     database->ChangeAdvisor(studentID, facultyID, true);
 }
 void Rollback::UndoChangeOfAdvisor(Database *database){
+    cout << "Rolling back change of advisor" << endl;
     database->ChangeAdvisor(studentID, facultyID, true);
+}
+
+string Rollback::ToString(){
+    string returnString = "Rollback!!\n Action:  ";
+    returnString += to_string(rollbackAction) + "\n";
+    if(deletedFaculty != nullptr){
+        returnString += deletedFaculty->ToString() + "\n";
+    }
+    else{
+        returnString += "No Faculty! \n"; 
+    }
+
+    if(deletedStudent != nullptr){
+        returnString += deletedStudent->ToString() + "\n";
+    }
+    else{
+        returnString += "No Student! \n"; 
+    }
+
+    returnString += "Faculty ID " + to_string(facultyID)  + "\n";
+    returnString += "Student ID " + to_string(studentID)  + "\n";
+
+    return returnString;
+
+}
+
+
+ostream& operator<<(ostream& os, Rollback& r){
+    os << r.ToString();
+    return os;
 }

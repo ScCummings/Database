@@ -143,6 +143,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new faculty member:" << endl;
             Faculty newFaculty = GetNewFaculty();
             schoolDatabase->AddFaculty(newFaculty, false);
+            cout << "Made it past add faculty" << endl;
 
             return true;
         }
@@ -187,12 +188,16 @@ bool DatabaseManager::PickOption(int optionNumber){
 
         //rollback
         case 13: {
+            cout << "Rolling back previous change\n";
+            schoolDatabase->PerformRollback();
             return true;
         }
         break;
 
         //exit
         default: {
+            cout << "Exiting...\n";
+            schoolDatabase->Quit();
             return false;
         }
     }
@@ -438,13 +443,14 @@ Faculty DatabaseManager::GetNewFaculty(){
         getline(cin, specialization);
 
         //add input protection if you get around to it!
-
         keepGoing = false;
     }
 
-    //Get student's year
+    keepGoing = true;
+
+    //Get faculty member's year
     while(keepGoing){
-        cout << "What is the student's year?\n";
+        cout << "What is the faculty member's rank?\n";
 
         string fRankString;
         getline(cin, fRankString);
@@ -465,8 +471,11 @@ Faculty DatabaseManager::GetNewFaculty(){
         catch(out_of_range e){
             cout << "Invalid rank, only ranks 0-5 are supported\n";
         }
+
     }
 
+
     Faculty returnFaculty(facultyID, name, rank, specialization);
+
     return returnFaculty;
 }

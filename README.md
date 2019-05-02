@@ -20,6 +20,7 @@
 
 4. References used to complete the assignment
     * https://stackoverflow.com/questions/34170164/destructor-for-binary-search-tree
+    * 
 
 5. Instructions for running the assignment
     * git clone from repository

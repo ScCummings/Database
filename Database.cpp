@@ -23,7 +23,7 @@ Database::Database() {
     }
 	//}
 
-	//rollbackStack = new LimitedAcceptingStack<Rollback>();
+	rollbackStack = new LimitedAcceptingStack<Rollback*>(5);
 }
 
 /*
@@ -176,7 +176,11 @@ void Database::AddStudent(Student newStudent, bool isRollback) {
         tempFac->AddAdvisee(newStudent.GetID());
 
         if(!isRollback){
-            Rollback r(newStudent.GetID(), false);
+            cout << "Before rollback creation" << endl;
+            Rollback *r = new Rollback(newStudent.GetID(), false);
+            cout << "After rollback creation" << endl;
+            cout << r->ToString() << endl;
+            cout << "**************" << endl;
             rollbackStack->Push(r);
         }
         
@@ -198,11 +202,13 @@ void Database::DeleteStudent(int studentID, bool isRollback) {
 	Faculty* facTemp = new Faculty(stuTemp->GetAdvisorID());
 	facTemp = facultyTable->Find(facTemp);
 	//facTemp->AddAdvisee(stuTemp->GetID());
-	//facTemp->RemoveAdvisee(studentID);
+	facTemp->RemoveAdvisee(studentID);
 	//this->ChangeAdvisor(studentID, facultyTable->GetRoot()->key.GetID());
 	if (stuTemp != nullptr) {
         if(!isRollback){
-            Rollback r(stuTemp);
+            Rollback *r = new Rollback(stuTemp);
+            cout << (*r) << endl;
+            cout << &r << endl;
             rollbackStack->Push(r);
         }
 		studentTable->deleteR((*stuTemp));
@@ -222,7 +228,8 @@ void Database::AddFaculty(Faculty newFaculty, bool isRollback) {
 	if (&newFaculty != nullptr) {
 		facultyTable->insert(newFaculty);
         if(!isRollback){
-            Rollback r(newFaculty.GetID(), true);
+            Rollback *r = new Rollback(newFaculty.GetID(), true);
+            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
 	}
@@ -249,7 +256,8 @@ void Database::DeleteFaculty(int facultyID, bool isRollback) {
 	
 	if (facTemp != nullptr) {
         if(!isRollback){
-            Rollback r(facTemp);
+            Rollback *r = new Rollback(facTemp);
+            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
 		facultyTable->deleteR((*facTemp));
@@ -285,7 +293,9 @@ void Database::ChangeAdvisor(int studentID, int facultyID, bool isRollback) {
         facTemp1->AddAdvisee(studentID);
 
         if(!isRollback){
-            Rollback r(0, studentID, true);
+            Rollback *r = new Rollback(0, studentID, false);
+            cout << (*r) << endl;
+            rollbackStack->Push(r);
         }
     }
 
@@ -299,7 +309,8 @@ void Database::ChangeAdvisor(int studentID, int facultyID, bool isRollback) {
         facTemp2->RemoveAdvisee(studentID);
 
         if(!isRollback){
-            Rollback r(facTemp2->GetID(), studentID, true);
+            Rollback *r = new Rollback(facTemp2->GetID(), studentID, false);
+            cout << (*r) << endl;
             rollbackStack->Push(r);
         }
     }
@@ -320,9 +331,29 @@ void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
 	stuTemp->SetAdvisorID(0);
 
     if(!isRollback){
-        Rollback r(facultyID, studentID, false);
+        Rollback *r = new Rollback(facultyID, studentID, true);
+        cout << (*r) << endl;
         rollbackStack->Push(r);
     }
     
 }
-//void Database::Rollback();
+
+/*
+a) Rolls back a change
+b) @param: NA
+c) @return: NA
+d) no exceptions thrown
+*/
+void Database::PerformRollback(){
+    if(!rollbackStack->IsEmpty()){
+        rollbackStack->Pop()->PerformRollback(this);
+        cout << "DONE" << endl;
+    }
+    else{
+        cout << "No rollbacks remaining" << endl;
+    }
+}
+
+void Database::Quit(){
+    fileIO.Save(studentTable, facultyTable);
+}
