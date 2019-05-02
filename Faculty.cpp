@@ -282,6 +282,16 @@ int Faculty::GetAdviseeCount() {
 }
 
 /*
+a) Returns true if the faculty member has the advisee passed as a parameter by id
+b) @param: int studentID - the advisee ID that is being checked for
+c) @return: bool - true if the student is in the advisees list
+d) no exceptions thrown
+*/
+bool Faculty::HasAdvisee(int studentID){
+    return (advisees->find(studentID) >= 0);
+}
+
+/*
 a) Adds a single advisee to the list of advisees
 b) @param: int studentID - an integer value that represents the ID of the student who is becoming an advisee to the faculty member
 c) @return: void

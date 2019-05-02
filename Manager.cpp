@@ -178,7 +178,6 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new faculty member:" << endl << endl;
             Faculty newFaculty = GetNewFaculty();
             schoolDatabase->AddFaculty(newFaculty, false);
-            cout << "Made it past add faculty" << endl;
 
             return true;
         }
