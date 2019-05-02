@@ -1,13 +1,30 @@
 #include "Manager.h"
-
+/*
+a) Constructor for the DatabaseManager class
+b) @param: none
+c) @return: NA
+d) no exceptions thrown
+*/
 DatabaseManager::DatabaseManager(){
     schoolDatabase = new Database();
 }
 
+/*
+a) destructor for the DatabaseManager class
+b) @param: none
+c) @return: NA
+d) no exceptions thrown
+*/
 DatabaseManager::~DatabaseManager(){
     delete schoolDatabase;
 }
 
+/*
+a) function that runs the main implementation of the program
+b) @param: none
+c) @return: void
+d) invalid_argument & out_of_range exceptions thrown
+*/
 void DatabaseManager::RunManager(){
     cin.clear();
     cout << "----------------DATABASE----------------" << endl;
@@ -52,6 +69,12 @@ void DatabaseManager::RunManager(){
     }while(PickOption(optionNumber));
 }
 
+/*
+a) Basic logic for what functions to call when a user picks an option
+b) @param: int optionNumber - the number that the user chose
+c) @return: bool - returns whether or not their request was successfully carried out
+d) no exceptions thrown
+*/
 bool DatabaseManager::PickOption(int optionNumber){
     switch(optionNumber){
         //Print students
@@ -122,7 +145,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Adding new student:" << endl;
             Student newStudent = GetNewStudent();
             schoolDatabase->AddStudent(newStudent, false);
-            
+
             return true;
         }
         break;
@@ -197,7 +220,12 @@ bool DatabaseManager::PickOption(int optionNumber){
         }
     }
 }
-
+/*
+a) input function that has the user enter in information for the new Student's ID number
+b) @param: none
+c) @return: int - the ID number of the student
+d) invalid_argument & out_of_range exceptions caught
+*/
 int DatabaseManager::GetStudentID(){
     int studentID;
     while(true){
@@ -232,7 +260,12 @@ int DatabaseManager::GetStudentID(){
         }
     }
 }
-
+/*
+a) input function that has the user enter in information for the new Faculty member's ID number
+b) @param: none
+c) @return: int - the ID number of the faculty member
+d) invalid_argument & out_of_range exceptions caught
+*/
 int DatabaseManager::GetFacultyID(){
     while(true){
         int facultyID;
@@ -268,6 +301,12 @@ int DatabaseManager::GetFacultyID(){
     }
 }
 
+/*
+a) input function that has the user enter in information for the new Student object
+b) @param: none
+c) @return: Student - the student object that is created by the user
+d) invalid_argument & out_of_range exceptions caught
+*/
 Student DatabaseManager::GetNewStudent(){
     int studentID;
     float studentGPA;
@@ -386,6 +425,12 @@ Student DatabaseManager::GetNewStudent(){
     return returnStudent;
 }
 
+/*
+a) input function that has the user enter in information for the new Faculty object
+b) @param: none
+c) @return: Faculty - the faculty object that is created by the user
+d) invalid_argument & out_of_range exceptions caught
+*/
 Faculty DatabaseManager::GetNewFaculty(){
     int facultyID;
     string name;

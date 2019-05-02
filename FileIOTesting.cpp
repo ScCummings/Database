@@ -36,6 +36,12 @@ int main(){
     return 0;
 }
 */
+/*
+a) input function for getting the new student object's ID
+b) @param: None
+c) @return: int - an integer value representing ID of the new student object
+d) invalid argument exception and out_of_range exception thrown
+*/
 int GetStudentID(){
     int studentID;
     while(true){
@@ -61,7 +67,7 @@ int GetStudentID(){
                 cout << "Invalid ID number\n";
             }
         }
-        
+
         //Test to see if student ID is valid and contained in the tree
         bool isContained = true;
 
@@ -70,7 +76,12 @@ int GetStudentID(){
         }
     }
 }
-
+/*
+a) input function for getting the new faculty object's ID
+b) @param: None
+c) @return: int - an integer value representing ID of the new faculty object
+d) invalid argument exception and out_of_range exception thrown
+*/
 int GetFacultyID(){
     while(true){
         int facultyID;
@@ -105,7 +116,12 @@ int GetFacultyID(){
         }
     }
 }
-
+/*
+a) input function for getting the a new student object
+b) @param: None
+c) @return: Student - a student object created from the input data
+d) invalid argument exception and out_of_range exception thrown
+*/
 Student GetNewStudent(){
     int studentID;
     float studentGPA;
@@ -137,7 +153,7 @@ Student GetNewStudent(){
         catch(out_of_range e){
             cout << "Invalid ID number\n";
         }
-        
+
     }
 
     keepGoing = true;
@@ -165,7 +181,7 @@ Student GetNewStudent(){
     }
 
     keepGoing = true;
-    
+
     //Getting student's GPA
     while(keepGoing){
         cout << "What is the new student's GPA?\n";
@@ -223,7 +239,12 @@ Student GetNewStudent(){
     Student returnStudent(studentID, studentGPA, advisorID, studentName, studentYear, studentMajor);
     return returnStudent;
 }
-
+/*
+a) input function for getting the new faculty object's ID
+b) @param: None
+c) @return: Faculty - a new faculty object created from the input information
+d) invalid argument exception and out_of_range exception thrown
+*/
 Faculty GetNewFaculty(){
     int facultyID;
     string name;
@@ -253,7 +274,7 @@ Faculty GetNewFaculty(){
         catch(out_of_range e){
             cout << "Invalid ID number\n";
         }
-        
+
     }
 
     keepGoing = true;

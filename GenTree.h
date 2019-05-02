@@ -18,20 +18,35 @@ public:
 
 
 //////Implementation///////
-
+/*
+a) tree node constructor
+b) @param: NA
+c) @return: NA
+d) no exceptions thrown
+*/
 template<class T>
 TreeNode<T>::TreeNode() {
 	left = nullptr;
 	right = nullptr;
 }
-
+/*
+a) overloaded TreeNode constructor that passes in a T object to place as the data of the Node
+b) @param: T k - a T object (faculty or student) that gets set as the data of the TreeNode
+c) @return: NA
+d) no exceptions thrown
+*/
 template<class T>
 TreeNode<T>::TreeNode(T k) {
 	key = k;
 	left = nullptr;
 	right = nullptr;
 }
-
+/*
+a) TreeNode destructor function
+b) @param: None
+c) @return: NA
+d) no exceptions thrown
+*/
 template<class T>
 TreeNode<T>::~TreeNode() {
 	left = nullptr;
@@ -70,19 +85,33 @@ private:
 };
 
 
-/////implement this bad boy/////
 
-//Default
+/*
+a) constructor for the BST class
+b) @param: None
+c) @return: NA
+d) no exceptions thrown
+*/
 template<class T>
 BST<T>::BST() {
 	root = nullptr;
 }
-
+/*
+a) destructor for the BST class
+b) @param: None
+c) @return: NA
+d) no exceptions thrown
+*/
 template<class T>
 BST<T>::~BST() {
 	destructRecursive(root);
 }
-
+/*
+a) Recursively destructs the BST
+b) @param: TreeNode<T>* node - the node that is the root of the BST that we want to destroy
+c) @return: void
+d) no exceptions thrown
+*/
 template<class T>
 void BST<T>::destructRecursive(TreeNode<T> *node) {
 	if (node != nullptr) {
@@ -91,12 +120,22 @@ void BST<T>::destructRecursive(TreeNode<T> *node) {
 		delete node;
 	}
 }
-
+/*
+a) function that prints the BST using the recPrint function
+b) @param: None
+c) @return: void
+d) no exceptions thrown
+*/
 template<class T>
 void BST<T>::printTree() {
 	recPrint(root);
 }
-
+/*
+a) a function that recursively prints each of the nodes in the BST
+b) @param: TreeNode<T> *node - the TreeNode that is the root of the tree we would like to print
+c) @return: void
+d) no exceptions thrown
+*/
 template<class T>
 void BST<T>::recPrint(TreeNode<T> *node) {
 	if (node == nullptr) {
@@ -109,16 +148,34 @@ void BST<T>::recPrint(TreeNode<T> *node) {
 	}
 }
 
-//overloaded recPrint function that calls from the root
+
+/*
+a) overloaded recPrint function that calls from the root
+b) @param: None
+c) @return: void
+d) no exceptions thrown
+*/
 template<class T>
 void BST<T>::recPrint() {
 	recPrint(root);
 }
+
+/*
+a) funtion that returns whether or not the BST is empty
+b) @param: None
+c) @return: bool - whether or not the BST is empty
+d) no exceptions thrown
+*/
 template<class T>
 bool BST<T>::isEmpty() {
 	return (root == nullptr);
 }
-
+/*
+a) function that inserts a new T value and TreeNode into the BST
+b) @param: T value - the data of the new node
+c) @return: void
+d) no exceptions thrown
+*/
 template<class T>
 void BST<T>::insert(T value) {
 	//check if value exists, if not continue
@@ -155,7 +212,12 @@ void BST<T>::insert(T value) {
 		}
 	}
 }
-
+/*
+a) function that determines whether or not a BST contains the T value within one of its TreeNodes
+b) @param: T value - the data that we are searching for
+c) @return: bool - whether or not the BST contains the T value
+d) no exceptions thrown
+*/
 template<class T>
 bool BST<T>::contains(T value) {
 	if (isEmpty()) {
@@ -176,7 +238,12 @@ bool BST<T>::contains(T value) {
 	}
 	return true;
 }
-
+/*
+a) function that deletes a TreeNode from the tree that has the data key. It then returns whether or not it was sucessful in the deletion
+b) @param: T key - the data that we are trying to delete
+c) @return: bool - whether or not the TreeNode with that data was deleted
+d) no exceptions thrown
+*/
 template<class T>
 bool BST<T>::deleteR(T key) {
 	if (isEmpty())
@@ -266,7 +333,12 @@ bool BST<T>::deleteR(T key) {
 
 	return true;
 }
-
+/*
+a) function that returns the node that will replace the node that we just deleted
+b) @param: TreeNode<T> *d - the node that will be deleted
+c) @return: TreeNode<T> *d - the node that will replace the node that was just deleted
+d) no exceptions thrown
+*/
 template<class T>
 TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d) { //d is the node to be deleted
 	//we want the smallest larger than d
@@ -288,7 +360,12 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T> *d) { //d is the node to be delete
 	return successor;
 
 }
-
+/*
+a) a function that finds and returns a pointer to the data for a T object we are looking for
+b) @param: T *value - the data that we are searching for
+c) @return: T* - a pointer to the data we are looking for within the tree
+d) no exceptions thrown
+*/
 template<class T>
 T* BST<T>::Find(T *value) {
 	if (isEmpty()) {
@@ -316,8 +393,12 @@ T* BST<T>::Find(T *value) {
 		return returnT;
 	}
 }
-
-//GetRoot function for the addStudent function in Database
+/*
+a) accessor function for the Root of the BST
+b) @param: Node
+c) @return: TreeNode<T>* - a pointer to the root of the BST
+d) no exceptions thrown
+*/
 template<class T>
 TreeNode<T>* BST<T>::GetRoot() {
 	return root;
