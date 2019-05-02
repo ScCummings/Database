@@ -1,3 +1,12 @@
+//Name:  Dan Haub
+//Student ID#:  2315346
+//Chapman Email:  haub@chapman.edu
+//Name:  Scott Cummings
+//Student ID#:  2317991
+//Chapman Email:  scummings@chapman.edu
+//Course Number and Section:  CPSC 350-01
+//Assignment:  5 - School Database
+
 #include "Database.h"
 
 using namespace std;
@@ -253,7 +262,7 @@ void Database::DeleteFaculty(int facultyID, bool isRollback) {
 		stuTemp = studentTable->Find(stuTemp);
 		stuTemp->SetAdvisorID(facultyTable->GetRoot()->key.GetID());
 	}*/
-	
+
 	if (facTemp != nullptr) {
         if(!isRollback){
             Rollback *r = new Rollback(facTemp);

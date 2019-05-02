@@ -1,3 +1,12 @@
+//Name:  Dan Haub
+//Student ID#:  2315346
+//Chapman Email:  haub@chapman.edu
+//Name:  Scott Cummings
+//Student ID#:  2317991
+//Chapman Email:  scummings@chapman.edu
+//Course Number and Section:  CPSC 350-01
+//Assignment:  5 - School Database
+
 #include "FileIO.h"
 
 using namespace std;
@@ -9,9 +18,15 @@ c) @return: void
 d) no exceptions thrown
 */
 void FileIO::Save(BST<Student> *studentTree, BST<Faculty> *facultyTree){
-    //Faculty(int id, string name, short rank, string specialization, GenDoubleLinkedList<int> *advisees) {
-    //Student(int ID, float GPA, int advisorID, string name, short rank, string specialization){
+    if(outputStream.is_open()){
+        outputStream.close();
+    }
+
+    outputStream.open(studentData);
     SaveStudentRec(studentTree->GetRoot());
+
+    outputStream.close();
+    outputStream.open(facultyData);
     SaveFacultyRec(facultyTree->GetRoot());
 }
 /*
