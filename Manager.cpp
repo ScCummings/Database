@@ -110,8 +110,9 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Printing single student:" << endl;
             cout << "What is the ID of the student you want to print" << endl;
             int studentID = GetStudentID();
-            schoolDatabase->PrintStudent(studentID);
             cout << endl;
+            schoolDatabase->PrintStudent(studentID);
+            cout << endl << endl;
             return true;
         }
         break;
@@ -121,8 +122,9 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Printing single faculty member:" << endl;
             cout << "What is the ID of the faculty member you want to print?" << endl;
             int facultyID = GetFacultyID();
-            schoolDatabase->PrintFaculty(facultyID);
             cout << endl;
+            schoolDatabase->PrintFaculty(facultyID);
+            cout << endl << endl;
             return true;
         }
         break;
@@ -132,8 +134,9 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Printing a student's advisor:" << endl;
             cout << "What is the ID of the student whose advisor you want to print?" << endl;
             int studentID = GetStudentID();
-            schoolDatabase->PrintAdvisor(studentID);
             cout << endl;
+            schoolDatabase->PrintAdvisor(studentID);
+            cout << endl << endl;
             return true;
         }
         break;
@@ -143,6 +146,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "Printing all a faculty member's advisees:" << endl;
             cout << "What is the ID of the faculty member whose advisees you want to print?" << endl;
             int facultyID = GetFacultyID();
+            cout << endl;
             schoolDatabase->PrintAdvisees(facultyID);
             return true;
         }
@@ -150,7 +154,7 @@ bool DatabaseManager::PickOption(int optionNumber){
 
         //Add a new student
         case 7: {
-            cout << "Adding new student:" << endl;
+            cout << "Adding new student:" << endl << endl;
             Student newStudent = GetNewStudent();
             schoolDatabase->AddStudent(newStudent, false);
 
@@ -171,7 +175,7 @@ bool DatabaseManager::PickOption(int optionNumber){
 
         //Add a new faculty member
         case 9: {
-            cout << "Adding new faculty member:" << endl;
+            cout << "Adding new faculty member:" << endl << endl;
             Faculty newFaculty = GetNewFaculty();
             schoolDatabase->AddFaculty(newFaculty, false);
             cout << "Made it past add faculty" << endl;
@@ -256,7 +260,7 @@ int DatabaseManager::GetStudentID(){
                 }
                 else{
                     Student stuTemp(studentID);
-                    if(database.GetStudentTable().contains(studentID)){
+                    if(schoolDatabase->GetStudentTable()->contains(stuTemp)){
                         keepGoing = false;
                     }
                     else{
@@ -302,7 +306,7 @@ int DatabaseManager::GetFacultyID(){
                 }
                 else{
                     Faculty facTemp(facultyID);
-                    if(database.GetFacultyTable().contains(facultyID)){
+                    if(schoolDatabase->GetFacultyTable()->contains(facTemp)){
                         keepGoing = false;
                     }
                     else{
