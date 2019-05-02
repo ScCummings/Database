@@ -36,12 +36,12 @@ public:
 	void PrintStudent(int studentID);
 	void PrintAdvisor(int studentID);
 	void PrintAdvisees(int facultyID);
-	void AddStudent(Student newStudent);
-	void DeleteStudent(int studentID);
-	void AddFaculty(Faculty newFaculty);
-	void DeleteFaculty(int facultyID);
-	void ChangeAdvisor(int studentID, int facultyID);
-	void RemoveAdvisee(int facultyID, int studentID);
+	void AddStudent(Student newStudent, bool isRollback);
+	void DeleteStudent(int studentID, bool isRollback);
+	void AddFaculty(Faculty newFaculty, bool isRollback);
+	void DeleteFaculty(int facultyID, bool isRollback);
+	void ChangeAdvisor(int studentID, int facultyID, bool isRollback);
+	void RemoveAdvisee(int facultyID, int studentID, bool isRollback);
 	void PerformRollback();
 };
 

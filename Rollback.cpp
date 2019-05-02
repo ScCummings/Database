@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /*#include "Rollback.h"
 #include <iostream>
+=======
+#include "Rollback.h"
+>>>>>>> abbce76f24cb6b1035a2cea1895d208446f50970
 
 Rollback::Rollback(Faculty *deletedFaculty){
     rollbackAction = 1;
@@ -60,22 +64,39 @@ void Rollback::PerformRollback(Database *database){
 }
 
 void Rollback::UndoFacultyDelete(Database *database){
-    //database
+    int* tempAdvisees = deletedFaculty->GetAdvisees();
+    int tempAdviseesCount = deletedFaculty->GetAdviseeCount();
+
+
+    for(int i = 0; i < tempAdviseesCount; i++){
+        deletedFaculty->RemoveAdvisee(tempAdvisees[i]);
+    }
+
+    database->AddFaculty((*deletedFaculty), true);
+
+    for(int i = 0; i < tempAdviseesCount; i++){
+        database->ChangeAdvisor(tempAdvisees[i], deletedFaculty->GetID(), true);
+    }
 }
 void Rollback::UndoStudentDelete(Database *database){
-    database->AddStudent((*deletedStudent));
+    database->AddStudent((*deletedStudent), true);
 }
 
 void Rollback::UndoFacultyInsert(Database *database){
-    database->DeleteFaculty(facultyID);
+    database->DeleteFaculty(facultyID, true);
 }
 void Rollback::UndoStudentInsert(Database *database){
-    database->DeleteStudent(studentID);
+    database->DeleteStudent(studentID, true);
 }
 
 void Rollback::UndoChangeOfAdvisee(Database *database){
-
+    database->ChangeAdvisor(studentID, facultyID, true);
 }
 void Rollback::UndoChangeOfAdvisor(Database *database){
+<<<<<<< HEAD
 
 }*/
+=======
+    database->ChangeAdvisor(studentID, facultyID, true);
+}
+>>>>>>> abbce76f24cb6b1035a2cea1895d208446f50970
