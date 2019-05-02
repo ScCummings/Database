@@ -192,7 +192,7 @@ void Database::AddStudent(Student newStudent, bool isRollback) {
             cout << "**************" << endl;
             rollbackStack->Push(r);
         }
-        
+
 	}
 	else {
 		cout << "Sorry, the student you passed in doesn't exist." << endl;
@@ -344,7 +344,7 @@ void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
         cout << (*r) << endl;
         rollbackStack->Push(r);
     }
-    
+
 }
 
 /*
@@ -365,4 +365,11 @@ void Database::PerformRollback(){
 
 void Database::Quit(){
     fileIO.Save(studentTable, facultyTable);
+}
+
+BST<Student>* Database::GetStudentTable(){
+	return studentTable;
+}
+BST<Faculty>* Database::GetFacultyTable(){
+	return facultyTree;
 }
