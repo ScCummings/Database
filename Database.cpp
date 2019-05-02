@@ -367,9 +367,21 @@ void Database::Quit(){
     fileIO.Save(studentTable, facultyTable);
 }
 
+/*
+a) Accessor method for the Student table in database
+b) @param: NA
+c) @return: BST<Student>* - a pointer to a BST that represents the student table in database
+d) no exceptions thrown
+*/
 BST<Student>* Database::GetStudentTable(){
 	return studentTable;
 }
+/*
+a) Accessor method for the Faculty table in database
+b) @param: NA
+c) @return: BST<Faculty>* - a pointer to a BST that represents the faculty table in database
+d) no exceptions thrown
+*/
 BST<Faculty>* Database::GetFacultyTable(){
 	return facultyTree;
 }
