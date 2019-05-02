@@ -33,6 +33,8 @@ private:
 	//Tries to load files with trees
 	//If it succedes it returns true
 	bool LoadFiles();
+	BST<Student>* GetStudentTable();
+	BST<Faculty>* GetFacultyTable();
 
 public:
 	Database();

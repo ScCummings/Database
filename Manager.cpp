@@ -255,7 +255,13 @@ int DatabaseManager::GetStudentID(){
                     cout << "Invalid ID number\n";
                 }
                 else{
-                    keepGoing = false;
+                    Student stuTemp(studentID);
+                    if(database.GetStudentTable().contains(studentID)){
+                        keepGoing = false;
+                    }
+                    else{
+                        cerr << "Student ID was not found." << endl;
+                    }
                 }
             }
             catch(invalid_argument e){
@@ -295,7 +301,13 @@ int DatabaseManager::GetFacultyID(){
                     cout << "Invalid ID number\n";
                 }
                 else{
-                    keepGoing = false;
+                    Faculty facTemp(facultyID);
+                    if(database.GetFacultyTable().contains(facultyID)){
+                        keepGoing = false;
+                    }
+                    else{
+                        cerr << "Faculty ID was not found." << endl;
+                    }
                 }
             }
             catch(invalid_argument e){
