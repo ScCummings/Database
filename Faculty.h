@@ -46,6 +46,9 @@ public:
 	//Returns the number of advisees that the faculty member oversees
 	int GetAdviseeCount();
 
+    //Returns true if the faculty member has the advisee passed as a parameter by id
+    bool HasAdvisee(int studentID);
+
 	//Adds a single advisee to the list of advisees
 	void AddAdvisee(int studentID);
 

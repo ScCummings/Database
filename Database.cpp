@@ -183,7 +183,6 @@ void Database::AddStudent(Student newStudent, bool isRollback) {
 
         if(!isRollback){
             Rollback *r = new Rollback(newStudent.GetID(), false);
-            cout << r->ToString() << endl;
             rollbackStack->Push(r);
         }
 
@@ -208,7 +207,6 @@ void Database::DeleteStudent(int studentID, bool isRollback) {
 	if (stuTemp != nullptr) {
         if(!isRollback){
             Rollback *r = new Rollback(stuTemp);
-            cout << &r << endl;
             rollbackStack->Push(r);
         }
 		studentTable->deleteR((*stuTemp));
@@ -315,15 +313,21 @@ d) no exceptions thrown
 void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
 	Faculty* facTemp = new Faculty(facultyID);
 	facTemp = facultyTable->Find(facTemp);
-	facTemp->RemoveAdvisee(studentID);
-	Student* stuTemp = new Student(studentID);
-	stuTemp = studentTable->Find(stuTemp);
-	stuTemp->SetAdvisorID(0);
 
-    if(!isRollback){
-        Rollback *r = new Rollback(facultyID, studentID, true);
-        rollbackStack->Push(r);
+    if(facTemp->HasAdvisee(studentID)){
+        facTemp->RemoveAdvisee(studentID);
+        Student* stuTemp = new Student(studentID);
+        stuTemp = studentTable->Find(stuTemp);
+        stuTemp->SetAdvisorID(0);
+        if(!isRollback){
+            Rollback *r = new Rollback(facultyID, studentID, true);
+            rollbackStack->Push(r);
+        }
     }
+    else{
+        cerr << "That faculty member doesn't have a student with that ID" << endl;
+    }
+    
 
 }
 
