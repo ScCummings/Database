@@ -36,44 +36,37 @@ d) invalid_argument & out_of_range exceptions thrown
 */
 void DatabaseManager::RunManager(){
     cin.clear();
+    cin.ignore(1, EOF);
     cout << "----------------DATABASE----------------" << endl;
     int optionNumber;
     do{
         while(true){
-            cout << "Please choose an action (type the number and press enter)" << endl;
-            cout << "1 ) Print all students" << endl;
-            cout << "2 ) Print all faculty members" << endl;
-            cout << "3 ) Print a specific student" << endl;
-            cout << "4 ) Print a specific faculty member" << endl;
-            cout << "5 ) Print a student's advisor" << endl;
-            cout << "6 ) Print a faculty member's advisees" << endl;
-            cout << "7 ) Add a new student" << endl;
-            cout << "8 ) Delete a student" << endl;
-            cout << "9 ) Add a new faculty member" << endl;
-            cout << "10) Delete a faculty member" << endl;
-            cout << "11) Change a student's advisor" << endl;
-            cout << "12) Remove an advisee from an advisor" << endl;
-            cout << "13) Rollback a change" << endl;
-            cout << "14) Exit" << endl << endl;
+            cout << "->";
 
             string temp;
             getline(cin, temp);
 
+            if(temp == ""){
+                continue;
+            }
+
             try{
                 optionNumber = stoi(temp);
 
-                if((optionNumber >= 1) && (optionNumber <= 14)){
+                if((optionNumber >= 0) && (optionNumber <= 14)){
                     break;
                 }
             }
             catch(invalid_argument e){
-                cout << "**Command not recognized**" << endl;
+                cout << "**Command not recognized: enter 0 for help**" << endl;
+                continue;
             }
             catch(out_of_range e){
-                cout << "**Command not recognized**" << endl;
+                cout << "**Command not recognized: enter 0 for help**" << endl;
+                continue;
             }
 
-            cout << "**Command not recognized**" << endl;
+            cout << "**Command not recognized: enter 0 for help**" << endl;
         }
     }while(PickOption(optionNumber));
 }
@@ -86,9 +79,16 @@ d) no exceptions thrown
 */
 bool DatabaseManager::PickOption(int optionNumber){
     switch(optionNumber){
+        //Prints help screen
+        case 0: {
+            PrintHelp();
+            return true;
+        }
+        break;
+
         //Print students
         case 1: {
-            cout << "Printing students:" << endl;
+            cout << "Printing students:" << endl << endl;
             schoolDatabase->PrintStudents();
 
             return true;
@@ -98,7 +98,7 @@ bool DatabaseManager::PickOption(int optionNumber){
         //Print faculty
 
         case 2: {
-            cout << "Printing faculty:" << endl;
+            cout << "Printing faculty:" << endl << endl;
             schoolDatabase->PrintFaculty();
 
             return true;
@@ -111,7 +111,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the student you want to print" << endl;
             int studentID = GetStudentID();
             schoolDatabase->PrintStudent(studentID);
-
+            cout << endl;
             return true;
         }
         break;
@@ -122,7 +122,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty member you want to print?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->PrintFaculty(facultyID);
-
+            cout << endl;
             return true;
         }
         break;
@@ -133,7 +133,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the student whose advisor you want to print?" << endl;
             int studentID = GetStudentID();
             schoolDatabase->PrintAdvisor(studentID);
-
+            cout << endl;
             return true;
         }
         break;
@@ -144,7 +144,6 @@ bool DatabaseManager::PickOption(int optionNumber){
             cout << "What is the ID of the faculty member whose advisees you want to print?" << endl;
             int facultyID = GetFacultyID();
             schoolDatabase->PrintAdvisees(facultyID);
-
             return true;
         }
         break;
@@ -234,6 +233,7 @@ bool DatabaseManager::PickOption(int optionNumber){
         }
     }
 }
+
 /*
 a) input function that has the user enter in information for the new Student's ID number
 b) @param: none
@@ -528,8 +528,26 @@ Faculty DatabaseManager::GetNewFaculty(){
 
     }
 
-
     Faculty returnFaculty(facultyID, name, rank, specialization);
 
     return returnFaculty;
+}
+
+void DatabaseManager::PrintHelp(){
+    cout << "Please choose an action (type the number and press enter)" << endl;
+    cout << "0 ) Prints help screen" << endl;
+    cout << "1 ) Print all students" << endl;
+    cout << "2 ) Print all faculty members" << endl;
+    cout << "3 ) Print a specific student" << endl;
+    cout << "4 ) Print a specific faculty member" << endl;
+    cout << "5 ) Print a student's advisor" << endl;
+    cout << "6 ) Print a faculty member's advisees" << endl;
+    cout << "7 ) Add a new student" << endl;
+    cout << "8 ) Delete a student" << endl;
+    cout << "9 ) Add a new faculty member" << endl;
+    cout << "10) Delete a faculty member" << endl;
+    cout << "11) Change a student's advisor" << endl;
+    cout << "12) Remove an advisee from an advisor" << endl;
+    cout << "13) Rollback a change" << endl;
+    cout << "14) Exit" << endl << endl;
 }

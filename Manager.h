@@ -27,6 +27,8 @@ class DatabaseManager{
 
 		bool PickOption(int option);
 
+        void PrintHelp();
+
         int GetStudentID();
         int GetFacultyID();
 
