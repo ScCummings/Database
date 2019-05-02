@@ -352,9 +352,15 @@ Student DatabaseManager::GetNewStudent(){
         cout << "What is the new student's ID number?\n";
         string sIDString;
         getline(cin, sIDString);
-
+        //if
         try{
             studentID = stoi(sIDString);
+            if(schoolDatabase->GetFacultyTable()->contains(studentID)){
+                cerr << "Sorry, that ID is taken. Please give the student a different one." << endl;
+            }
+            else{
+                keepGoing = false;
+            }
             if(studentID <= 0){
                 cout << "Invalid ID number\n";
             }
@@ -477,6 +483,12 @@ Faculty DatabaseManager::GetNewFaculty(){
 
         try{
             facultyID = stoi(fIDString);
+            if(schoolDatabase->GetFacultyTable()->contains(facultyID)){
+                cerr << "Sorry, that ID is taken. Please give the faculty a different one." << endl;
+            }
+            else{
+                keepGoing = false;
+            }
             if(facultyID <= 0){
                 cout << "Invalid ID number\n";
             }
