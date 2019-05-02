@@ -1,4 +1,4 @@
-#ifndef ROLLBACK_H
+/*#ifndef ROLLBACK_H
 #define ROLLBACK_H
 
 #include "Database.h"
@@ -41,3 +41,4 @@ class Rollback{
 };
 
 #endif //ROLLBACK_H
+*/

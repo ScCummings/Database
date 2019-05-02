@@ -19,7 +19,7 @@ private:
 
     FileIO fileIO;
 
-	LimitedAcceptingStack<Rollback> *rollbackStack;
+	//LimitedAcceptingStack<Rollback> *rollbackStack;
 
 	//Tries to load files with trees
 	//If it succedes it returns true

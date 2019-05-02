@@ -174,8 +174,8 @@ void Database::AddStudent(Student newStudent) {
         Faculty *tempFac = new Faculty(newStudent.GetAdvisorID());
         tempFac = facultyTable->Find(tempFac);
         tempFac->AddAdvisee(newStudent.GetID());
-        Rollback r(newStudent.GetID(), false);
-        rollbackStack->Push(r);
+        //Rollback r(newStudent.GetID(), false);
+        //rollbackStack->Push(r);
 	}
 	else {
 		cout << "Sorry, the student you passed in doesn't exist." << endl;
@@ -197,8 +197,8 @@ void Database::DeleteStudent(int studentID) {
 	//facTemp->RemoveAdvisee(studentID);
 	//this->ChangeAdvisor(studentID, facultyTable->GetRoot()->key.GetID());
 	if (stuTemp != nullptr) {
-        Rollback r(stuTemp);
-        rollbackStack->Push(r);
+        //Rollback r(stuTemp);
+        //rollbackStack->Push(r);
 		studentTable->deleteR((*stuTemp));
 	}
 	else {
@@ -215,8 +215,8 @@ d) no exceptions thrown
 void Database::AddFaculty(Faculty newFaculty) {
 	if (&newFaculty != nullptr) {
 		facultyTable->insert(newFaculty);
-        Rollback r(newFaculty.GetID, true);
-        rollbackStack->Push(r);
+        //Rollback r(newFaculty.GetID, true);
+        //rollbackStack->Push(r);
 	}
 	else {
 		cout << "Sorry, the faculty member you passed in doesn't exist." << endl;
@@ -238,10 +238,10 @@ void Database::DeleteFaculty(int facultyID) {
 		stuTemp = studentTable->Find(stuTemp);
 		stuTemp->SetAdvisorID(facultyTable->GetRoot()->key.GetID());
 	}*/
-	
+
 	if (facTemp != nullptr) {
-        Rollback r(facTemp);
-        rollbackStack->Push(r);
+        //Rollback r(facTemp);
+        //rollbackStack->Push(r);
 		facultyTable->deleteR((*facTemp));
         facultyTable->GetRoot()->key.AddAdvisees(facTemp->GetAdvisees(), facTemp->GetAdviseeCount());
 	}
@@ -267,8 +267,8 @@ void Database::ChangeAdvisor(int studentID, int facultyID) {
 	stuTemp->SetAdvisorID(facultyID);
 	facTemp2->RemoveAdvisee(studentID);
 
-    Rollback r(facultyID, studentID, true);
-    rollbackStack->Push(r);
+    //Rollback r(facultyID, studentID, true);
+    //rollbackStack->Push(r);
 }
 
 /*
@@ -285,7 +285,7 @@ void Database::RemoveAdvisee(int facultyID, int studentID) {
 	stuTemp = studentTable->Find(stuTemp);
 	stuTemp->SetAdvisorID(0);
 
-    Rollback r(facultyID, studentID, false);
-    rollbackStack->Push(r);
+    //Rollback r(facultyID, studentID, false);
+    //rollbackStack->Push(r);
 }
 //void Database::Rollback();
