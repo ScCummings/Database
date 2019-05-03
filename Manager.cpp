@@ -249,6 +249,10 @@ int DatabaseManager::GetStudentID(){
         bool keepGoing = true;
         while(keepGoing){
             cout << "Please enter an existing student id number\n";
+            cout << "Those are: \n";
+            PrintStudentIDs();
+            cout << "Please enter one of the numbers above: " << endl;
+            //those are
             string sIDString;
             getline(cin, sIDString);
 
@@ -295,6 +299,9 @@ int DatabaseManager::GetFacultyID(){
         bool keepGoing = true;
         while(keepGoing){
             cout << "Please enter an existing faculty id number\n";
+            cout << "Those are: " << endl;
+            PrintFacultyIDs();
+            cout << "Please enter one of the numbers above: " << endl;
             string fIDString;
             getline(cin, fIDString);
 
@@ -559,7 +566,12 @@ Faculty DatabaseManager::GetNewFaculty(){
 
     return returnFaculty;
 }
-
+/*
+a) prints each of the available options for users
+b) @param: none
+c) @return: void
+d) no exceptions thrown
+*/
 void DatabaseManager::PrintHelp(){
     cout << "Please choose an action (type the number and press enter)" << endl;
     cout << "0 ) Prints help screen" << endl;
@@ -577,4 +589,54 @@ void DatabaseManager::PrintHelp(){
     cout << "12) Remove an advisee from an advisor" << endl;
     cout << "13) Rollback a change" << endl;
     cout << "14) Exit" << endl << endl;
+}
+/*
+a) Calls PrintStudentIDs on the root
+b) @param: none
+c) @return: void
+d) no exceptions thrown
+*/
+void DatabaseManager::PrintStudentIDs(){
+	PrintStudentIDs(schoolDatabase->GetStudentTable()->GetRoot());
+}
+/*
+a) Preorder traversal to print each of the student's ID's
+b) @param: TreeNode<Student* - the node that we want to start at (root)
+c) @return: void
+d) void
+*/
+void DatabaseManager::PrintStudentIDs(TreeNode<Student> *current){
+    if(current == nullptr){
+        return;
+    }
+    else{
+        PrintStudentIDs(current->left);
+        cout << current->key.GetID() << endl;
+        PrintStudentIDs(current->right);
+    }
+}
+/*
+a) Calls PrintFacultyIDs on the root
+b) @param: none
+c) @return: void
+d) no exceptions thrown
+*/
+void DatabaseManager::PrintFacultyIDs(){
+    PrintFacultyIDs(schoolDatabase->GetFacultyTable()->GetRoot());
+}
+/*
+a) Preorder traversal to print each of the faculty's ID's
+b) @param: TreeNode<Student* - the node that we want to start at (root)
+c) @return: void
+d) void
+*/
+void DatabaseManager::PrintFacultyIDs(TreeNode<Faculty> *current){
+    if(current == nullptr){
+        return;
+    }
+    else{
+        PrintFacultyIDs(current->left);
+        cout << current->key.GetID() << endl;
+        PrintFacultyIDs(current->right);
+    }
 }

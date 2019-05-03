@@ -22,6 +22,11 @@ class DatabaseManager{
 
         void RunManager();
 
+		void PrintStudentIDs();
+		void PrintStudentIDs(TreeNode<Student> *current);
+		void PrintFacultyIDs();
+		void PrintFacultyIDs(TreeNode<Faculty> *current);
+
 	private:
 		Database *schoolDatabase;
 
