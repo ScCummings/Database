@@ -13,7 +13,7 @@ Rollback::Rollback(){
     rollbackAction = 0;
 
     this->deletedStudent = nullptr;
-    this->deletedStudent = nullptr;
+    this->deletedFaculty = nullptr;
 
 }
 

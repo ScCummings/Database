@@ -357,10 +357,7 @@ Student DatabaseManager::GetNewStudent(){
             if(schoolDatabase->GetFacultyTable()->contains(studentID)){
                 cerr << "Sorry, that ID is taken. Please give the student a different one." << endl;
             }
-            else{
-                keepGoing = false;
-            }
-            if(studentID <= 0){
+            else if(studentID <= 0){
                 cout << "Invalid ID number\n";
             }
             else{
@@ -383,9 +380,27 @@ Student DatabaseManager::GetNewStudent(){
         cout << "What is the new student's name?\n";
         getline(cin, studentName);
 
-        //add input protection if you get around to it!
-
-        keepGoing = false;
+        if(studentName.find("\"") != -1){
+            cout << "Invalid character:  \'\"\'" << endl;
+        }
+        else if(studentName.find(":") != -1){
+            cout << "Invalid character:  \':\'" << endl;
+        }
+        else if(studentName.find("{") != -1){
+            cout << "Invalid character:  \'{\'" << endl;
+        }
+        else if(studentName.find("}") != -1){
+            cout << "Invalid character:  \'}\'" << endl;
+        }
+        else if(studentName.find("[") != -1){
+            cout << "Invalid character:  \'[\'" << endl;
+        }
+        else if(studentName.find("]") != -1){
+            cout << "Invalid character:  \']\'" << endl;
+        }
+        else{
+            keepGoing = false;
+        }
     }
 
     keepGoing = true;
@@ -395,9 +410,27 @@ Student DatabaseManager::GetNewStudent(){
         cout << "What is the new student's specialization/major?\n";
         getline(cin, studentMajor);
 
-        //add input protection if you get around to it!
-
-        keepGoing = false;
+        if(studentMajor.find("\"") != -1){
+            cout << "Invalid character:  \'\"\'" << endl;
+        }
+        else if(studentMajor.find(":") != -1){
+            cout << "Invalid character:  \':\'" << endl;
+        }
+        else if(studentMajor.find("{") != -1){
+            cout << "Invalid character:  \'{\'" << endl;
+        }
+        else if(studentMajor.find("}") != -1){
+            cout << "Invalid character:  \'}\'" << endl;
+        }
+        else if(studentMajor.find("[") != -1){
+            cout << "Invalid character:  \'[\'" << endl;
+        }
+        else if(studentMajor.find("]") != -1){
+            cout << "Invalid character:  \']\'" << endl;
+        }
+        else{
+            keepGoing = false;
+        }
     }
 
     keepGoing = true;
@@ -511,9 +544,27 @@ Faculty DatabaseManager::GetNewFaculty(){
         cout << "What is the new faculty member's name?\n";
         getline(cin, name);
 
-        //add input protection if you get around to it!
-
-        keepGoing = false;
+        if(name.find("\"") != -1){
+            cout << "Invalid character:  \'\"\'" << endl;
+        }
+        else if(name.find(":") != -1){
+            cout << "Invalid character:  \':\'" << endl;
+        }
+        else if(name.find("{") != -1){
+            cout << "Invalid character:  \'{\'" << endl;
+        }
+        else if(name.find("}") != -1){
+            cout << "Invalid character:  \'}\'" << endl;
+        }
+        else if(name.find("[") != -1){
+            cout << "Invalid character:  \'[\'" << endl;
+        }
+        else if(name.find("]") != -1){
+            cout << "Invalid character:  \']\'" << endl;
+        }
+        else{
+            keepGoing = false;
+        }
     }
 
     keepGoing = true;
@@ -523,8 +574,27 @@ Faculty DatabaseManager::GetNewFaculty(){
         cout << "What is the new faculty member's specialization/department?\n";
         getline(cin, specialization);
 
-        //add input protection if you get around to it!
-        keepGoing = false;
+        if(specialization.find("\"") != -1){
+            cout << "Invalid character:  \'\"\'" << endl;
+        }
+        else if(specialization.find(":") != -1){
+            cout << "Invalid character:  \':\'" << endl;
+        }
+        else if(specialization.find("{") != -1){
+            cout << "Invalid character:  \'{\'" << endl;
+        }
+        else if(specialization.find("}") != -1){
+            cout << "Invalid character:  \'}\'" << endl;
+        }
+        else if(specialization.find("[") != -1){
+            cout << "Invalid character:  \'[\'" << endl;
+        }
+        else if(specialization.find("]") != -1){
+            cout << "Invalid character:  \']\'" << endl;
+        }
+        else{
+            keepGoing = false;
+        }
     }
 
     keepGoing = true;
