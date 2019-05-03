@@ -38,7 +38,7 @@ public:
     string Serialize();
 
     // Returns a Faculty object parced from a string
-    static Faculty Unserialize(string str);
+    static Faculty Unserialize(string str) throw (UnserializeException);
 
 	//Returns a complete list of Advisee ID numbers
 	int* GetAdvisees();

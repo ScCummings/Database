@@ -35,14 +35,20 @@ b) @param: TreeNode<Student> *curr - a TreeNode which is the Node at which we wa
 c) @return: void
 d) no exceptions thrown
 */
-void FileIO::SaveStudentRec(TreeNode<Student> *curr){
+void FileIO::SaveStudentRec(TreeNode<Student> *curr) throw (UnserializeException){
     if(curr == nullptr){
         return;
     }
     else{
-        outputStream << curr->key.Serialize() << endl;
-        SaveStudentRec(curr->left);
-        SaveStudentRec(curr->right);
+        try{
+            outputStream << curr->key.Serialize() << endl;
+            
+            SaveStudentRec(curr->left);
+            SaveStudentRec(curr->right);
+        }
+        catch(UnserializeException e){
+            throw e;
+        }
     }
 }
 /*
@@ -51,14 +57,19 @@ b) @param: TreeNode<Faculty> *curr - a TreeNode which is the Node at which we wa
 c) @return: void
 d) no exceptions thrown
 */
-void FileIO::SaveFacultyRec(TreeNode<Faculty> *curr){
+void FileIO::SaveFacultyRec(TreeNode<Faculty> *curr) throw (UnserializeException){
     if(curr == nullptr){
         return;
     }
     else{
-        outputStream << curr->key.Serialize() << endl;
-        SaveFacultyRec(curr->left);
-        SaveFacultyRec(curr->right);
+        try{
+            outputStream << curr->key.Serialize() << endl;
+            SaveFacultyRec(curr->left);
+            SaveFacultyRec(curr->right);
+        }
+        catch(UnserializeException e){
+            throw e;
+        }
     }
 }
 /*
@@ -67,7 +78,7 @@ b) @param: None
 c) @return: BST<Student>* A pointer to the loaded student tree
 d) throws UnserializationException
 */
-BST<Student>* FileIO::LoadStudents(){
+BST<Student>* FileIO::LoadStudents() throw (UnserializeException){
     BST<Student> *newStudentTree = new BST<Student>();
     if(inputStream.is_open()){
         inputStream.close();
@@ -79,9 +90,9 @@ BST<Student>* FileIO::LoadStudents(){
             newStudentTree->insert(Student::Unserialize(line));
         }
     }
-    //change to UnserializationException
-    catch(int e){
-        cout << "UnserializationException" << endl;
+    catch(UnserializeException e){
+        cout << "in load students" << endl;
+        throw e;
     }
     return newStudentTree;
 }
@@ -91,7 +102,7 @@ b) @param: None
 c) @return: BST<Faculty>* A pointer to the loaded faculty tree
 d) throws UnserializationException
 */
-BST<Faculty>* FileIO::LoadFaculty(){
+BST<Faculty>* FileIO::LoadFaculty() throw (UnserializeException){
     BST<Faculty> *newFacultyTree = new BST<Faculty>();
     if(inputStream.is_open()){
         inputStream.close();
@@ -104,8 +115,8 @@ BST<Faculty>* FileIO::LoadFaculty(){
         }
     }
     //change to UnserializationException
-    catch(int e){
-        cout << "UnserializationException" << endl;
+    catch(UnserializeException e){
+        throw e;
     }
     return newFacultyTree;
 }

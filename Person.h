@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include "GenStack.h"
+#include "UnserializeException.h"
 
 using namespace std;
 

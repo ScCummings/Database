@@ -19,9 +19,16 @@ d) no exceptions thrown
 */
 Database::Database() {
 	if(fileIO.CheckLoadStatus()){
-        studentTable = fileIO.LoadStudents();
-        facultyTable = fileIO.LoadFaculty();
-        cout << "loaded from files" << endl;
+        try{
+            studentTable = fileIO.LoadStudents();
+            facultyTable = fileIO.LoadFaculty();
+            cout << "loaded from files" << endl;
+        }
+        catch(UnserializeException e){
+            cerr << e.GetMessage() << endl;
+            cerr << "Load failed... Exiting" << endl;
+            exit(EXIT_FAILURE);
+        }
 
     }
 	else{

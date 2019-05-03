@@ -36,15 +36,15 @@ class FileIO{
         //Stores string for name of facluty data dump file
         const string facultyDataDump = "FacultyTableDump.dat";
 
-        void SaveStudentRec(TreeNode<Student> *curr);
+        void SaveStudentRec(TreeNode<Student> *curr) throw (UnserializeException);
 
-        void SaveFacultyRec(TreeNode<Faculty> *curr);
+        void SaveFacultyRec(TreeNode<Faculty> *curr) throw (UnserializeException);
 
     public:
         bool CheckLoadStatus();
         void Save(BST<Student>* studentTree, BST<Faculty>* facultyTree);
-        BST<Student>* LoadStudents();
-        BST<Faculty>* LoadFaculty();
+        BST<Student>* LoadStudents() throw (UnserializeException);
+        BST<Faculty>* LoadFaculty() throw (UnserializeException);
 };
 
 #endif //FILE_IO_H

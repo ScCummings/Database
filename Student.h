@@ -40,7 +40,7 @@ class Student : public Person
         string Serialize();
 
         // returns a Student object parced from a string
-        static Student Unserialize(string str);
+        static Student Unserialize(string str) throw (UnserializeException);
 
         // accessor for the student's advisor's ID
         int GetAdvisorID();
