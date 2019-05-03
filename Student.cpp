@@ -119,6 +119,7 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
             //collect characters until the close quote
             while(str[i] != '\"'){
+                //protects against going beyond the scope of the string
                 if(i >= str.length()){
                     throw UnserializeException("Unserialization of student failed: invalid input string");
                 }
@@ -277,7 +278,7 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
     //creates the new student
     Student someStudent(id,GPA,advisorID,name,rank,specialization);
-    
+
     return someStudent;
 }
 

@@ -139,6 +139,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
 
             //collect characters until the close quote
             while(str[i] != '\"'){
+                //protects against going beyond the scope of the string
                 if(i >= str.length()){
                     throw UnserializeException("Unserialization of faculty failed: invalid input string");
                 }
@@ -160,6 +161,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     //collect numeric characters until the next member variable starts at the comma
                     while(str[i] != ','){
                         if(i >= str.length()){
+                            //protects against going beyond the scope of the string
                             throw UnserializeException("Unserialization of faculty failed: invalid input string");
                         }
                         idString += str[i++];
@@ -180,6 +182,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     if(str[i++] == '\"'){
                         //collects characters until the close quote
                         while(str[i] != '\"'){
+                            //protects against going beyond the scope of the string
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of faculty failed: invalid input string");
                             }
@@ -200,6 +203,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                 else if(thisString == "rank"){
                     string rankString = "";
                     while(str[i] != ','){
+                        //protects against going beyond the scope of the string
                         if(i >= str.length()){
                             throw UnserializeException("Unserialization of faculty failed: invalid input string");
                         }
@@ -212,6 +216,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     string specializationString = "";
                     if(str[i++] == '\"'){
                         while(str[i] != '\"'){
+                            //protects against going beyond the scope of the string
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of faculty failed: invalid input string");
                             }
@@ -233,6 +238,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     if(str[i] == '['){
                         i++;
                         while(str[i] != ']'){
+                            //protects against going beyond the scope of the string
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of faculty failed: invalid input string");
                             }
