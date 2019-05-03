@@ -8,6 +8,11 @@
 //Assignment:  5 - School Database
 
 #include "Manager.h"
+
+//It was said that if you do more stuff, youll get more points
+//This is technically more stuff.
+#define yeet throw
+
 /*
 a) Constructor for the DatabaseManager class
 b) @param: none
@@ -78,162 +83,187 @@ c) @return: bool - returns whether or not their request was successfully carried
 d) no exceptions thrown
 */
 bool DatabaseManager::PickOption(int optionNumber){
-    switch(optionNumber){
-        //Prints help screen
-        case 0: {
-            PrintHelp();
-            return true;
+    try{
+        switch(optionNumber){
+            //Prints help screen
+            case 0: {
+                PrintHelp();
+                return true;
+            }
+            break;
+
+            //Print students
+            case 1: {
+                cout << "Printing students:" << endl << endl;
+                schoolDatabase->PrintStudents();
+
+                return true;
+            }
+            break;
+
+            //Print faculty
+
+            case 2: {
+                cout << "Printing faculty:" << endl << endl;
+                schoolDatabase->PrintFaculty();
+
+                return true;
+            }
+            break;
+
+            //Print specific student
+            case 3: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Printing single student:" << endl;
+                cout << "What is the ID of the student you want to print" << endl;
+                int studentID = GetStudentID();
+                cout << endl;
+                schoolDatabase->PrintStudent(studentID);
+                cout << endl << endl;
+                return true;
+            }
+            break;
+
+            //Print specific faculty member
+            case 4: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Printing single faculty member:" << endl;
+                cout << "What is the ID of the faculty member you want to print?" << endl;
+                int facultyID = GetFacultyID();
+                cout << endl;
+                schoolDatabase->PrintFaculty(facultyID);
+                cout << endl << endl;
+                return true;
+            }
+            break;
+
+            //Print student's advisor
+            case 5: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Printing a student's advisor:" << endl;
+                cout << "What is the ID of the student whose advisor you want to print?" << endl;
+                int studentID = GetStudentID();
+                cout << endl;
+                schoolDatabase->PrintAdvisor(studentID);
+                cout << endl << endl;
+                return true;
+            }
+            break;
+
+            //Print faculty member's advisees
+            case 6: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Printing all a faculty member's advisees:" << endl;
+                cout << "What is the ID of the faculty member whose advisees you want to print?" << endl;
+                int facultyID = GetFacultyID();
+                cout << endl;
+                schoolDatabase->PrintAdvisees(facultyID);
+                return true;
+            }
+            break;
+
+            //Add a new student
+            case 7: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Adding new student:" << endl << endl;
+                Student newStudent = GetNewStudent();
+                schoolDatabase->AddStudent(newStudent, false);
+
+                return true;
+            }
+            break;
+
+            //Delete a student
+            case 8: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Deleting student:" << endl;
+                cout << "What is the ID of the student you want to delete?" << endl;
+                int studentID = GetStudentID();
+                schoolDatabase->DeleteStudent(studentID, false);
+
+                return true;
+            }
+            break;
+
+            //Add a new faculty member
+            case 9: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Adding new faculty member:" << endl << endl;
+                Faculty newFaculty = GetNewFaculty();
+                schoolDatabase->AddFaculty(newFaculty, false);
+
+                return true;
+            }
+            break;
+
+            //Delete a faculty member
+            case 10: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Deleting faculty member:" << endl;
+                cout << "What is the ID of the faculty memeber you want to delete?" << endl;
+                int facultyID = GetFacultyID();
+                schoolDatabase->DeleteFaculty(facultyID, false);
+
+                return true;
+            }
+            break;
+
+            //Change advisor
+            case 11: {
+                cout << "enter '~' at any point to exit" << endl;
+
+                cout << "Changing student's advisor:" << endl;
+                cout << "What is the ID of the student whose advisor you want to change?" << endl;
+                int studentID = GetStudentID();
+                cout << "What is the ID of the faculty who will be the new advisor for student " << studentID << " ?" << endl;
+                int facultyID = GetFacultyID();
+                schoolDatabase->ChangeAdvisor(studentID, facultyID, false);
+
+                return true;
+            }
+            break;
+
+            //Remove Advisee
+            case 12: {
+                cout << "enter '~' at any point to exit" << endl;
+                
+                cout << "Removing a faculty member's advisee:" << endl;
+                cout << "WARNING: THIS WILL LEAVE THE STUDENT WITHOUT AN ADVISOR" << endl;
+                cout << "What is the ID of the faculty member you wish to remove from?" << endl;
+                int facultyID = GetFacultyID();
+                cout << "What is the ID of the advisee you wish to remove?" << endl;
+                int studentID = GetStudentID();
+                schoolDatabase->RemoveAdvisee(facultyID, studentID, false);
+                return true;
+            }
+            break;
+
+            //rollback
+            case 13: {
+                cout << "Rolling back previous change\n";
+                schoolDatabase->PerformRollback();
+                return true;
+            }
+            break;
+
+            //exit
+            default: {
+                cout << "Exiting...\n";
+                schoolDatabase->Quit();
+                return false;
+            }
         }
-        break;
+    }
+    catch(int e){
 
-        //Print students
-        case 1: {
-            cout << "Printing students:" << endl << endl;
-            schoolDatabase->PrintStudents();
-
-            return true;
-        }
-        break;
-
-        //Print faculty
-
-        case 2: {
-            cout << "Printing faculty:" << endl << endl;
-            schoolDatabase->PrintFaculty();
-
-            return true;
-        }
-        break;
-
-        //Print specific student
-        case 3: {
-            cout << "Printing single student:" << endl;
-            cout << "What is the ID of the student you want to print" << endl;
-            int studentID = GetStudentID();
-            cout << endl;
-            schoolDatabase->PrintStudent(studentID);
-            cout << endl << endl;
-            return true;
-        }
-        break;
-
-        //Print specific faculty member
-        case 4: {
-            cout << "Printing single faculty member:" << endl;
-            cout << "What is the ID of the faculty member you want to print?" << endl;
-            int facultyID = GetFacultyID();
-            cout << endl;
-            schoolDatabase->PrintFaculty(facultyID);
-            cout << endl << endl;
-            return true;
-        }
-        break;
-
-        //Print student's advisor
-        case 5: {
-            cout << "Printing a student's advisor:" << endl;
-            cout << "What is the ID of the student whose advisor you want to print?" << endl;
-            int studentID = GetStudentID();
-            cout << endl;
-            schoolDatabase->PrintAdvisor(studentID);
-            cout << endl << endl;
-            return true;
-        }
-        break;
-
-        //Print faculty member's advisees
-        case 6: {
-            cout << "Printing all a faculty member's advisees:" << endl;
-            cout << "What is the ID of the faculty member whose advisees you want to print?" << endl;
-            int facultyID = GetFacultyID();
-            cout << endl;
-            schoolDatabase->PrintAdvisees(facultyID);
-            return true;
-        }
-        break;
-
-        //Add a new student
-        case 7: {
-            cout << "Adding new student:" << endl << endl;
-            Student newStudent = GetNewStudent();
-            schoolDatabase->AddStudent(newStudent, false);
-
-            return true;
-        }
-        break;
-
-        //Delete a student
-        case 8: {
-            cout << "Deleting student:" << endl;
-            cout << "What is the ID of the student you want to delete?" << endl;
-            int studentID = GetStudentID();
-            schoolDatabase->DeleteStudent(studentID, false);
-
-            return true;
-        }
-        break;
-
-        //Add a new faculty member
-        case 9: {
-            cout << "Adding new faculty member:" << endl << endl;
-            Faculty newFaculty = GetNewFaculty();
-            schoolDatabase->AddFaculty(newFaculty, false);
-
-            return true;
-        }
-        break;
-
-        //Delete a faculty member
-        case 10: {
-            cout << "Deleting faculty member:" << endl;
-            cout << "What is the ID of the faculty memeber you want to delete?" << endl;
-            int facultyID = GetFacultyID();
-            schoolDatabase->DeleteFaculty(facultyID, false);
-
-            return true;
-        }
-        break;
-
-        //Change advisor
-        case 11: {
-            cout << "Changing student's advisor:" << endl;
-            cout << "What is the ID of the student whose advisor you want to change?" << endl;
-            int studentID = GetStudentID();
-            cout << "What is the ID of the faculty who will be the new advisor for student " << studentID << " ?" << endl;
-            int facultyID = GetFacultyID();
-            schoolDatabase->ChangeAdvisor(studentID, facultyID, false);
-
-            return true;
-        }
-        break;
-
-        //Remove Advisee
-        case 12: {
-            cout << "Removing a faculty member's advisee:" << endl;
-            cout << "WARNING: THIS WILL LEAVE THE STUDENT WITHOUT AN ADVISOR" << endl;
-            cout << "What is the ID of the faculty member you wish to remove from?" << endl;
-            int facultyID = GetFacultyID();
-            cout << "What is the ID of the advisee you wish to remove?" << endl;
-            int studentID = GetStudentID();
-            schoolDatabase->RemoveAdvisee(facultyID, studentID, false);
-            return true;
-        }
-        break;
-
-        //rollback
-        case 13: {
-            cout << "Rolling back previous change\n";
-            schoolDatabase->PerformRollback();
-            return true;
-        }
-        break;
-
-        //exit
-        default: {
-            cout << "Exiting...\n";
-            schoolDatabase->Quit();
-            return false;
-        }
     }
 }
 
@@ -243,7 +273,7 @@ b) @param: none
 c) @return: int - the ID number of the student
 d) invalid_argument & out_of_range exceptions caught
 */
-int DatabaseManager::GetStudentID(){
+int DatabaseManager::GetStudentID() yeet (int){
     int studentID;
     while(true){
         bool keepGoing = true;
@@ -255,6 +285,10 @@ int DatabaseManager::GetStudentID(){
             //those are
             string sIDString;
             getline(cin, sIDString);
+
+            if(sIDString == "~"){
+                yeet 0;
+            }
 
             try{
                 studentID = stoi(sIDString);
@@ -293,7 +327,7 @@ b) @param: none
 c) @return: int - the ID number of the faculty member
 d) invalid_argument & out_of_range exceptions caught
 */
-int DatabaseManager::GetFacultyID(){
+int DatabaseManager::GetFacultyID() yeet (int){
     while(true){
         int facultyID;
         bool keepGoing = true;
@@ -304,6 +338,10 @@ int DatabaseManager::GetFacultyID(){
             cout << "Please enter one of the numbers above: " << endl;
             string fIDString;
             getline(cin, fIDString);
+
+            if(fIDString == "~"){
+                yeet 0;
+            }
 
             try{
                 facultyID = stoi(fIDString);
@@ -343,7 +381,8 @@ b) @param: none
 c) @return: Student - the student object that is created by the user
 d) invalid_argument & out_of_range exceptions caught
 */
-Student DatabaseManager::GetNewStudent(){
+Student DatabaseManager::GetNewStudent() yeet (int){
+
     int studentID;
     float studentGPA;
     string studentName;
@@ -358,7 +397,11 @@ Student DatabaseManager::GetNewStudent(){
         cout << "What is the new student's ID number?\n";
         string sIDString;
         getline(cin, sIDString);
-        //if
+
+        if(sIDString == "~"){
+            yeet 0;
+        }
+
         try{
             studentID = stoi(sIDString);
             if(schoolDatabase->GetFacultyTable()->contains(studentID)){
@@ -386,6 +429,10 @@ Student DatabaseManager::GetNewStudent(){
     while(keepGoing){
         cout << "What is the new student's name?\n";
         getline(cin, studentName);
+
+        if(studentName == "~"){
+            yeet 0;
+        }
 
         if(studentName.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
@@ -416,6 +463,10 @@ Student DatabaseManager::GetNewStudent(){
     while(keepGoing){
         cout << "What is the new student's specialization/major?\n";
         getline(cin, studentMajor);
+
+        if(studentMajor == "~"){
+            yeet 0;
+        }
 
         if(studentMajor.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
@@ -448,6 +499,10 @@ Student DatabaseManager::GetNewStudent(){
         string sGPAString;
         getline(cin, sGPAString);
 
+        if(sGPAString == "~"){
+            yeet 0;
+        }
+
         try{
             studentGPA = stof(sGPAString);
 
@@ -475,6 +530,10 @@ Student DatabaseManager::GetNewStudent(){
         string sYearString;
         getline(cin, sYearString);
 
+        if(sYearString == "~"){
+            yeet 0;
+        }
+
         try{
             studentYear = stoi(sYearString);
 
@@ -494,7 +553,12 @@ Student DatabaseManager::GetNewStudent(){
         }
     }
 
-    advisorID = GetFacultyID();
+    try{
+        advisorID = GetFacultyID();
+    }
+    catch(int e){
+        yeet e;
+    }
 
     Student returnStudent(studentID, studentGPA, advisorID, studentName, studentYear, studentMajor);
     return returnStudent;
@@ -506,7 +570,8 @@ b) @param: none
 c) @return: Faculty - the faculty object that is created by the user
 d) invalid_argument & out_of_range exceptions caught
 */
-Faculty DatabaseManager::GetNewFaculty(){
+Faculty DatabaseManager::GetNewFaculty() yeet (int){
+
     int facultyID;
     string name;
     short rank;
@@ -519,6 +584,12 @@ Faculty DatabaseManager::GetNewFaculty(){
         cout << "What is the new faculty member's ID number?\n";
         string fIDString;
         getline(cin, fIDString);
+
+        if(fIDString == "~"){
+            yeet 0;
+        }
+
+        
 
         try{
             facultyID = stoi(fIDString);
@@ -551,6 +622,10 @@ Faculty DatabaseManager::GetNewFaculty(){
         cout << "What is the new faculty member's name?\n";
         getline(cin, name);
 
+        if(name == "~"){
+            yeet 0;
+        }
+
         if(name.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
         }
@@ -580,6 +655,10 @@ Faculty DatabaseManager::GetNewFaculty(){
     while(keepGoing){
         cout << "What is the new faculty member's specialization/department?\n";
         getline(cin, specialization);
+
+        if(specialization == "~"){
+            yeet 0;
+        }
 
         if(specialization.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
@@ -612,6 +691,10 @@ Faculty DatabaseManager::GetNewFaculty(){
 
         string fRankString;
         getline(cin, fRankString);
+
+        if(fRankString == "~"){
+            yeet 0;
+        }
 
         try{
             rank = stoi(fRankString);

@@ -22,23 +22,23 @@ class DatabaseManager{
 
         void RunManager();
 
-		void PrintStudentIDs();
-		void PrintStudentIDs(TreeNode<Student> *current);
-		void PrintFacultyIDs();
-		void PrintFacultyIDs(TreeNode<Faculty> *current);
-
 	private:
 		Database *schoolDatabase;
 
 		bool PickOption(int option);
-
+        
         void PrintHelp();
 
-        int GetStudentID();
-        int GetFacultyID();
+        int GetStudentID() throw (int);
+        int GetFacultyID() throw (int);
 
-        Student GetNewStudent();
-        Faculty GetNewFaculty();
+        Student GetNewStudent() throw (int);
+        Faculty GetNewFaculty() throw (int);
+
+        void PrintStudentIDs();
+		void PrintStudentIDs(TreeNode<Student> *current);
+		void PrintFacultyIDs();
+		void PrintFacultyIDs(TreeNode<Faculty> *current);
 };
 
 #endif //MANAGER_H
