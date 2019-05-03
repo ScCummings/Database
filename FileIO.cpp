@@ -19,14 +19,18 @@ d) no exceptions thrown
 */
 void FileIO::Save(BST<Student> *studentTree, BST<Faculty> *facultyTree){
     if(outputStream.is_open()){
+        //if there is an output stream open, close it
         outputStream.close();
     }
 
     outputStream.open(studentData);
+    //open a new output stream
     SaveStudentRec(studentTree->GetRoot());
-
+    //Save the current student tree
     outputStream.close();
+    //close the outputStream
     outputStream.open(facultyData);
+    //open a new outputStream using the facultyData file
     SaveFacultyRec(facultyTree->GetRoot());
 }
 /*
@@ -37,16 +41,18 @@ d) no exceptions thrown
 */
 void FileIO::SaveStudentRec(TreeNode<Student> *curr) throw (UnserializeException){
     if(curr == nullptr){
+        //if curr doesnt exist, exit
         return;
     }
     else{
         try{
+            //Preorder traversal to serialize the student object
             outputStream << curr->key.Serialize() << endl;
-            
             SaveStudentRec(curr->left);
             SaveStudentRec(curr->right);
         }
         catch(UnserializeException e){
+            //catch any exceptions
             throw e;
         }
     }
@@ -59,10 +65,12 @@ d) no exceptions thrown
 */
 void FileIO::SaveFacultyRec(TreeNode<Faculty> *curr) throw (UnserializeException){
     if(curr == nullptr){
+        //if curr doesnt exist, exit
         return;
     }
     else{
         try{
+            //preorder traversal to serialize the faculty
             outputStream << curr->key.Serialize() << endl;
             SaveFacultyRec(curr->left);
             SaveFacultyRec(curr->right);
@@ -81,16 +89,20 @@ d) throws UnserializationException
 BST<Student>* FileIO::LoadStudents() throw (UnserializeException){
     BST<Student> *newStudentTree = new BST<Student>();
     if(inputStream.is_open()){
+        //if there is an inputstream open, close it
         inputStream.close();
     }
     inputStream.open(studentData);
+    //open a new inputStream from the studentData file
     string line = "";
     try{
+        //while you can get more add lines through inputStream, Insert the Unserialized student
         while(getline(inputStream,line)){
             newStudentTree->insert(Student::Unserialize(line));
         }
     }
     catch(UnserializeException e){
+        //debug statement
         cout << "in load students" << endl;
         throw e;
     }
@@ -105,11 +117,14 @@ d) throws UnserializationException
 BST<Faculty>* FileIO::LoadFaculty() throw (UnserializeException){
     BST<Faculty> *newFacultyTree = new BST<Faculty>();
     if(inputStream.is_open()){
+        //if there is an inputStream open, close it
         inputStream.close();
     }
     inputStream.open(facultyData);
+    //open a new inputStream with the faultyData file
     string line = "";
     try{
+        //while you can add more lines through the inputStream, insert the Unserialized faculty objects
         while(getline(inputStream,line)){
             newFacultyTree->insert(Faculty::Unserialize(line));
         }
@@ -152,24 +167,31 @@ bool FileIO::CheckLoadStatus(){
         bool facultyTableHasData = false;
 
         inputStream.open(studentData);
+        //open a new inputStream from the studentData file
         string tempLine = "";
+        //if the file has data, set studentTableHasData
         if(getline(inputStream, tempLine)){
             studentTableHasData = true;
         }
+        //close the inputStream
         inputStream.close();
+        //open a new inputStream using the facultyData file
         inputStream.open(facultyData);
         tempLine = "";
+        //if the file has data, set facultyTableHasData
         if(getline(inputStream, tempLine)){
             facultyTableHasData = true;
         }
 
-
+        //if they both have data
         if(studentTableHasData && facultyTableHasData){
             return true;
         }
 
+        //if only one has data
         else if(studentTableHasData || facultyTableHasData){
             if(studentTableHasData){
+                //student has data
                 bool userResponse = false;
                 string userResponseString = "";
                 while(true){
@@ -189,11 +211,16 @@ bool FileIO::CheckLoadStatus(){
                 }
                 if(userResponse){
                     inputStream.open(studentData);
+                    //open a new inputStream with the studentData file
                     inputStream.clear();
+                    //clear the inputStream
                     inputStream.seekg(0, inputStream.beg);
+                    //goes back to the beginning of the file
                     outputStream.open(studentDataDump);
+                    //open a outputStream with the studentDataDump file
 
                     string temp = "";
+                    //while you can input into to the inputStream, do it
                     while(getline(inputStream,temp)){
                         outputStream << temp << endl;
                     }
@@ -208,6 +235,7 @@ bool FileIO::CheckLoadStatus(){
             }
 
             else if(facultyTableHasData){
+                //if faculty has data
                 bool userResponse = false;
                 string userResponseString = "";
                 while(true){
@@ -226,12 +254,17 @@ bool FileIO::CheckLoadStatus(){
                     }
                 }
                 if(userResponse){
+                    //open a new input stream with the facultyData file
                     inputStream.open(facultyData);
+                    //clear the inputStream
                     inputStream.clear();
+                    //start the input stream at the beginning of the file
                     inputStream.seekg(0, inputStream.beg);
+                    //open an outputStream with the facultyDataDump file
                     outputStream.open(facultyDataDump);
 
                     string temp = "";
+                    //while you can input to the inputStream, do it
                     while(getline(inputStream,temp)){
                         outputStream << temp << endl;
                     }

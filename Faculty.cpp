@@ -126,7 +126,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
         if((i == 0 && str[i] != '{') && (str[str.length()-1] != '}')){
             throw UnserializeException("Unserialization of failed failed: invalid input string");
         }
-        
+
         //Tests the current character for delimiters
         if((str[i] == '{') || (str[i] == '[') || (str[i] == '\"' & (!delim->isEmpty() && (delim->peek() != '\"')))){
             delim->push(str[i]);
@@ -214,7 +214,7 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                         while(str[i] != '\"'){
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of faculty failed: invalid input string");
-                            }   
+                            }
                             specializationString += str[i++];
                         }
 
@@ -281,7 +281,6 @@ d) no exceptions thrown
 */
 int* Faculty::GetAdvisees() {
 	int* adv = new int[advisees->getSize()];
-
 	advisees->resetIterator();
 	int count = 0;
 	while (advisees->hasNext()) {
