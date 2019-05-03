@@ -234,7 +234,7 @@ bool DatabaseManager::PickOption(int optionNumber){
             //Remove Advisee
             case 12: {
                 cout << "enter '~' at any point to exit" << endl;
-                
+
                 cout << "Removing a faculty member's advisee:" << endl;
                 cout << "WARNING: THIS WILL LEAVE THE STUDENT WITHOUT AN ADVISOR" << endl;
                 cout << "What is the ID of the faculty member you wish to remove from?" << endl;
@@ -329,28 +329,30 @@ d) invalid_argument & out_of_range exceptions caught
 */
 int DatabaseManager::GetFacultyID() yeet (int){
     while(true){
+        //until they enter a valid id number, keep looping them
         int facultyID;
         bool keepGoing = true;
         while(keepGoing){
             cout << "Please enter an existing faculty id number\n";
             cout << "Those are: " << endl;
-            PrintFacultyIDs();
+            PrintFacultyIDs(); // print the faculty id numbers so that they know what they are
             cout << "Please enter one of the numbers above: " << endl;
             string fIDString;
-            getline(cin, fIDString);
+            getline(cin, fIDString); //check the input
 
             if(fIDString == "~"){
+                //if they press tilde, let them exit
                 yeet 0;
             }
 
             try{
-                facultyID = stoi(fIDString);
+                facultyID = stoi(fIDString); //try to cast it to an int
                 if(facultyID <= 0){
                     cout << "Invalid ID number\n";
                 }
                 else{
                     Faculty facTemp(facultyID);
-                    if(schoolDatabase->GetFacultyTable()->contains(facTemp)){
+                    if(schoolDatabase->GetFacultyTable()->contains(facTemp)){ //if the table contains the object, we're gonna stop here
                         keepGoing = false;
                     }
                     else{
@@ -396,7 +398,7 @@ Student DatabaseManager::GetNewStudent() yeet (int){
     while(keepGoing){
         cout << "What is the new student's ID number?\n";
         string sIDString;
-        getline(cin, sIDString);
+        getline(cin, sIDString); //
 
         if(sIDString == "~"){
             yeet 0;
@@ -433,7 +435,7 @@ Student DatabaseManager::GetNewStudent() yeet (int){
         if(studentName == "~"){
             yeet 0;
         }
-
+        //User Being Malicious Checking
         if(studentName.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
         }
@@ -467,7 +469,7 @@ Student DatabaseManager::GetNewStudent() yeet (int){
         if(studentMajor == "~"){
             yeet 0;
         }
-
+        //Same Check
         if(studentMajor.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
         }
@@ -499,14 +501,14 @@ Student DatabaseManager::GetNewStudent() yeet (int){
         string sGPAString;
         getline(cin, sGPAString);
 
-        if(sGPAString == "~"){
+        if(sGPAString == "~"){ //let them exit if they press tilde
             yeet 0;
         }
 
         try{
-            studentGPA = stof(sGPAString);
+            studentGPA = stof(sGPAString); // try to cast as a float
 
-            if(0 <= studentGPA && studentGPA <= 5.0){
+            if(0 <= studentGPA && studentGPA <= 5.0){ // check the input
                 keepGoing = false;
             }
             else{
@@ -530,14 +532,14 @@ Student DatabaseManager::GetNewStudent() yeet (int){
         string sYearString;
         getline(cin, sYearString);
 
-        if(sYearString == "~"){
+        if(sYearString == "~"){ //if they press tilde, let them exit
             yeet 0;
         }
 
         try{
-            studentYear = stoi(sYearString);
+            studentYear = stoi(sYearString); // try to cast to an int
 
-            if(1 <= studentYear && studentYear <= 4){
+            if(1 <= studentYear && studentYear <= 4){ // check input
                 studentYear--;
                 keepGoing = false;
             }
@@ -580,20 +582,20 @@ Faculty DatabaseManager::GetNewFaculty() yeet (int){
     bool keepGoing = true;
 
     //Getting faculty ID
-    while(keepGoing){
+    while(keepGoing){ // bool condition
         cout << "What is the new faculty member's ID number?\n";
         string fIDString;
         getline(cin, fIDString);
 
-        if(fIDString == "~"){
+        if(fIDString == "~"){ // if they press tilde, let them exit
             yeet 0;
         }
 
-        
+
 
         try{
-            facultyID = stoi(fIDString);
-            if(schoolDatabase->GetFacultyTable()->contains(facultyID)){
+            facultyID = stoi(fIDString); //try to cast to an int
+            if(schoolDatabase->GetFacultyTable()->contains(facultyID)){ // check to see if the ID has been taken
                 cerr << "Sorry, that ID is taken. Please give the faculty a different one." << endl;
             }
             else{
@@ -622,10 +624,10 @@ Faculty DatabaseManager::GetNewFaculty() yeet (int){
         cout << "What is the new faculty member's name?\n";
         getline(cin, name);
 
-        if(name == "~"){
+        if(name == "~"){ // if they press tilde, let them exit
             yeet 0;
         }
-
+        //error checking 
         if(name.find("\"") != -1){
             cout << "Invalid character:  \'\"\'" << endl;
         }
