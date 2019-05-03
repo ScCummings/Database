@@ -45,7 +45,7 @@ void DatabaseManager::RunManager(){
     cin.ignore(1, EOF);
 
     cout << "----------------DATABASE----------------" << endl;
-    cout << "endter 0 for help" << endl;
+    cout << "enter 0 for help" << endl;
 
     int optionNumber;
 
