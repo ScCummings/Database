@@ -124,6 +124,7 @@ d) no exceptions thrown
 template<class T>
 void BST<T>::destructRecursive(TreeNode<T> *node) {
 	if (node != nullptr) {
+		//while the node exists, do a postorder traversal and delete the tree(from the root)
 		destructRecursive(node->left);
 		destructRecursive(node->right);
 		delete node;
@@ -148,9 +149,11 @@ d) no exceptions thrown
 template<class T>
 void BST<T>::recPrint(TreeNode<T> *node) {
 	if (node == nullptr) {
+		//if the node doesnt exist, break
 		return;
 	}
 	else {
+		//inorder traversal of the tree to recursively print
 		recPrint(node->left);
 		cout << node->key << endl << endl;
 		recPrint(node->right);
@@ -236,6 +239,7 @@ bool BST<T>::contains(T value) {
 		TreeNode<T> *current = root;
 
 		while (current->key != value) {
+			//while the key isnt the value (we haven't gotten to it yet)
 			if (value < current->key)
 				current = current->left;
 			else
@@ -255,11 +259,15 @@ d) no exceptions thrown
 */
 template<class T>
 bool BST<T>::deleteR(T key) {
-	if (isEmpty())
+	if (isEmpty()){
+		//if the tree is empty, stop deleting
 		return false;
+	}
 
-	if (!contains(key))
+	if (!contains(key)){
+		//if the tree doesnt contain the key, dont delete it
 		return false;
+	}
 
 	TreeNode<T> *current = root;
 	TreeNode<T> *parent = root;

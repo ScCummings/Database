@@ -20,11 +20,13 @@ d) no exceptions thrown
 Database::Database() {
 	if(fileIO.CheckLoadStatus()){
         try{
+			//try loading the files
             studentTable = fileIO.LoadStudents();
             facultyTable = fileIO.LoadFaculty();
             cout << "loaded from files" << endl;
         }
         catch(UnserializeException e){
+			//catch if the files cannot be loaded
             cerr << e.GetMessage() << endl;
             cerr << "Load failed... Exiting" << endl;
             exit(EXIT_FAILURE);
@@ -32,10 +34,11 @@ Database::Database() {
 
     }
 	else{
+		//if the files can't be loaded, make new, empty trees
         studentTable = new BST<Student>();
 	    facultyTable = new BST<Faculty>();
     }
-
+	//Make a new rollback object with the size of 5
 	rollbackStack = new LimitedAcceptingStack<Rollback*>(5);
 }
 
@@ -104,9 +107,11 @@ void Database::PrintFaculty(int facultyID) {
 	Faculty *temp = new Faculty(facultyID);
 	temp = facultyTable->Find(temp);
 	if (temp == nullptr) {
+		//faculty member wasnt found
 		cout << "Sorry, faculty member not found" << endl;
 	}
 	else {
+		//print out the faculty
 		cout << (*temp);
 	}
 }
@@ -121,9 +126,11 @@ void Database::PrintStudent(int studentID) {
 	Student *temp = new Student(studentID);
 	temp = studentTable->Find(temp);
 	if (temp == nullptr) {
+		//student member wasnt found
 		cout << "Sorry, student was not found" << endl;
 	}
 	else {
+		//print out the student object
 		cout << (*temp);
 	}
 }
@@ -138,9 +145,11 @@ void Database::PrintAdvisor(int studentID) {
 	Student* stuTemp = new Student(studentID);
 	stuTemp = studentTable->Find(stuTemp);
 	if (stuTemp == nullptr) {
+		//the student of the faculty member wasnt found
 		cout << "Sorry, the student whose advisor you are looking for was not found" << endl;
 	}
 	else {
+		//Make a new temp faculty object to print out
 		Faculty* facTemp = new Faculty(stuTemp->GetAdvisorID());
 		facTemp = facultyTable->Find(facTemp);
 		if (facTemp == nullptr) {
@@ -164,6 +173,7 @@ void Database::PrintAdvisees(int facultyID) {
 	facTemp = facultyTable->Find(facTemp);
 	int* studentIDs = facTemp->GetAdvisees();
 	for (int i = 0; i < facTemp->GetAdviseeCount(); ++i) {
+		//print out each of the faculty members advisees
 		Student* stuTemp = new Student(studentIDs[i]);
 		stuTemp = studentTable->Find(stuTemp);
 		if (stuTemp == nullptr) {
@@ -182,13 +192,17 @@ c) @return: NA
 d) no exceptions thrown
 */
 void Database::AddStudent(Student newStudent, bool isRollback) {
+	//as long as the student exists:
 	if (&newStudent != nullptr) {
 		studentTable->insert(newStudent);
+		//make a temp faculty object
         Faculty *tempFac = new Faculty(newStudent.GetAdvisorID());
         tempFac = facultyTable->Find(tempFac);
+		//add the student to the temp faculty object
         tempFac->AddAdvisee(newStudent.GetID());
 
         if(!isRollback){
+			//if it isnt a rollback then add it to the rollback stack
             Rollback *r = new Rollback(newStudent.GetID(), false);
             rollbackStack->Push(r);
         }
@@ -206,13 +220,18 @@ c) @return: NA
 d) no exceptions thrown
 */
 void Database::DeleteStudent(int studentID, bool isRollback) {
+	//make a temp student object
 	Student* stuTemp = new Student(studentID);
 	stuTemp = studentTable->Find(stuTemp);
+	//make a temp faculty object
 	Faculty* facTemp = new Faculty(stuTemp->GetAdvisorID());
 	facTemp = facultyTable->Find(facTemp);
+	//remove the student from the temp faculty object
 	facTemp->RemoveAdvisee(studentID);
+	//as long as the student exists:
 	if (stuTemp != nullptr) {
         if(!isRollback){
+			//if it isnt a rollback command, add it to the rollback stack
             Rollback *r = new Rollback(stuTemp);
             rollbackStack->Push(r);
         }
@@ -231,8 +250,10 @@ d) no exceptions thrown
 */
 void Database::AddFaculty(Faculty newFaculty, bool isRollback) {
 	if (&newFaculty != nullptr) {
+		//if the passed in new faculty member doesnt exist
 		facultyTable->insert(newFaculty);
         if(!isRollback){
+			//if it isnt a rollback command, add the it to the rollback stack
             Rollback *r = new Rollback(newFaculty.GetID(), true);
             rollbackStack->Push(r);
         }
@@ -251,13 +272,17 @@ d) no exceptions thrown
 void Database::DeleteFaculty(int facultyID, bool isRollback) {
 	Faculty* facTemp = new Faculty(facultyID);
 	facTemp = facultyTable->Find(facTemp);
-
+	//make a temp faculty object
 	if (facTemp != nullptr) {
+		//as long as facTemp exists:
         if(!isRollback){
+			//if the action is not a rollback, add it to the rollbackStack
             Rollback *r = new Rollback(facTemp);
             rollbackStack->Push(r);
         }
+		//Delete facTemp
 		facultyTable->deleteR((*facTemp));
+		//add facTemp's advisees to the root
         facultyTable->GetRoot()->key.AddAdvisees(facTemp->GetAdvisees(), facTemp->GetAdviseeCount());
 	}
 	else {
@@ -320,13 +345,15 @@ d) no exceptions thrown
 void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
 	Faculty* facTemp = new Faculty(facultyID);
 	facTemp = facultyTable->Find(facTemp);
-
+	//make a temp faculty object
     if(facTemp->HasAdvisee(studentID)){
+		//if facTemp has the studentID as the advisee
         facTemp->RemoveAdvisee(studentID);
         Student* stuTemp = new Student(studentID);
         stuTemp = studentTable->Find(stuTemp);
         stuTemp->SetAdvisorID(0);
         if(!isRollback){
+			//if the action isnt a rollback, add it to the rollback stack
             Rollback *r = new Rollback(facultyID, studentID, true);
             rollbackStack->Push(r);
         }
@@ -334,7 +361,7 @@ void Database::RemoveAdvisee(int facultyID, int studentID, bool isRollback) {
     else{
         cerr << "That faculty member doesn't have a student with that ID" << endl;
     }
-    
+
 
 }
 
@@ -346,6 +373,7 @@ d) no exceptions thrown
 */
 void Database::PerformRollback(){
     if(!rollbackStack->IsEmpty()){
+		//if the rollback stack is empty:
         rollbackStack->Pop()->PerformRollback(this);
         cout << "DONE" << endl;
     }
