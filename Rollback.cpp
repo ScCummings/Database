@@ -9,6 +9,12 @@
 
 #include "Rollback.h"
 
+/*
+a) Default constructor
+b) @param : none
+c) @return : NA
+d) no exceptions thrown
+*/
 Rollback::Rollback(){
     rollbackAction = 0;
 
@@ -24,6 +30,7 @@ c) @return: NA
 d) no exceptions thrown
 */
 Rollback::Rollback(Faculty *deletedFaculty){
+    //Undoing faculty delete
     rollbackAction = 1;
     this->deletedFaculty = deletedFaculty;
     this->deletedStudent = nullptr;
@@ -36,6 +43,7 @@ c) @return: NA
 d) no exceptions thrown
 */
 Rollback::Rollback(Student *deletedStudent){
+    //undoing student delete
     rollbackAction = 2;
     this->deletedStudent = deletedStudent;
     this->deletedFaculty = nullptr;
@@ -48,17 +56,20 @@ c) @return: NA
 d) no exceptions thrown
 */
 Rollback::Rollback(int insertedPersonID, bool isFaculty){
+    //undoing faculty insertion
     if(isFaculty){
         rollbackAction = 3;
         facultyID = insertedPersonID;
     }
+    
+    //undoing student insertion
     else{
         rollbackAction = 4;
         studentID = insertedPersonID;
     }
+
     this->deletedStudent = nullptr;
     this->deletedFaculty = nullptr;
-
 }
 
 /*
@@ -68,12 +79,16 @@ c) @return: NA
 d) no exceptions thrown
 */
 Rollback::Rollback(int facultyID, int studentID, bool isChangeAdvisee){
+    //undoing advisee removal
     if(isChangeAdvisee){
         rollbackAction = 5;
     }
+
+    //undoing advisor change
     else{
         rollbackAction = 6;
     }
+
     this->facultyID = facultyID;
     this->studentID = studentID;
 
@@ -95,7 +110,7 @@ Rollback::~Rollback(){
 }
 
 /*
-a) the input logic for the rollback class
+a) Chooses the correct function based off rollback action short
 b) @param: Database* - a pointer to the database that we are working with
 c) @return: void
 d) no exceptions thrown
@@ -132,16 +147,19 @@ d) no exceptions thrown
 */
 void Rollback::UndoFacultyDelete(Database *database){
     cout << "Rolling back student deletion" << endl;
+
+    //stores list of advisees in deleted faculty member
     int* tempAdvisees = deletedFaculty->GetAdvisees();
     int tempAdviseesCount = deletedFaculty->GetAdviseeCount();
 
-
+    //removes those advisees from the deleted faculty member
     for(int i = 0; i < tempAdviseesCount; i++){
         deletedFaculty->RemoveAdvisee(tempAdvisees[i]);
     }
 
     database->AddFaculty((*deletedFaculty), true);
 
+    //returns those advisees to the deleted faculty member
     for(int i = 0; i < tempAdviseesCount; i++){
         database->ChangeAdvisor(tempAdvisees[i], deletedFaculty->GetID(), true);
     }
@@ -181,13 +199,13 @@ void Rollback::UndoStudentInsert(Database *database){
 }
 
 /*
-a) Function for undoing a change of advisee
+a) Function for undoing an advisee removal
 b) @param: Database* - a pointer to the database that we are working with
 c) @return: void
 d) no exceptions thrown
 */
 void Rollback::UndoChangeOfAdvisee(Database *database){
-    cout << "Rolling back change of advisee" << endl;
+    cout << "Rolling back advisee removal" << endl;
     database->ChangeAdvisor(studentID, facultyID, true);
 }
 
@@ -200,45 +218,4 @@ d) no exceptions thrown
 void Rollback::UndoChangeOfAdvisor(Database *database){
     cout << "Rolling back change of advisor" << endl;
     database->ChangeAdvisor(studentID, facultyID, true);
-}
-
-/*
-a) tostring function for testing and implementing rollback
-b) @param: none
-c) @return: string - a string value that is printed
-d) no exceptions thrown
-*/
-string Rollback::ToString(){
-    string returnString = "Rollback!!\n Action:  ";
-    returnString += to_string(rollbackAction) + "\n";
-    if(deletedFaculty != nullptr){
-        returnString += deletedFaculty->ToString() + "\n";
-    }
-    else{
-        returnString += "No Faculty! \n";
-    }
-
-    if(deletedStudent != nullptr){
-        returnString += deletedStudent->ToString() + "\n";
-    }
-    else{
-        returnString += "No Student! \n";
-    }
-
-    returnString += "Faculty ID " + to_string(facultyID)  + "\n";
-    returnString += "Student ID " + to_string(studentID)  + "\n";
-
-    return returnString;
-
-}
-
-/*
-a) operator overloading fo the Rollback class
-b) @param: ostream& os - the address of the output stream that we will be working with | Rollback& r - the address of the Rollback object that we will be working with
-c) @return: ostream& - the address of the outputstream that we are working with
-d) no exceptions thrown
-*/
-ostream& operator<<(ostream& os, Rollback& r){
-    os << r.ToString();
-    return os;
 }

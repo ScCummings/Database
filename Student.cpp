@@ -133,12 +133,13 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                 //move past the colon
                 i += 2;
 
-                //check the name of the current member vairable
+                //gets the id of the new student
                 if(thisString == "id"){
                     string idString = "";
 
                     //collect numeric characters until the next member variable starts at the comma
                     while(str[i] != ','){
+                        //protects against going beyond the scope of the string
                         if(i >= str.length()){
                             throw UnserializeException("Unserialization of student failed: invalid input string");
                         }
@@ -153,6 +154,8 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                         throw UnserializeException("Unserialization of student failed: invalid input string");
                     }
                 }
+
+                //Gets the name of the new student
                 else if(thisString == "name"){
                     string nameString = "";
 
@@ -160,6 +163,7 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                     if(str[i++] == '\"'){
                         //collects characters until the close quote
                         while(str[i] != '\"'){
+                            //protects against going beyond the scope of the string
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of student failed: invalid input string");
                             }
@@ -167,6 +171,8 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                         }
 
                         i++;
+
+                        //makes sure things are happening in order
                         if(str[i] != ','){
                             throw UnserializeException("Unserialization of student failed: invalid input string");
                         }
@@ -177,9 +183,12 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                     }
                     name = nameString;
                 }
+
+                //gets the rank of the student
                 else if(thisString == "rank"){
                     string rankString = "";
                     while(str[i] != ','){
+                        //protects against going beyond the scope of the string
                         if(i >= str.length()){
                             throw UnserializeException("Unserialization of student failed: invalid input string");
                         }
@@ -188,10 +197,13 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
                     rank = (short)stoi(rankString);
                 }
+                
+                //Gets the major of the student
                 else if(thisString == "specialization"){
                     string specializationString = "";
                     if(str[i++] == '\"'){
                         while(str[i] != '\"'){
+                            //protects against going beyond the scope of the string
                             if(i >= str.length()){
                                 throw UnserializeException("Unserialization of student failed: invalid input string");
                             }
@@ -208,9 +220,12 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                     }
                     specialization = specializationString;
                 }
+
+                //gets the GPA of the student
                 else if(thisString == "GPA"){
                     string gpaString = "";
                     while(str[i] != ','){
+                        //protects against going beyond the scope of the string
                         if(i >= str.length()){
                             throw UnserializeException("Unserialization of student failed: invalid input string");
                         }
@@ -219,9 +234,12 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
                     GPA = stof(gpaString);
                 }
+
+                //gets the advisor of the student
                 else if(thisString == "advisorID"){
                     string advisorIDString = "";
                     while(str[i] != '}'){
+                        //protects against going beyond the scope of the string
                         if(i >= str.length()){
                             throw UnserializeException("Unserialization of student failed: invalid input string");
                         }
@@ -232,6 +250,8 @@ Student Student::Unserialize(string str) throw (UnserializeException){
                 }
                 continue;
             }
+
+            //protects against unexpected cases
             else{
                 throw UnserializeException("Unserialization of student failed: invalid input string");
             }
@@ -250,19 +270,14 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
     delete delim;
 
-    /*
-    int id = -1;
-    string name = "";
-    short rank = -1;
-    string specialization = "";
-    float GPA = -1;
-    int advisorID = -1;
-    */
+    //makes sure all data members have been filled
     if((id == -1)||(name == "")||(rank == -1)||(specialization == "")||(GPA == -1)||(advisorID == -1)){
         throw UnserializeException("Unserialization of student failed: invalid input string");
     }
 
+    //creates the new student
     Student someStudent(id,GPA,advisorID,name,rank,specialization);
+    
     return someStudent;
 }
 

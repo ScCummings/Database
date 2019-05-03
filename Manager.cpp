@@ -40,14 +40,21 @@ c) @return: void
 d) invalid_argument & out_of_range exceptions thrown
 */
 void DatabaseManager::RunManager(){
+    //resets cin to prepare for getline()
     cin.clear();
     cin.ignore(1, EOF);
+
     cout << "----------------DATABASE----------------" << endl;
+    cout << "endter 0 for help" << endl;
+
     int optionNumber;
+
+    //keep asking for inut until the user chooses to exit
     do{
         while(true){
             cout << "->";
 
+            //get an input from the user
             string temp;
             getline(cin, temp);
 
@@ -55,6 +62,7 @@ void DatabaseManager::RunManager(){
                 continue;
             }
 
+            //makes sure the input is valid
             try{
                 optionNumber = stoi(temp);
 
@@ -62,6 +70,8 @@ void DatabaseManager::RunManager(){
                     break;
                 }
             }
+
+            //if it isnt, let the user know
             catch(invalid_argument e){
                 cout << "**Command not recognized: enter 0 for help**" << endl;
                 continue;
@@ -73,6 +83,7 @@ void DatabaseManager::RunManager(){
 
             cout << "**Command not recognized: enter 0 for help**" << endl;
         }
+
     }while(PickOption(optionNumber));
 }
 
@@ -83,6 +94,7 @@ c) @return: bool - returns whether or not their request was successfully carried
 d) no exceptions thrown
 */
 bool DatabaseManager::PickOption(int optionNumber){
+    //try catch block allows for function exiting
     try{
         switch(optionNumber){
             //Prints help screen
@@ -277,19 +289,24 @@ int DatabaseManager::GetStudentID() yeet (int){
     int studentID;
     while(true){
         bool keepGoing = true;
+        
+        //continually asks for a student that exists
         while(keepGoing){
             cout << "Please enter an existing student id number\n";
             cout << "Those are: \n";
             PrintStudentIDs();
             cout << "Please enter one of the numbers above: " << endl;
-            //those are
+
+            //get input from user
             string sIDString;
             getline(cin, sIDString);
 
+            //allows exiting
             if(sIDString == "~"){
                 yeet 0;
             }
 
+            //try catch block protects against stoi errors
             try{
                 studentID = stoi(sIDString);
                 if(studentID <= 0){
