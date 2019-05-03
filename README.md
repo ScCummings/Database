@@ -13,10 +13,32 @@
 2. Source Files
     * main.cpp
     * Makefile
+    * GenTree.h
+    * GenStack.h
+    * GenDoubleLinkedList.h
+    * LimitedAcceptingStack.h
+    * Person.h
+    * Faculty.h
+    * Faculty.cpp
+    * Student.h
+    * Student.cpp
+    * Database.h
+    * Database.cpp
+    * Rollback.h
+    * Rollback.cpp
+    * FileIO.h
+    * FileIO.cpp
+    * Manager.h
+    * Manager.cpp
+    * UnserializeEcxeption.h
+    * UnserializeEcxeption.cpp
+    * StackException.h
+    * StackException.cpp
 
 
 3. Description of any known compile/runtime errors, or bugs.
-    * N/A
+    * It is possible to create multiple students and faculty with the same ID 
+    * * This can only happen through the storage files by manually changing the data stored within
 
 4. References used to complete the assignment
     * https://stackoverflow.com/questions/34170164/destructor-for-binary-search-tree
