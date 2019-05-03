@@ -442,7 +442,7 @@ Student DatabaseManager::GetNewStudent(){
         getline(cin, sGPAString);
 
         try{
-            studentGPA = stoi(sGPAString);
+            studentGPA = stof(sGPAString);
 
             if(0 <= studentGPA && studentGPA <= 5.0){
                 keepGoing = false;
