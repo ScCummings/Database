@@ -441,6 +441,5 @@ d) no exceptions thrown
 */
 ostream& operator<<(ostream& os, Faculty& f) {
 	os << f.ToString();
-	//cout << "Makes it to return" << endl;
 	return os;
 }

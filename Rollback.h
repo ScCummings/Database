@@ -30,31 +30,47 @@ class Rollback{
         int studentID = 0;
         int facultyID = 0;
 
-
+        //Function for undoing a faculty delete
         void UndoFacultyDelete(Database *database);
+
+        //Function for undoing a student delete
         void UndoStudentDelete(Database *database);
 
+
+        //Function for undoing a faculty insert
         void UndoFacultyInsert(Database *database);
+
+        //Function for undoing a student insert
         void UndoStudentInsert(Database *database);
 
+
+        //Function for undoing an advisee removal
         void UndoChangeOfAdvisee(Database *database);
+
+        //Function for undoing a change of advisor
         void UndoChangeOfAdvisor(Database *database);
 
     public:
+        //Default constructor
         Rollback();
+
+        //Overloaded constructor for the Rollback class
         Rollback(Faculty *deletedFaculty);
+
+        //Overloaded constructor for the Rollback class
         Rollback(Student *deletedStudent);
+
+        //Overloaded constructor for the Rollback class
         Rollback(int insertedPersonID, bool isFaculty);
+
+        //Overloaded constructor for the Rollback class
         Rollback(int facultyID, int studentID, bool isChangeAdvisee);
 
+        //Default Destructor
         ~Rollback();
 
+        //Chooses the correct function based off rollback action short
         void PerformRollback(Database *database);
-
-        string ToString();
-
-        //overloaded stream insertion operator
-        friend ostream& operator<<(ostream& os, Rollback& r);
 };
 
 #endif //ROLLBACK_H
