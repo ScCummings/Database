@@ -38,7 +38,7 @@
 
 3. Description of any known compile/runtime errors, or bugs.
     * It is possible to create multiple students and faculty with the same ID 
-    * * This can only happen through the storage files by manually changing the data stored within
+        * This can only happen through the storage files by manually changing the data stored within
 
 4. References used to complete the assignment
     * https://stackoverflow.com/questions/34170164/destructor-for-binary-search-tree
