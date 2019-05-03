@@ -112,7 +112,7 @@ d) UnserializationException thrown
 */
 Faculty Faculty::Unserialize(string str) throw (UnserializeException){
     GenStack<char> *delim = new GenStack<char>();
-    //{"id":4432,"name":"Urdu","rank":0,"specialization":"Queso Studies","advisees":[234423,543523,243465,987967]}
+
     //Stores values used to create new student
     int id = -1;
     string name = "";
@@ -122,8 +122,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
 
     //Traverses entire faculty string
     for(int i = 0; i < str.length(); i++){
-        if(i == 0 && str[i] != '{'){
-            throw UnserializeException("Unserialization of faculty failed: invalid input string");
+        //if the first character is not an open brace and the last character is not a close brace, throw an error
+        if((i == 0 && str[i] != '{') && (str[str.length()-1] != '}')){
+            throw UnserializeException("Unserialization of failed failed: invalid input string");
         }
         
         //Tests the current character for delimiters
@@ -138,6 +139,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
 
             //collect characters until the close quote
             while(str[i] != '\"'){
+                if(i >= str.length()){
+                    throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                }
                 thisString += str[i++];
             }
 
@@ -155,6 +159,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
 
                     //collect numeric characters until the next member variable starts at the comma
                     while(str[i] != ','){
+                        if(i >= str.length()){
+                            throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                        }
                         idString += str[i++];
                     }
 
@@ -173,6 +180,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     if(str[i++] == '\"'){
                         //collects characters until the close quote
                         while(str[i] != '\"'){
+                            if(i >= str.length()){
+                                throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                            }
                             nameString += str[i++];
                         }
 
@@ -190,6 +200,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                 else if(thisString == "rank"){
                     string rankString = "";
                     while(str[i] != ','){
+                        if(i >= str.length()){
+                            throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                        }
                         rankString += str[i++];
                     }
 
@@ -199,6 +212,9 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     string specializationString = "";
                     if(str[i++] == '\"'){
                         while(str[i] != '\"'){
+                            if(i >= str.length()){
+                                throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                            }   
                             specializationString += str[i++];
                         }
 
@@ -217,8 +233,14 @@ Faculty Faculty::Unserialize(string str) throw (UnserializeException){
                     if(str[i] == '['){
                         i++;
                         while(str[i] != ']'){
+                            if(i >= str.length()){
+                                throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                            }
                             string studentIDString = "";
                             while(str[i] != ',' && str[i] != ']'){
+                                if(i >= str.length()){
+                                    throw UnserializeException("Unserialization of faculty failed: invalid input string");
+                                }
                                 studentIDString += str[i++];
                             }
                             if(str[i] == ','){

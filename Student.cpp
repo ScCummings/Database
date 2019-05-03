@@ -102,7 +102,7 @@ Student Student::Unserialize(string str) throw (UnserializeException){
 
     //Traverses entire student string
     for(int i = 0; i < str.length(); i++){
-        //if the first character is not an open brace, throw an error
+        //if the first character is not an open brace and the last character is not a close brace, throw an error
         if((i == 0 && str[i] != '{') && (str[str.length()-1] != '}')){
             throw UnserializeException("Unserialization of student failed: invalid input string");
         }
